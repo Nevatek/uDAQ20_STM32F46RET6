@@ -54,8 +54,10 @@ typedef enum
 	en_AD7616_IDLE = 0U,
 	en_AD7616_START_OF_CONV,
 	en_AD7616_WAITING_FOR_BUSY_SIG_FALLING,
+	en_AD7616_WAITING_FOR_BUSY_SIG_FALLING_BUSY,
 	en_AD7616_READING_CHANNEL_ENTRY,
 	en_AD7616_READING_CHANNEL,
+	en_AD7616_READING_CMPLTED,
 }AD7616_STATE;
 
 void Drv_AD7616_Init(void);
@@ -72,4 +74,5 @@ void Drv_AD7616_TriggerReadADCSpi_1W(void);
 void Drv_AD7616_WriteSpiRegister_1W(uint8_t u8RegAddrs , uint16_t u16RegData , REG_RW_STATE u8RW);
 uint8_t Drv_AD7616_ReadSpiRegister_1W(uint8_t *u8RegAddrs , uint16_t *pu8RegData);
 void Drv_AD7616_Handler(void);
+AD7616_STATE Drv_AD7616_GetState(void);
 #endif /* SRC_DRV_AD7616_H_ */

@@ -68,8 +68,8 @@ void Drv_AD7616_Init(void)
 	 */
 	HAL_GPIO_WritePin(AD7616_RESET_GPIO_Port , AD7616_RESET_Pin , GPIO_PIN_SET);
 	HAL_GPIO_WritePin(AD7616_CS__GPIO_Port , AD7616_CS__Pin , GPIO_PIN_SET);
-	Drv_AD7616_SelectChannel(AD7616_CHAB7);
-	Drv_AD7616_SelectHWInputVoltageRange(RANGE_SEL_PM_5V);
+	Drv_AD7616_SelectChannel(m_MaxChannelScan = AD7616_CHAB1/*MAX Channel to scan*/);/*Sequencer will read from channel 0 - Configured channel*/
+	Drv_AD7616_SelectHWInputVoltageRange(RANGE_SEL_PM_2_5V);
 	HAL_GPIO_WritePin(AD7616_CONV_GPIO_Port , AD7616_CONV_Pin , GPIO_PIN_RESET);
 
 	HAL_Delay(TIME_RESET_WAIT);
@@ -158,7 +158,7 @@ void Drv_AD7616_TriggerReadADCSpi_1W(void)
 {
 	g_u8SPI_RdCmplte = FALSE;
 	HAL_GPIO_WritePin(AD7616_CS__GPIO_Port , AD7616_CS__Pin , GPIO_PIN_RESET);
-	HAL_SPI_Receive_IT(GetInstance_SPI1(), &g_u16SpiReadBuffer[0U], sizeof(uint32_t));
+	HAL_SPI_Receive_IT(GetInstance_SPI1(), &g_u16SpiReadBuffer[0U], 4U/*Read size of bytes*/);
 }
 /*********************.Drv_AD7616_TriggerAdcConvst().*****************************
  .Purpose        : Function to trigger start of converion of ADC
@@ -168,11 +168,39 @@ void Drv_AD7616_TriggerReadADCSpi_1W(void)
  ****************************************************************************/
 void Drv_AD7616_ReadSpiADC_1W(uint16_t *pu16ChA , uint16_t *pu16ChB)
 {
+	*pu16ChA = 0;
+	*pu16ChB = 0;
 	*pu16ChA = (g_u16SpiReadBuffer[0U]);
 	*pu16ChA |= (g_u16SpiReadBuffer[1U] << 8U);
 
 	*pu16ChB = (g_u16SpiReadBuffer[2U]);
 	*pu16ChB |= (g_u16SpiReadBuffer[3U] << 8U);
+
+	/*
+	 * WORK AROUND - Random 65535 getting while signal is ZERO
+	 */
+	if(65535U == *pu16ChA)
+	{
+		*pu16ChA = 0U;
+	}
+
+	if(65535U == *pu16ChB)
+	{
+		*pu16ChB = 0U;
+	}
+	/*
+	 * WORK AROUND - Random 65535 getting while signal is ZERO
+	 */
+}
+/*********************.Drv_AD7616_TriggerAdcConvst().*****************************
+ .Purpose        : Function to trigger start of converion of ADC
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+AD7616_STATE Drv_AD7616_GetState(void)
+{
+	return (m_State);
 }
 /*********************.Drv_AD7616_TriggerAdcConvst().*****************************
  .Purpose        : Function to trigger start of converion of ADC
@@ -191,10 +219,8 @@ void Drv_AD7616_Handler(void)
 
 		case (en_AD7616_START_OF_CONV):
 		{
-			m_ChannelSel = AD7616_CHAB0;
-			m_MaxChannelScan = AD7616_CHAB7;
-			Drv_AD7616_SelectChannel(m_MaxChannelScan);
-			Drv_AD7616_TriggerAdcConvst();
+			m_ChannelSel = AD7616_CHAB0;/*Inital channel to buffer*/
+			Drv_AD7616_TriggerAdcConvst();/*TRIGGER SCAN CONV*/
 			StartTimer(&(g_ADCTim) , TIMEOUT_AD7616_BUSY);/*MAX Timeout for BUSY or conversion time*/
 			m_State = en_AD7616_WAITING_FOR_BUSY_SIG_FALLING;
 		}break;
@@ -212,6 +238,10 @@ void Drv_AD7616_Handler(void)
 				m_State = en_AD7616_IDLE;
 			}
 		}break;
+		case (en_AD7616_WAITING_FOR_BUSY_SIG_FALLING_BUSY):
+		{
+				m_State = en_AD7616_READING_CHANNEL_ENTRY;
+		}break;
 		case (en_AD7616_READING_CHANNEL_ENTRY):
 		{
 			Drv_AD7616_TriggerReadADCSpi_1W();/*Inititate reading*/
@@ -228,7 +258,7 @@ void Drv_AD7616_Handler(void)
 				{
 					/*If all channel got readed -> go to complete state*/
 
-					m_State = en_AD7616_IDLE;
+					m_State = en_AD7616_READING_CMPLTED;
 				}
 				else
 				{
@@ -236,6 +266,10 @@ void Drv_AD7616_Handler(void)
 					m_State = en_AD7616_READING_CHANNEL_ENTRY;
 				}
 			}
+		}break;
+		case (en_AD7616_READING_CMPLTED):
+		{
+			m_State = en_AD7616_IDLE;
 		}break;
 	}
 }

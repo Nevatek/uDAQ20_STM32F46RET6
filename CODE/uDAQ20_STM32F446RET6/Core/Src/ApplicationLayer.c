@@ -19,4 +19,8 @@ void ApplicationLayer_Init(void)
 void ApplicationLayer_Exe(void)
 {
 	Drv_AD7616_Handler();
+	if(en_AD7616_READING_CMPLTED == Drv_AD7616_GetState())
+	{
+		/*If data capture completed - push data to USB*/
+	}
 }
