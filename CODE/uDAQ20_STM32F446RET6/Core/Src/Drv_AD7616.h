@@ -10,7 +10,8 @@
 
 #define TIME_RESET_WAIT (200U)/*1 Ms*/
 #define TIMEOUT_AD7616_BUSY (10U)/*1MS*/
-
+#define AD7616_MAX_NUM_CHANNEL (16U)
+#define AD7616_LEN_PER_CHANNEL_IN_BYTES (2U)
 typedef enum
 {
 	RANGE_SW_MODE = 0x00,
@@ -68,7 +69,7 @@ void Drv_AD7616_TriggerAdcConvst(void);
 uint8_t Drv_AD7616_GetStatus_DeviceConvCmplte(void);
 uint8_t Drv_AD7616_GetStatus_TX_Complete(void);
 uint8_t Drv_AD7616_GetStatus_RX_Available(void);
-void Drv_AD7616_ReadSpiADC_1W(uint16_t*pu16ChA , uint16_t *pu16ChB);
+uint8_t* Drv_AD7616_ReadSpiADC_1W(void);
 void Drv_AD7616_TriggerReadRegisterSpi_1W(void);
 void Drv_AD7616_TriggerReadADCSpi_1W(void);
 void Drv_AD7616_WriteSpiRegister_1W(uint8_t u8RegAddrs , uint16_t u16RegData , REG_RW_STATE u8RW);
