@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 #include "Drv_AD7616.h"
 #include "Drv_SoftDelay.h"
+#include "ApplicationLayer.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -115,39 +116,11 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  static uint8_t u8RegAddrs = 0;
-  static uint16_t u16RegData = 0;
-  static uint16_t u16Data[8][2];
+  ApplicationLayer_Init();
 
-  Drv_AD7616_Init();
-
-//  Drv_AD7616_WriteSpiRegister_1W(ADDRS_REG_CONFIGURATION , 0xFF , REG_WRITE);
-//  while(TRUE != Drv_AD7616_GetStatus_TX_Complete());
-//
-//  Drv_AD7616_WriteSpiRegister_1W(ADDRS_REG_CONFIGURATION , 0x00 , REG_READ);
-//  while(TRUE != Drv_AD7616_GetStatus_TX_Complete());
-
-  AD7616_CHANNEL m_Ch = AD7616_CHAB0;
-//  Drv_AD7616_WriteSpiRegister_1W(ADDRS_REG_CONFIGURATION , 0xBB , REG_WRITE);
-//  while(TRUE != Drv_AD7616_GetStatus_TX_Complete());
-//  Drv_AD7616_WriteSpiRegister_1W(ADDRS_REG_CONFIGURATION , 0xBB , REG_READ);
-//  while(TRUE != Drv_AD7616_GetStatus_TX_Complete());
-//  Drv_AD7616_TriggerReadRegisterSpi_1W();
-//  while(TRUE != Drv_AD7616_GetStatus_RX_Available());
-//  Drv_AD7616_ReadSpiRegister_1W(&u8RegAddrs , &u16RegData);
   while (1)
   {
-//	  Drv_AD7616_SelectChannel(m_Ch);
-	  Drv_AD7616_TriggerAdcConvst();
-	  while(TRUE != Drv_AD7616_GetStatus_DeviceConvCmplte());
-	  Drv_AD7616_TriggerReadADCSpi_1W();
-	  while(TRUE != Drv_AD7616_GetStatus_RX_Available());
-	  Drv_AD7616_ReadSpiADC_1W(&u16Data[m_Ch][0] , &u16Data[m_Ch][1]);
-//	  m_Ch++;
-	  if(8 == m_Ch)
-	  {
-		  m_Ch = 0;
-	  }
+	 ApplicationLayer_Exe();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -231,7 +204,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;

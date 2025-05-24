@@ -1,0 +1,20 @@
+/*
+ * ApplicationLayer.c
+ *
+ *  Created on: May 24, 2025
+ *      Author: aldri
+ */
+
+
+#include "main.h"
+#include "ApplicationLayer.h"
+
+void ApplicationLayer_Init(void)
+{
+
+}
+
+void ApplicationLayer_Exe(void)
+{
+
+}

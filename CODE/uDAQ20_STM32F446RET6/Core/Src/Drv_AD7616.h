@@ -9,6 +9,7 @@
 #define SRC_DRV_AD7616_H_
 
 #define TIME_RESET_WAIT (200U)/*1 Ms*/
+#define TIMEOUT_AD7616_BUSY (10U)/*1MS*/
 
 typedef enum
 {
@@ -48,6 +49,15 @@ typedef enum
 	ADDRS_REG_STATUS			= 0x80/*Status Register*/
 }AD7616_REGISTER_ADDRS_MAP;
 
+typedef enum
+{
+	en_AD7616_IDLE = 0U,
+	en_AD7616_START_OF_CONV,
+	en_AD7616_WAITING_FOR_BUSY_SIG_FALLING,
+	en_AD7616_READING_CHANNEL_ENTRY,
+	en_AD7616_READING_CHANNEL,
+}AD7616_STATE;
+
 void Drv_AD7616_Init(void);
 void ISRCallback_Ad7616_Busy(void);
 void Drv_AD7616_SelectChannel(AD7616_CHANNEL m_Ch);
@@ -56,9 +66,10 @@ void Drv_AD7616_TriggerAdcConvst(void);
 uint8_t Drv_AD7616_GetStatus_DeviceConvCmplte(void);
 uint8_t Drv_AD7616_GetStatus_TX_Complete(void);
 uint8_t Drv_AD7616_GetStatus_RX_Available(void);
-uint8_t Drv_AD7616_ReadSpiADC_1W(uint16_t*pu16ChA , uint16_t *pu16ChB);
+void Drv_AD7616_ReadSpiADC_1W(uint16_t*pu16ChA , uint16_t *pu16ChB);
 void Drv_AD7616_TriggerReadRegisterSpi_1W(void);
 void Drv_AD7616_TriggerReadADCSpi_1W(void);
 void Drv_AD7616_WriteSpiRegister_1W(uint8_t u8RegAddrs , uint16_t u16RegData , REG_RW_STATE u8RW);
 uint8_t Drv_AD7616_ReadSpiRegister_1W(uint8_t *u8RegAddrs , uint16_t *pu8RegData);
+void Drv_AD7616_Handler(void);
 #endif /* SRC_DRV_AD7616_H_ */

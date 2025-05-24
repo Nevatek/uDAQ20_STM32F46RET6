@@ -5,12 +5,19 @@
  *      Author: aldri
  */
 #include "main.h"
+#include "Appl_Timer.h"
 #include "Drv_AD7616.h"
 
 uint8_t g_u8AdcConvComplteFlag = FALSE;
 uint8_t g_u8SPI_WrCmplte = FALSE;
 uint8_t g_u8SPI_RdCmplte = FALSE;
 uint8_t g_u16SpiReadBuffer[8U];
+uint16_t g_u16ADCData[2U][8U];
+
+AD7616_STATE m_State = en_AD7616_IDLE;
+AD7616_CHANNEL m_MaxChannelScan = AD7616_CHAB0;
+AD7616_CHANNEL m_ChannelSel;
+stcTimer g_ADCTim;
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
  .Returns        :  RETURN_ERROR
@@ -34,7 +41,6 @@ inline void ISRCallback_Ad7616_Busy(void)
  ****************************************************************************/
 void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef * hspi)
 {
-//	LL_GPIO_SetOutputPin(AD7616_CS__GPIO_Port , AD7616_CS__Pin);
 	HAL_GPIO_WritePin(AD7616_CS__GPIO_Port , AD7616_CS__Pin , GPIO_PIN_SET);
 	g_u8SPI_RdCmplte = TRUE;
 }
@@ -46,7 +52,6 @@ void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef * hspi)
  ****************************************************************************/
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef * hspi)
 {
-//	LL_GPIO_SetOutputPin(AD7616_CS__GPIO_Port , AD7616_CS__Pin);
 	HAL_GPIO_WritePin(AD7616_CS__GPIO_Port , AD7616_CS__Pin , GPIO_PIN_SET);
 	g_u8SPI_WrCmplte = TRUE;
 }
@@ -63,7 +68,7 @@ void Drv_AD7616_Init(void)
 	 */
 	HAL_GPIO_WritePin(AD7616_RESET_GPIO_Port , AD7616_RESET_Pin , GPIO_PIN_SET);
 	HAL_GPIO_WritePin(AD7616_CS__GPIO_Port , AD7616_CS__Pin , GPIO_PIN_SET);
-	Drv_AD7616_SelectChannel(AD7616_CHAB0);
+	Drv_AD7616_SelectChannel(AD7616_CHAB7);
 	Drv_AD7616_SelectHWInputVoltageRange(RANGE_SEL_PM_5V);
 	HAL_GPIO_WritePin(AD7616_CONV_GPIO_Port , AD7616_CONV_Pin , GPIO_PIN_RESET);
 
@@ -114,9 +119,9 @@ uint8_t Drv_AD7616_GetStatus_RX_Available(void)
 void Drv_AD7616_SelectChannel(AD7616_CHANNEL m_Ch)
 {
 	uint8_t u8Channel = (uint8_t)m_Ch;
-	HAL_GPIO_WritePin(AD7616_CHSEL0_GPIO_Port, AD7616_CHSEL0_Pin, (u8Channel & 0x01));
+	HAL_GPIO_WritePin(AD7616_CHSEL2_GPIO_Port, AD7616_CHSEL2_Pin, (u8Channel & 0x01));
 	HAL_GPIO_WritePin(AD7616_CHSEL1_GPIO_Port, AD7616_CHSEL1_Pin, 0x01 & (u8Channel >> 1U));
-	HAL_GPIO_WritePin(AD7616_CHSEL2_GPIO_Port, AD7616_CHSEL2_Pin, 0x01 & (u8Channel >> 2U));
+	HAL_GPIO_WritePin(AD7616_CHSEL0_GPIO_Port, AD7616_CHSEL0_Pin, 0x01 & (u8Channel >> 2U));
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
@@ -161,17 +166,76 @@ void Drv_AD7616_TriggerReadADCSpi_1W(void)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-uint8_t Drv_AD7616_ReadSpiADC_1W(uint16_t *pu16ChA , uint16_t *pu16ChB)
+void Drv_AD7616_ReadSpiADC_1W(uint16_t *pu16ChA , uint16_t *pu16ChB)
 {
-	uint8_t u8Status = FALSE;
-	if(TRUE == g_u8SPI_RdCmplte)
-	{
-		*pu16ChA = (g_u16SpiReadBuffer[1U] << 8U);
-		*pu16ChA |= (g_u16SpiReadBuffer[0U]);
+	*pu16ChA = (g_u16SpiReadBuffer[0U]);
+	*pu16ChA |= (g_u16SpiReadBuffer[1U] << 8U);
 
-		*pu16ChB = (g_u16SpiReadBuffer[3U] << 8U);
-		*pu16ChB |= (g_u16SpiReadBuffer[2U]);
-		u8Status = TRUE;
+	*pu16ChB = (g_u16SpiReadBuffer[2U]);
+	*pu16ChB |= (g_u16SpiReadBuffer[3U] << 8U);
+}
+/*********************.Drv_AD7616_TriggerAdcConvst().*****************************
+ .Purpose        : Function to trigger start of converion of ADC
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void Drv_AD7616_Handler(void)
+{
+	switch (m_State)
+	{
+		case (en_AD7616_IDLE):
+		{
+			m_State = en_AD7616_START_OF_CONV;
+		}break;
+
+		case (en_AD7616_START_OF_CONV):
+		{
+			m_ChannelSel = AD7616_CHAB0;
+			m_MaxChannelScan = AD7616_CHAB7;
+			Drv_AD7616_SelectChannel(m_MaxChannelScan);
+			Drv_AD7616_TriggerAdcConvst();
+			StartTimer(&(g_ADCTim) , TIMEOUT_AD7616_BUSY);/*MAX Timeout for BUSY or conversion time*/
+			m_State = en_AD7616_WAITING_FOR_BUSY_SIG_FALLING;
+		}break;
+
+		case (en_AD7616_WAITING_FOR_BUSY_SIG_FALLING):
+		{
+			if(TRUE == Drv_AD7616_GetStatus_DeviceConvCmplte())
+			{
+				/*IF BUSY signal is low (END of converison) -> READ CHANNEL*/
+				m_State = en_AD7616_READING_CHANNEL_ENTRY;
+			}
+			if(TRUE == Timer_IsTimeout(&(g_ADCTim)))
+			{
+				/*IF Conversion failed after timeout -> GOTO IDLE state*/
+				m_State = en_AD7616_IDLE;
+			}
+		}break;
+		case (en_AD7616_READING_CHANNEL_ENTRY):
+		{
+			Drv_AD7616_TriggerReadADCSpi_1W();/*Inititate reading*/
+			m_State = en_AD7616_READING_CHANNEL;
+		}break;
+		case (en_AD7616_READING_CHANNEL):
+		{
+			if(TRUE == Drv_AD7616_GetStatus_RX_Available())
+			{
+				Drv_AD7616_ReadSpiADC_1W(&g_u16ADCData[0U][m_ChannelSel] , &g_u16ADCData[1U][m_ChannelSel]);
+
+				m_ChannelSel++;
+				if(m_MaxChannelScan < m_ChannelSel)
+				{
+					/*If all channel got readed -> go to complete state*/
+
+					m_State = en_AD7616_IDLE;
+				}
+				else
+				{
+					/*IF READING is completed -> SWITCH channel and READ next channel*/
+					m_State = en_AD7616_READING_CHANNEL_ENTRY;
+				}
+			}
+		}break;
 	}
-	return u8Status;
 }
