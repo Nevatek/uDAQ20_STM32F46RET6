@@ -8,10 +8,13 @@
 #ifndef SRC_DRV_AD7616_H_
 #define SRC_DRV_AD7616_H_
 
-#define TIME_RESET_WAIT (200U)/*1 Ms*/
-#define TIMEOUT_AD7616_BUSY (10U)/*1MS*/
-#define AD7616_MAX_NUM_CHANNEL (16U)
+#define TIME_RESET_WAIT 				(200U)/*1 Ms*/
+#define TIMEOUT_AD7616_BUSY 			(10U)/*1MS*/
+#define AD7616_MAX_NUM_CHANNEL 			(16U)
 #define AD7616_LEN_PER_CHANNEL_IN_BYTES (2U)
+#define AD7616_CRC_ENABLED_FLAG			(FALSE)
+#define AD7616_SIZE_OF_CRC				(1U)
+#define AD7616_CRC_INDEX				(32U)
 typedef enum
 {
 	RANGE_SW_MODE = 0x00,
