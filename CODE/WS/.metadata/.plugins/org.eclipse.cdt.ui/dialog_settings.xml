@@ -17,6 +17,7 @@
 		<item key="caseSensitive" value="false"/>
 		<item key="searchFlags" value="227191"/>
 		<list key="previousPatterns">
+			<item value="HAL_GPIO_EXTI_Callback"/>
 			<item value="Drv_AD7616_SelectChannel"/>
 		</list>
 	</section>

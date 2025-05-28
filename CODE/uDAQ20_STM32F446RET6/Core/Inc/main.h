@@ -55,9 +55,13 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 SPI_HandleTypeDef *GetInstance_SPI1(void);
+I2C_HandleTypeDef* GetInstance_I2C1(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define PCF8574_IRQ_Pin GPIO_PIN_3
+#define PCF8574_IRQ_GPIO_Port GPIOA
+#define PCF8574_IRQ_EXTI_IRQn EXTI3_IRQn
 #define AD7616_CS__Pin GPIO_PIN_4
 #define AD7616_CS__GPIO_Port GPIOA
 #define AD7616_CHSEL2_Pin GPIO_PIN_10

@@ -3006,3 +3006,1295 @@ Finished building: default.size.stdout
  
 Finished building: uDAQ20_STM32F446RET6.list
  
+21:16:06 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/Appl_Timer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Appl_Timer.d" -MT"Core/Src/Appl_Timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Appl_Timer.o"
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+In file included from ../Core/Src/DRV_PCF8574.c:16:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/DRV_PCF8574.c:15:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/ApplicationLayer.c:9:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Init':
+../Core/Src/ApplicationLayer.c:19:9: error: too few arguments to function 'PCF8574_Init'
+   19 |         PCF8574_Init();
+      |         ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:122:12: note: declared here
+  122 | ReturnType PCF8574_Init(PCF8574_HandleType *hpcf,uint8_t device_address);
+      |            ^~~~~~~~~~~~
+../Core/Src/ApplicationLayer.c: In function 'Appl_GpioExpanderHandler':
+../Core/Src/ApplicationLayer.c:42:32: error: 'pcf1' undeclared (first use in this function)
+   42 |         PCF8574_GetFlagStatus(&pcf1, IO_INTERRUPT, &u8Status);
+      |                                ^~~~
+../Core/Src/ApplicationLayer.c:42:32: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/ApplicationLayer.c:42:53: error: 'u8Status' undeclared (first use in this function); did you mean 'ITStatus'?
+   42 |         PCF8574_GetFlagStatus(&pcf1, IO_INTERRUPT, &u8Status);
+      |                                                     ^~~~~~~~
+      |                                                     ITStatus
+../Core/Src/ApplicationLayer.c:48:47: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   48 |         PCF8574_GetFlagStatus(&pcf1, IO_READ, &u8ReadStatus);
+      |                                               ^~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:138:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  138 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:52:44: warning: passing argument 2 of 'PCF8574_GetPinState' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   52 |                 PCF8574_GetPinState(&pcf1, &u8PinsState);/*Read all pins*/
+      |                                            ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:135:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  135 | ReturnType PCF8574_GetPinState(PCF8574_HandleType *hpcf, uint8_t* state);
+      |                                                          ~~~~~~~~~^~~~~
+../Core/Src/ApplicationLayer.c:39:26: warning: unused variable 'u8IrQStatus' [-Wunused-variable]
+   39 |         volatile uint8_t u8IrQStatus = 0;
+      |                          ^~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:35:35: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+   35 | void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c);
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:36:35: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+   36 | void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c);
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c: In function 'i2c_init':
+../Core/Src/DRV_PCF8574.c:283:9: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  283 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |         ^~~~~~~~~~~~~~~~~
+      |         PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:283:35: warning: implicit declaration of function 'GetInstance_I2C1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  283 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+      |                                   GetInstance_SPI1
+../Core/Src/DRV_PCF8574.c:283:35: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+make: *** [Core/Src/subdir.mk:55: Core/Src/ApplicationLayer.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/DRV_PCF8574.c:286:22: warning: implicit declaration of function 'HAL_I2C_IsDeviceReady' [-Wimplicit-function-declaration]
+  286 |         if(HAL_OK == HAL_I2C_IsDeviceReady(pI2c,
+      |                      ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_read':
+../Core/Src/DRV_PCF8574.c:306:9: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  306 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |         ^~~~~~~~~~~~~~~~~
+      |         PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:306:35: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  306 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:313:30: warning: implicit declaration of function 'HAL_I2C_Master_Receive' [-Wimplicit-function-declaration]
+  313 |                 if(HAL_OK == HAL_I2C_Master_Receive(pI2c,
+      |                              ^~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:327:20: error: 'HAL_I2C_STATE_READY' undeclared (first use in this function); did you mean 'HAL_PCD_STATE_READY'?
+  327 |                 if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
+      |                    ^~~~~~~~~~~~~~~~~~~
+      |                    HAL_PCD_STATE_READY
+../Core/Src/DRV_PCF8574.c:327:20: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/DRV_PCF8574.c:327:43: warning: implicit declaration of function 'HAL_I2C_GetState'; did you mean 'HAL_PCD_GetState'? [-Wimplicit-function-declaration]
+  327 |                 if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
+      |                                           ^~~~~~~~~~~~~~~~
+      |                                           HAL_PCD_GetState
+../Core/Src/DRV_PCF8574.c:329:38: warning: implicit declaration of function 'HAL_I2C_Master_Receive_IT' [-Wimplicit-function-declaration]
+  329 |                         if(HAL_OK == HAL_I2C_Master_Receive_IT(pI2c,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:346:38: warning: implicit declaration of function 'HAL_I2C_Master_Receive_DMA' [-Wimplicit-function-declaration]
+  346 |                         if(HAL_OK == HAL_I2C_Master_Receive_DMA(pI2c,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_write':
+../Core/Src/DRV_PCF8574.c:373:9: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  373 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |         ^~~~~~~~~~~~~~~~~
+      |         PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:373:35: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  373 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:380:31: warning: implicit declaration of function 'HAL_I2C_Master_Transmit' [-Wimplicit-function-declaration]
+  380 |                 if(HAL_OK == (HAL_I2C_Master_Transmit(pI2c,
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:394:20: error: 'HAL_I2C_STATE_READY' undeclared (first use in this function); did you mean 'HAL_PCD_STATE_READY'?
+  394 |                 if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
+      |                    ^~~~~~~~~~~~~~~~~~~
+      |                    HAL_PCD_STATE_READY
+../Core/Src/DRV_PCF8574.c:396:38: warning: implicit declaration of function 'HAL_I2C_Master_Transmit_IT' [-Wimplicit-function-declaration]
+  396 |                         if(HAL_OK == HAL_I2C_Master_Transmit_IT(pI2c,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:412:38: warning: implicit declaration of function 'HAL_I2C_Master_Transmit_DMA'; did you mean 'HAL_SPI_Transmit_DMA'? [-Wimplicit-function-declaration]
+  412 |                         if(HAL_OK == HAL_I2C_Master_Transmit_DMA(pI2c,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                      HAL_SPI_Transmit_DMA
+../Core/Src/DRV_PCF8574.c: At top level:
+../Core/Src/DRV_PCF8574.c:435:35: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  435 | void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:465:35: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  465 | void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/DRV_PCF8574.c:491:24: warning: implicit declaration of function 'GetInterruptPin_GPIO' [-Wimplicit-function-declaration]
+  491 |         uint16_t pin = GetInterruptPin_GPIO();
+      |                        ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:496:65: warning: implicit declaration of function 'GetInstance_PCF1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  496 |                 PCF8574_HandleType* hpcf = (PCF8574_HandleType*)GetInstance_PCF1();
+      |                                                                 ^~~~~~~~~~~~~~~~
+      |                                                                 GetInstance_SPI1
+make: *** [Core/Src/subdir.mk:55: Core/Src/DRV_PCF8574.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:17:30 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+arm-none-eabi-gcc "../Core/Src/Drv_SoftDelay.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_SoftDelay.d" -MT"Core/Src/Drv_SoftDelay.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_SoftDelay.o"
+arm-none-eabi-gcc "../Core/Src/USB_CDC.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/USB_CDC.d" -MT"Core/Src/USB_CDC.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/USB_CDC.o"
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/ApplicationLayer.c:9:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/ApplicationLayer.c: In function 'Appl_GpioExpanderHandler':
+../Core/Src/ApplicationLayer.c:43:55: error: 'u8Status' undeclared (first use in this function); did you mean 'ITStatus'?
+   43 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_INTERRUPT, &u8Status);
+      |                                                       ^~~~~~~~
+      |                                                       ITStatus
+../Core/Src/ApplicationLayer.c:43:55: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/ApplicationLayer.c:49:49: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   49 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_READ, &u8ReadStatus);
+      |                                                 ^~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:138:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  138 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:53:46: warning: passing argument 2 of 'PCF8574_GetPinState' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   53 |                 PCF8574_GetPinState(&g_Pcf1, &u8PinsState);/*Read all pins*/
+      |                                              ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:135:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  135 | ReturnType PCF8574_GetPinState(PCF8574_HandleType *hpcf, uint8_t* state);
+      |                                                          ~~~~~~~~~^~~~~
+../Core/Src/ApplicationLayer.c:40:26: warning: unused variable 'u8IrQStatus' [-Wunused-variable]
+   40 |         volatile uint8_t u8IrQStatus = 0;
+      |                          ^~~~~~~~~~~
+In file included from ../Core/Src/DRV_PCF8574.c:16:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/DRV_PCF8574.c:15:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/DRV_PCF8574.c:35:35: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+   35 | void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c);
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   PCD_HandleTypeDef
+make: *** [Core/Src/subdir.mk:55: Core/Src/ApplicationLayer.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/DRV_PCF8574.c:36:35: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+   36 | void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c);
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   PCD_HandleTypeDef
+../Core/Src/USB_CDC.c: In function 'USB_CDC_ParseRxBuffer':
+../Core/Src/USB_CDC.c:70:18: warning: variable 'u16ReadCrc' set but not used [-Wunused-but-set-variable]
+   70 |         uint16_t u16ReadCrc = 0U;
+      |                  ^~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_init':
+../Core/Src/DRV_PCF8574.c:283:9: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  283 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |         ^~~~~~~~~~~~~~~~~
+      |         PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:283:35: warning: implicit declaration of function 'GetInstance_I2C1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  283 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+      |                                   GetInstance_SPI1
+../Core/Src/DRV_PCF8574.c:283:35: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+../Core/Src/DRV_PCF8574.c:286:22: warning: implicit declaration of function 'HAL_I2C_IsDeviceReady' [-Wimplicit-function-declaration]
+  286 |         if(HAL_OK == HAL_I2C_IsDeviceReady(pI2c,
+      |                      ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_read':
+../Core/Src/DRV_PCF8574.c:306:9: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  306 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |         ^~~~~~~~~~~~~~~~~
+      |         PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:306:35: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  306 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:313:30: warning: implicit declaration of function 'HAL_I2C_Master_Receive' [-Wimplicit-function-declaration]
+  313 |                 if(HAL_OK == HAL_I2C_Master_Receive(pI2c,
+      |                              ^~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:327:20: error: 'HAL_I2C_STATE_READY' undeclared (first use in this function); did you mean 'HAL_PCD_STATE_READY'?
+  327 |                 if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
+      |                    ^~~~~~~~~~~~~~~~~~~
+      |                    HAL_PCD_STATE_READY
+../Core/Src/DRV_PCF8574.c:327:20: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/DRV_PCF8574.c:327:43: warning: implicit declaration of function 'HAL_I2C_GetState'; did you mean 'HAL_PCD_GetState'? [-Wimplicit-function-declaration]
+  327 |                 if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
+      |                                           ^~~~~~~~~~~~~~~~
+      |                                           HAL_PCD_GetState
+../Core/Src/DRV_PCF8574.c:329:38: warning: implicit declaration of function 'HAL_I2C_Master_Receive_IT' [-Wimplicit-function-declaration]
+  329 |                         if(HAL_OK == HAL_I2C_Master_Receive_IT(pI2c,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:346:38: warning: implicit declaration of function 'HAL_I2C_Master_Receive_DMA' [-Wimplicit-function-declaration]
+  346 |                         if(HAL_OK == HAL_I2C_Master_Receive_DMA(pI2c,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_write':
+../Core/Src/DRV_PCF8574.c:373:9: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  373 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |         ^~~~~~~~~~~~~~~~~
+      |         PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:373:35: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  373 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:380:31: warning: implicit declaration of function 'HAL_I2C_Master_Transmit' [-Wimplicit-function-declaration]
+  380 |                 if(HAL_OK == (HAL_I2C_Master_Transmit(pI2c,
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:394:20: error: 'HAL_I2C_STATE_READY' undeclared (first use in this function); did you mean 'HAL_PCD_STATE_READY'?
+  394 |                 if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
+      |                    ^~~~~~~~~~~~~~~~~~~
+      |                    HAL_PCD_STATE_READY
+../Core/Src/DRV_PCF8574.c:396:38: warning: implicit declaration of function 'HAL_I2C_Master_Transmit_IT' [-Wimplicit-function-declaration]
+  396 |                         if(HAL_OK == HAL_I2C_Master_Transmit_IT(pI2c,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:412:38: warning: implicit declaration of function 'HAL_I2C_Master_Transmit_DMA'; did you mean 'HAL_SPI_Transmit_DMA'? [-Wimplicit-function-declaration]
+  412 |                         if(HAL_OK == HAL_I2C_Master_Transmit_DMA(pI2c,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                      HAL_SPI_Transmit_DMA
+../Core/Src/DRV_PCF8574.c: At top level:
+../Core/Src/DRV_PCF8574.c:435:35: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  435 | void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:465:35: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  465 | void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/DRV_PCF8574.c:491:24: warning: implicit declaration of function 'GetInterruptPin_GPIO' [-Wimplicit-function-declaration]
+  491 |         uint16_t pin = GetInterruptPin_GPIO();
+      |                        ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:496:65: warning: implicit declaration of function 'GetInstance_PCF1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  496 |                 PCF8574_HandleType* hpcf = (PCF8574_HandleType*)GetInstance_PCF1();
+      |                                                                 ^~~~~~~~~~~~~~~~
+      |                                                                 GetInstance_SPI1
+make: *** [Core/Src/subdir.mk:55: Core/Src/DRV_PCF8574.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:17:40 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+In file included from ../Core/Src/DRV_PCF8574.c:16:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/DRV_PCF8574.c:15:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/ApplicationLayer.c:9:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/ApplicationLayer.c: In function 'Appl_GpioExpanderHandler':
+../Core/Src/ApplicationLayer.c:43:54: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   43 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_INTERRUPT, &u8IrQStatus);
+      |                                                      ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:138:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  138 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:49:49: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   49 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_READ, &u8ReadStatus);
+      |                                                 ^~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:138:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  138 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:53:46: warning: passing argument 2 of 'PCF8574_GetPinState' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   53 |                 PCF8574_GetPinState(&g_Pcf1, &u8PinsState);/*Read all pins*/
+      |                                              ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:135:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  135 | ReturnType PCF8574_GetPinState(PCF8574_HandleType *hpcf, uint8_t* state);
+      |                                                          ~~~~~~~~~^~~~~
+../Core/Src/DRV_PCF8574.c:35:35: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+   35 | void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c);
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:36:35: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+   36 | void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c);
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c: In function 'i2c_init':
+../Core/Src/DRV_PCF8574.c:283:9: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  283 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |         ^~~~~~~~~~~~~~~~~
+      |         PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:283:35: warning: implicit declaration of function 'GetInstance_I2C1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  283 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+      |                                   GetInstance_SPI1
+../Core/Src/DRV_PCF8574.c:283:35: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+../Core/Src/DRV_PCF8574.c:286:22: warning: implicit declaration of function 'HAL_I2C_IsDeviceReady' [-Wimplicit-function-declaration]
+  286 |         if(HAL_OK == HAL_I2C_IsDeviceReady(pI2c,
+      |                      ^~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_read':
+../Core/Src/DRV_PCF8574.c:306:9: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  306 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |         ^~~~~~~~~~~~~~~~~
+      |         PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:306:35: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  306 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:313:30: warning: implicit declaration of function 'HAL_I2C_Master_Receive' [-Wimplicit-function-declaration]
+  313 |                 if(HAL_OK == HAL_I2C_Master_Receive(pI2c,
+      |                              ^~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:327:20: error: 'HAL_I2C_STATE_READY' undeclared (first use in this function); did you mean 'HAL_PCD_STATE_READY'?
+  327 |                 if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
+      |                    ^~~~~~~~~~~~~~~~~~~
+      |                    HAL_PCD_STATE_READY
+../Core/Src/DRV_PCF8574.c:327:20: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/DRV_PCF8574.c:327:43: warning: implicit declaration of function 'HAL_I2C_GetState'; did you mean 'HAL_PCD_GetState'? [-Wimplicit-function-declaration]
+  327 |                 if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
+      |                                           ^~~~~~~~~~~~~~~~
+      |                                           HAL_PCD_GetState
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_timebase_tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_timebase_tim.d" -MT"Core/Src/stm32f4xx_hal_timebase_tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_timebase_tim.o"
+../Core/Src/DRV_PCF8574.c:329:38: warning: implicit declaration of function 'HAL_I2C_Master_Receive_IT' [-Wimplicit-function-declaration]
+  329 |                         if(HAL_OK == HAL_I2C_Master_Receive_IT(pI2c,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/DRV_PCF8574.c:346:38: warning: implicit declaration of function 'HAL_I2C_Master_Receive_DMA' [-Wimplicit-function-declaration]
+  346 |                         if(HAL_OK == HAL_I2C_Master_Receive_DMA(pI2c,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+../Core/Src/DRV_PCF8574.c: In function 'i2c_write':
+../Core/Src/DRV_PCF8574.c:373:9: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  373 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |         ^~~~~~~~~~~~~~~~~
+      |         PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:373:35: warning: initialization of 'int *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  373 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:380:31: warning: implicit declaration of function 'HAL_I2C_Master_Transmit' [-Wimplicit-function-declaration]
+  380 |                 if(HAL_OK == (HAL_I2C_Master_Transmit(pI2c,
+      |                               ^~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:394:20: error: 'HAL_I2C_STATE_READY' undeclared (first use in this function); did you mean 'HAL_PCD_STATE_READY'?
+  394 |                 if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
+      |                    ^~~~~~~~~~~~~~~~~~~
+      |                    HAL_PCD_STATE_READY
+../Core/Src/DRV_PCF8574.c:396:38: warning: implicit declaration of function 'HAL_I2C_Master_Transmit_IT' [-Wimplicit-function-declaration]
+  396 |                         if(HAL_OK == HAL_I2C_Master_Transmit_IT(pI2c,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:412:38: warning: implicit declaration of function 'HAL_I2C_Master_Transmit_DMA'; did you mean 'HAL_SPI_Transmit_DMA'? [-Wimplicit-function-declaration]
+  412 |                         if(HAL_OK == HAL_I2C_Master_Transmit_DMA(pI2c,
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                                      HAL_SPI_Transmit_DMA
+../Core/Src/DRV_PCF8574.c: At top level:
+../Core/Src/DRV_PCF8574.c:435:35: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  435 | void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c:465:35: error: unknown type name 'I2C_HandleTypeDef'; did you mean 'PCD_HandleTypeDef'?
+  465 | void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
+      |                                   ^~~~~~~~~~~~~~~~~
+      |                                   PCD_HandleTypeDef
+../Core/Src/DRV_PCF8574.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/DRV_PCF8574.c:491:24: warning: implicit declaration of function 'GetInterruptPin_GPIO' [-Wimplicit-function-declaration]
+  491 |         uint16_t pin = GetInterruptPin_GPIO();
+      |                        ^~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:496:65: warning: implicit declaration of function 'GetInstance_PCF1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  496 |                 PCF8574_HandleType* hpcf = (PCF8574_HandleType*)GetInstance_PCF1();
+      |                                                                 ^~~~~~~~~~~~~~~~
+      |                                                                 GetInstance_SPI1
+make: *** [Core/Src/subdir.mk:55: Core/Src/DRV_PCF8574.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:18:59 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../USB_DEVICE/Target/usbd_conf.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/Target/usbd_conf.d" -MT"USB_DEVICE/Target/usbd_conf.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/Target/usbd_conf.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usb_device.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usb_device.d" -MT"USB_DEVICE/App/usb_device.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usb_device.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_cdc_if.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_cdc_if.d" -MT"USB_DEVICE/App/usbd_cdc_if.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_cdc_if.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_desc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_desc.d" -MT"USB_DEVICE/App/usbd_desc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_desc.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.o"
+arm-none-eabi-gcc "../Core/Src/Appl_Timer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Appl_Timer.d" -MT"Core/Src/Appl_Timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Appl_Timer.o"
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/Drv_SoftDelay.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_SoftDelay.d" -MT"Core/Src/Drv_SoftDelay.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_SoftDelay.o"
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/ApplicationLayer.c:9:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/ApplicationLayer.c: In function 'Appl_GpioExpanderHandler':
+../Core/Src/ApplicationLayer.c:43:54: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   43 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_INTERRUPT, &u8IrQStatus);
+      |                                                      ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:138:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  138 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:49:49: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   49 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_READ, &u8ReadStatus);
+      |                                                 ^~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:138:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  138 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:53:46: warning: passing argument 2 of 'PCF8574_GetPinState' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   53 |                 PCF8574_GetPinState(&g_Pcf1, &u8PinsState);/*Read all pins*/
+      |                                              ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:135:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  135 | ReturnType PCF8574_GetPinState(PCF8574_HandleType *hpcf, uint8_t* state);
+      |                                                          ~~~~~~~~~^~~~~
+In file included from ../Core/Src/DRV_PCF8574.c:16:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/DRV_PCF8574.c:15:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/DRV_PCF8574.c: In function 'i2c_init':
+../Core/Src/DRV_PCF8574.c:283:35: warning: implicit declaration of function 'GetInstance_I2C1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  283 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+      |                                   GetInstance_SPI1
+../Core/Src/DRV_PCF8574.c:283:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+../Core/Src/DRV_PCF8574.c: In function 'i2c_read':
+../Core/Src/DRV_PCF8574.c:306:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  306 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_write':
+../Core/Src/DRV_PCF8574.c:373:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  373 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterTxCpltCallback':
+../Core/Src/DRV_PCF8574.c:437:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  437 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:443:65: warning: implicit declaration of function 'GetInstance_PCF1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  443 |                 PCF8574_HandleType* hpcf = (PCF8574_HandleType*)GetInstance_PCF1();
+      |                                                                 ^~~~~~~~~~~~~~~~
+      |                                                                 GetInstance_SPI1
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterRxCpltCallback':
+../Core/Src/DRV_PCF8574.c:467:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  467 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/DRV_PCF8574.c:491:24: warning: implicit declaration of function 'GetInterruptPin_GPIO' [-Wimplicit-function-declaration]
+  491 |         uint16_t pin = GetInterruptPin_GPIO();
+      |                        ^~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/USB_CDC.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/USB_CDC.d" -MT"Core/Src/USB_CDC.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/USB_CDC.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_timebase_tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_timebase_tim.d" -MT"Core/Src/stm32f4xx_hal_timebase_tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_timebase_tim.o"
+../Core/Src/USB_CDC.c: In function 'USB_CDC_ParseRxBuffer':
+../Core/Src/USB_CDC.c:70:18: warning: variable 'u16ReadCrc' set but not used [-Wunused-but-set-variable]
+   70 |         uint16_t u16ReadCrc = 0U;
+      |                  ^~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f4xx.d" -MT"Core/Src/system_stm32f4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f4xx.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/main.o: in function `HAL_GPIO_EXTI_Callback':
+D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/main.c:79: multiple definition of `HAL_GPIO_EXTI_Callback'; ./Core/Src/DRV_PCF8574.o:D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/DRV_PCF8574.c:490: first defined here
+C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/DRV_PCF8574.o: in function `HAL_I2C_MasterRxCpltCallback':
+D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/DRV_PCF8574.c:473: undefined reference to `GetInstance_PCF1'
+C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/DRV_PCF8574.o: in function `HAL_GPIO_EXTI_Callback':
+D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/DRV_PCF8574.c:491: undefined reference to `GetInterruptPin_GPIO'
+C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/DRV_PCF8574.c:496: undefined reference to `GetInstance_PCF1'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:68: uDAQ20_STM32F446RET6.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:19:34 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/main.o: in function `HAL_GPIO_EXTI_Callback':
+D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/main.c:82: multiple definition of `HAL_GPIO_EXTI_Callback'; ./Core/Src/DRV_PCF8574.o:D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/DRV_PCF8574.c:490: first defined here
+C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/DRV_PCF8574.o: in function `HAL_I2C_MasterRxCpltCallback':
+D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/DRV_PCF8574.c:473: undefined reference to `GetInstance_PCF1'
+C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/DRV_PCF8574.o: in function `HAL_GPIO_EXTI_Callback':
+D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/DRV_PCF8574.c:491: undefined reference to `GetInterruptPin_GPIO'
+C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/DRV_PCF8574.c:496: undefined reference to `GetInstance_PCF1'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:68: uDAQ20_STM32F446RET6.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:21:59 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/ApplicationLayer.c:9:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/ApplicationLayer.c: In function 'Appl_GpioExpanderHandler':
+../Core/Src/ApplicationLayer.c:43:54: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   43 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_INTERRUPT, &u8IrQStatus);
+      |                                                      ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:138:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  138 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:49:49: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   49 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_READ, &u8ReadStatus);
+      |                                                 ^~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:138:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  138 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:53:46: warning: passing argument 2 of 'PCF8574_GetPinState' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   53 |                 PCF8574_GetPinState(&g_Pcf1, &u8PinsState);/*Read all pins*/
+      |                                              ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:135:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  135 | ReturnType PCF8574_GetPinState(PCF8574_HandleType *hpcf, uint8_t* state);
+      |                                                          ~~~~~~~~~^~~~~
+In file included from ../Core/Src/DRV_PCF8574.c:16:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/DRV_PCF8574.c:15:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/DRV_PCF8574.c: In function 'i2c_init':
+../Core/Src/DRV_PCF8574.c:283:35: warning: implicit declaration of function 'GetInstance_I2C1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  283 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+      |                                   GetInstance_SPI1
+../Core/Src/DRV_PCF8574.c:283:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+../Core/Src/DRV_PCF8574.c: In function 'i2c_read':
+../Core/Src/DRV_PCF8574.c:306:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  306 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_write':
+../Core/Src/DRV_PCF8574.c:373:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  373 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterTxCpltCallback':
+../Core/Src/DRV_PCF8574.c:437:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  437 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c:443:65: warning: implicit declaration of function 'GetInstance_PCF1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  443 |                 PCF8574_HandleType* hpcf = (PCF8574_HandleType*)GetInstance_PCF1();
+      |                                                                 ^~~~~~~~~~~~~~~~
+      |                                                                 GetInstance_SPI1
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterRxCpltCallback':
+../Core/Src/DRV_PCF8574.c:467:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  467 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'HAL_GPIO_EXTI_Callback':
+../Core/Src/main.c:93:17: warning: implicit declaration of function 'Callback_IRQ_INT_Pin' [-Wimplicit-function-declaration]
+   93 |                 Callback_IRQ_INT_Pin();
+      |                 ^~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/DRV_PCF8574.o: in function `HAL_I2C_MasterRxCpltCallback':
+D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/DRV_PCF8574.c:473: undefined reference to `GetInstance_PCF1'
+C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/DRV_PCF8574.o: in function `Callback_IRQ_INT_Pin':
+D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/DRV_PCF8574.c:492: undefined reference to `GetInstance_PCF1'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:68: uDAQ20_STM32F446RET6.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:22:09 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/main.c:20:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/DRV_PCF8574.o: in function `HAL_I2C_MasterRxCpltCallback':
+D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/DRV_PCF8574.c:473: undefined reference to `GetInstance_PCF1'
+C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/DRV_PCF8574.o: in function `Callback_IRQ_INT_Pin':
+D:/projects/Nevatek/uDAQ20_STM32F46RET6/CODE/uDAQ20_STM32F446RET6/Debug/../Core/Src/DRV_PCF8574.c:492: undefined reference to `GetInstance_PCF1'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:68: uDAQ20_STM32F446RET6.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:27:05 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/DRV_PCF8574.c:16:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/DRV_PCF8574.c:15:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+In file included from ../Core/Src/ApplicationLayer.c:9:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/ApplicationLayer.c: In function 'Appl_GpioExpanderHandler':
+../Core/Src/ApplicationLayer.c:43:54: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   43 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_INTERRUPT, &u8IrQStatus);
+      |                                                      ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:138:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  138 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:49:49: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   49 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_READ, &u8ReadStatus);
+      |                                                 ^~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:138:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  138 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:53:46: warning: passing argument 2 of 'PCF8574_GetPinState' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   53 |                 PCF8574_GetPinState(&g_Pcf1, &u8PinsState);/*Read all pins*/
+      |                                              ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:135:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  135 | ReturnType PCF8574_GetPinState(PCF8574_HandleType *hpcf, uint8_t* state);
+      |                                                          ~~~~~~~~~^~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_init':
+../Core/Src/DRV_PCF8574.c:284:35: warning: implicit declaration of function 'GetInstance_I2C1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  284 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+      |                                   GetInstance_SPI1
+../Core/Src/DRV_PCF8574.c:284:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+../Core/Src/DRV_PCF8574.c: In function 'i2c_read':
+../Core/Src/DRV_PCF8574.c:307:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  307 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_write':
+../Core/Src/DRV_PCF8574.c:374:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  374 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterTxCpltCallback':
+../Core/Src/DRV_PCF8574.c:438:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  438 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterRxCpltCallback':
+../Core/Src/DRV_PCF8574.c:466:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  466 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/main.c:20:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  45668	    268	   9244	  55180	   d78c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+21:27:28 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+In file included from ../Core/Src/DRV_PCF8574.c:16:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/DRV_PCF8574.c:15:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/DRV_PCF8574.c: In function 'i2c_init':
+../Core/Src/DRV_PCF8574.c:284:35: warning: implicit declaration of function 'GetInstance_I2C1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  284 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+      |                                   GetInstance_SPI1
+../Core/Src/DRV_PCF8574.c:284:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+../Core/Src/DRV_PCF8574.c: In function 'i2c_read':
+../Core/Src/DRV_PCF8574.c:307:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  307 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_write':
+../Core/Src/DRV_PCF8574.c:379:55: error: 'pI2c' undeclared (first use in this function)
+  379 |                 if(HAL_OK == (HAL_I2C_Master_Transmit(pI2c,
+      |                                                       ^~~~
+../Core/Src/DRV_PCF8574.c:379:55: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterTxCpltCallback':
+../Core/Src/DRV_PCF8574.c:436:12: error: 'pI2c' undeclared (first use in this function)
+  436 |         if(pI2c == hi2c)
+      |            ^~~~
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterRxCpltCallback':
+../Core/Src/DRV_PCF8574.c:461:12: error: 'pI2c' undeclared (first use in this function)
+  461 |         if(pI2c == hi2c)
+      |            ^~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/DRV_PCF8574.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:27:39 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+In file included from ../Core/Src/DRV_PCF8574.c:16:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/DRV_PCF8574.c:15:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/DRV_PCF8574.c: In function 'i2c_init':
+../Core/Src/DRV_PCF8574.c:283:44: error: 'pI2c' undeclared (first use in this function)
+  283 |         if(HAL_OK == HAL_I2C_IsDeviceReady(pI2c,
+      |                                            ^~~~
+../Core/Src/DRV_PCF8574.c:283:44: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/DRV_PCF8574.c: In function 'i2c_read':
+../Core/Src/DRV_PCF8574.c:308:53: error: 'pI2c' undeclared (first use in this function)
+  308 |                 if(HAL_OK == HAL_I2C_Master_Receive(pI2c,
+      |                                                     ^~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_write':
+../Core/Src/DRV_PCF8574.c:373:55: error: 'pI2c' undeclared (first use in this function)
+  373 |                 if(HAL_OK == (HAL_I2C_Master_Transmit(pI2c,
+      |                                                       ^~~~
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterTxCpltCallback':
+../Core/Src/DRV_PCF8574.c:430:12: error: 'pI2c' undeclared (first use in this function)
+  430 |         if(pI2c == hi2c)
+      |            ^~~~
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterRxCpltCallback':
+../Core/Src/DRV_PCF8574.c:455:12: error: 'pI2c' undeclared (first use in this function)
+  455 |         if(pI2c == hi2c)
+      |            ^~~~
+make: *** [Core/Src/subdir.mk:55: Core/Src/DRV_PCF8574.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+21:27:54 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+In file included from ../Core/Src/DRV_PCF8574.c:16:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/DRV_PCF8574.c:15:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/DRV_PCF8574.c: In function 'i2c_init':
+../Core/Src/DRV_PCF8574.c:284:35: warning: implicit declaration of function 'GetInstance_I2C1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  284 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+      |                                   GetInstance_SPI1
+../Core/Src/DRV_PCF8574.c:284:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+../Core/Src/DRV_PCF8574.c: In function 'i2c_read':
+../Core/Src/DRV_PCF8574.c:307:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  307 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_write':
+../Core/Src/DRV_PCF8574.c:374:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  374 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterTxCpltCallback':
+../Core/Src/DRV_PCF8574.c:438:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  438 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterRxCpltCallback':
+../Core/Src/DRV_PCF8574.c:466:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  466 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  45668	    268	   9244	  55180	   d78c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+21:28:11 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+In file included from ../Core/Src/DRV_PCF8574.c:16:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/DRV_PCF8574.c:15:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/DRV_PCF8574.c: In function 'i2c_init':
+../Core/Src/DRV_PCF8574.c:284:35: warning: implicit declaration of function 'GetInstance_I2C1'; did you mean 'GetInstance_SPI1'? [-Wimplicit-function-declaration]
+  284 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+      |                                   GetInstance_SPI1
+../Core/Src/DRV_PCF8574.c:284:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+../Core/Src/DRV_PCF8574.c: In function 'i2c_read':
+../Core/Src/DRV_PCF8574.c:307:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  307 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'i2c_write':
+../Core/Src/DRV_PCF8574.c:373:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  373 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterTxCpltCallback':
+../Core/Src/DRV_PCF8574.c:436:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  436 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.c: In function 'HAL_I2C_MasterRxCpltCallback':
+../Core/Src/DRV_PCF8574.c:462:35: warning: initialization of 'I2C_HandleTypeDef *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+  462 |         I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
+      |                                   ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  45668	    268	   9244	  55180	   d78c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+21:28:27 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../USB_DEVICE/Target/usbd_conf.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/Target/usbd_conf.d" -MT"USB_DEVICE/Target/usbd_conf.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/Target/usbd_conf.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usb_device.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usb_device.d" -MT"USB_DEVICE/App/usb_device.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usb_device.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_cdc_if.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_cdc_if.d" -MT"USB_DEVICE/App/usbd_cdc_if.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_cdc_if.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_desc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_desc.d" -MT"USB_DEVICE/App/usbd_desc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_desc.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o"
+arm-none-eabi-gcc "../Core/Src/Appl_Timer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Appl_Timer.d" -MT"Core/Src/Appl_Timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Appl_Timer.o"
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/ApplicationLayer.c:9:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+../Core/Src/ApplicationLayer.c: In function 'Appl_GpioExpanderHandler':
+../Core/Src/ApplicationLayer.c:43:54: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   43 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_INTERRUPT, &u8IrQStatus);
+      |                                                      ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:138:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  138 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:49:49: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   49 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_READ, &u8ReadStatus);
+      |                                                 ^~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:138:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  138 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:53:46: warning: passing argument 2 of 'PCF8574_GetPinState' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   53 |                 PCF8574_GetPinState(&g_Pcf1, &u8PinsState);/*Read all pins*/
+      |                                              ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:135:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  135 | ReturnType PCF8574_GetPinState(PCF8574_HandleType *hpcf, uint8_t* state);
+      |                                                          ~~~~~~~~~^~~~~
+In file included from ../Core/Src/DRV_PCF8574.c:16:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/DRV_PCF8574.c:15:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+arm-none-eabi-gcc "../Core/Src/Drv_SoftDelay.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_SoftDelay.d" -MT"Core/Src/Drv_SoftDelay.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_SoftDelay.o"
+arm-none-eabi-gcc "../Core/Src/USB_CDC.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/USB_CDC.d" -MT"Core/Src/USB_CDC.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/USB_CDC.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+../Core/Src/USB_CDC.c: In function 'USB_CDC_ParseRxBuffer':
+../Core/Src/USB_CDC.c:70:18: warning: variable 'u16ReadCrc' set but not used [-Wunused-but-set-variable]
+   70 |         uint16_t u16ReadCrc = 0U;
+      |                  ^~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/DRV_PCF8574.h:18: warning: "TRUE" redefined
+   18 | #define TRUE    1
+      | 
+In file included from ../Core/Src/main.c:20:
+../Core/Inc/main.h:44: note: this is the location of the previous definition
+   44 | #define TRUE    (0x01)
+      | 
+../Core/Src/DRV_PCF8574.h:19: warning: "FALSE" redefined
+   19 | #define FALSE   0
+      | 
+../Core/Inc/main.h:45: note: this is the location of the previous definition
+   45 | #define FALSE   (0x00)
+      | 
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  45664	    268	   9244	  55176	   d788	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+21:29:09 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/ApplicationLayer.c: In function 'Appl_GpioExpanderHandler':
+../Core/Src/ApplicationLayer.c:43:54: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   43 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_INTERRUPT, &u8IrQStatus);
+      |                                                      ^~~~~~~~~~~~
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/DRV_PCF8574.h:136:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  136 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:49:49: warning: passing argument 3 of 'PCF8574_GetFlagStatus' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   49 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_READ, &u8ReadStatus);
+      |                                                 ^~~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:136:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  136 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:53:46: warning: passing argument 2 of 'PCF8574_GetPinState' discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   53 |                 PCF8574_GetPinState(&g_Pcf1, &u8PinsState);/*Read all pins*/
+      |                                              ^~~~~~~~~~~~
+../Core/Src/DRV_PCF8574.h:133:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'volatile uint8_t *' {aka 'volatile unsigned char *'}
+  133 | ReturnType PCF8574_GetPinState(PCF8574_HandleType *hpcf, uint8_t* state);
+      |                                                          ~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  45664	    268	   9244	  55176	   d788	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+21:29:40 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'Appl_GpioExpanderHandler':
+../Core/Src/ApplicationLayer.c:43:54: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+   43 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_INTERRUPT, (uint8_t)&u8IrQStatus);
+      |                                                      ^
+../Core/Src/ApplicationLayer.c:43:54: warning: passing argument 3 of 'PCF8574_GetFlagStatus' makes pointer from integer without a cast [-Wint-conversion]
+   43 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_INTERRUPT, (uint8_t)&u8IrQStatus);
+      |                                                      ^~~~~~~~~~~~~~~~~~~~~
+      |                                                      |
+      |                                                      unsigned char
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/DRV_PCF8574.h:136:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'unsigned char'
+  136 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:49:49: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+   49 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_READ, (uint8_t)&u8ReadStatus);
+      |                                                 ^
+../Core/Src/ApplicationLayer.c:49:49: warning: passing argument 3 of 'PCF8574_GetFlagStatus' makes pointer from integer without a cast [-Wint-conversion]
+   49 |         PCF8574_GetFlagStatus(&g_Pcf1, IO_READ, (uint8_t)&u8ReadStatus);
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~
+      |                                                 |
+      |                                                 unsigned char
+../Core/Src/DRV_PCF8574.h:136:74: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'unsigned char'
+  136 |                                                                 uint8_t* status);
+      |                                                                 ~~~~~~~~~^~~~~~
+../Core/Src/ApplicationLayer.c:53:46: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+   53 |                 PCF8574_GetPinState(&g_Pcf1, (uint8_t)&u8PinsState);/*Read all pins*/
+      |                                              ^
+../Core/Src/ApplicationLayer.c:53:46: warning: passing argument 2 of 'PCF8574_GetPinState' makes pointer from integer without a cast [-Wint-conversion]
+   53 |                 PCF8574_GetPinState(&g_Pcf1, (uint8_t)&u8PinsState);/*Read all pins*/
+      |                                              ^~~~~~~~~~~~~~~~~~~~~
+      |                                              |
+      |                                              unsigned char
+../Core/Src/DRV_PCF8574.h:133:67: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'unsigned char'
+  133 | ReturnType PCF8574_GetPinState(PCF8574_HandleType *hpcf, uint8_t* state);
+      |                                                          ~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  45664	    268	   9244	  55176	   d788	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+21:30:05 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  45660	    268	   9244	  55172	   d784	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+21:31:43 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  45668	    268	   9244	  55180	   d78c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+21:33:16 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/Appl_Timer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Appl_Timer.d" -MT"Core/Src/Appl_Timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Appl_Timer.o"
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/Drv_SoftDelay.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_SoftDelay.d" -MT"Core/Src/Drv_SoftDelay.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_SoftDelay.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  45668	    268	   9244	  55180	   d78c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+21:33:32 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/Appl_Timer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Appl_Timer.d" -MT"Core/Src/Appl_Timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Appl_Timer.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  45668	    268	   9244	  55180	   d78c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+21:33:49 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+   text	   data	    bss	    dec	    hex	filename
+  45668	    268	   9244	  55180	   d78c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+21:45:06 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../USB_DEVICE/Target/usbd_conf.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/Target/usbd_conf.d" -MT"USB_DEVICE/Target/usbd_conf.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/Target/usbd_conf.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usb_device.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usb_device.d" -MT"USB_DEVICE/App/usb_device.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usb_device.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_cdc_if.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_cdc_if.d" -MT"USB_DEVICE/App/usbd_cdc_if.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_cdc_if.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_desc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_desc.d" -MT"USB_DEVICE/App/usbd_desc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_desc.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o"
+arm-none-eabi-gcc "../Core/Src/Appl_Timer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Appl_Timer.d" -MT"Core/Src/Appl_Timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Appl_Timer.o"
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/Drv_SoftDelay.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_SoftDelay.d" -MT"Core/Src/Drv_SoftDelay.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_SoftDelay.o"
+arm-none-eabi-gcc "../Core/Src/USB_CDC.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/USB_CDC.d" -MT"Core/Src/USB_CDC.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/USB_CDC.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+../Core/Src/USB_CDC.c: In function 'USB_CDC_ParseRxBuffer':
+../Core/Src/USB_CDC.c:70:18: warning: variable 'u16ReadCrc' set but not used [-Wunused-but-set-variable]
+   70 |         uint16_t u16ReadCrc = 0U;
+      |                  ^~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  46040	    268	   9332	  55640	   d958	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+21:46:38 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  46040	    268	   9332	  55640	   d958	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 

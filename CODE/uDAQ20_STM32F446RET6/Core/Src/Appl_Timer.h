@@ -1,3 +1,9 @@
+/*
+ * Appl_Timer.h
+ *
+ *  Created on: May 20, 2024
+ *      Author: aldrin.Rebellow
+ */
 #ifndef APPL_TIMER_HPP
 #define APPL_TIMER_HPP
 

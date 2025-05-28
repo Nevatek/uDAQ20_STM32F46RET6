@@ -2,7 +2,7 @@
  * Drv_AD7616.h
  *
  *  Created on: May 18, 2025
- *      Author: aldri
+ *      Author: aldrin.Rebellow
  */
 
 #ifndef SRC_DRV_AD7616_H_

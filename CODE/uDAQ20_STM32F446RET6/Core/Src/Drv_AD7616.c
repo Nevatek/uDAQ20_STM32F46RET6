@@ -2,7 +2,7 @@
  * Drv_AD7616.c
  *
  *  Created on: May 18, 2025
- *      Author: aldri
+ *      Author: aldrin.Rebellow
  */
 #include "main.h"
 #include "string.h"

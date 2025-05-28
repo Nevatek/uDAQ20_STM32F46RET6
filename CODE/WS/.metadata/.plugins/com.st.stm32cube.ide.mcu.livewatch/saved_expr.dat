@@ -1,2 +1,2 @@
-g_u16ADCDataVal[0]
-g_u16ADCDataVal[1]
+g_u16ADCDataVal_ChannelA[0]
+g_u8PinsState

@@ -1,3 +1,9 @@
+/*
+ * Appl_Timer.c
+ *
+ *  Created on: May 20, 2024
+ *      Author: aldrin.Rebellow
+ */
 #include "stdlib.h"
 #include "main.h"
 #include "Appl_Timer.h"
@@ -22,7 +28,6 @@ void StartTimer(stcTimer *pTimer , uint32_t DelayTimeMs)
 uint8_t Timer_IsTimeout(stcTimer *pTimer)
 {
 	uint8_t bStatus = 0U;
-//  if(true == Timer_IsRunning(pTimer))
   {
     pTimer->u32CurrMills = HAL_GetTick();
     int32_t elapsedTime = (int32_t)(pTimer->u32CurrMills - pTimer->u32PrevMills);

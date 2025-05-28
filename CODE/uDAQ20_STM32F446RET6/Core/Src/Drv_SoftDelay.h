@@ -2,7 +2,7 @@
  * Drv_SoftDelay.h
  *
  *  Created on: May 18, 2025
- *      Author: aldri
+ *      Author: aldrin.Rebellow
  */
 
 #ifndef SRC_DRV_SOFTDELAY_H_
