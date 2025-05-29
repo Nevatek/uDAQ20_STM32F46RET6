@@ -95,7 +95,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		/*  ISR for IO End */
 	}
 
-	if(GPIO_Pin == GPIO_PIN_3)
+	if(GPIO_Pin == GPIO_PIN_9)
 	{
 		/* ISR for IO Start */
 		Callback_IRQ_INT_Pin();
@@ -453,12 +453,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PCF8574_IRQ_Pin */
-  GPIO_InitStruct.Pin = PCF8574_IRQ_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(PCF8574_IRQ_GPIO_Port, &GPIO_InitStruct);
-
   /*Configure GPIO pins : AD7616_CS__Pin AD7616_CHSEL1_Pin AD7616_CHSEL0_Pin */
   GPIO_InitStruct.Pin = AD7616_CS__Pin|AD7616_CHSEL1_Pin|AD7616_CHSEL0_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -473,6 +467,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : PCF8574_IRQ_Pin */
+  GPIO_InitStruct.Pin = PCF8574_IRQ_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(PCF8574_IRQ_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pin : AD7616_BUSY_IQR_Pin */
   GPIO_InitStruct.Pin = AD7616_BUSY_IQR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
@@ -480,9 +480,6 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(AD7616_BUSY_IQR_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI3_IRQn);
-
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 

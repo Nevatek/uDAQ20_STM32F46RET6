@@ -136,6 +136,9 @@ ReturnType PCF8574_GetFlagStatus(PCF8574_HandleType *hpcf,
 								uint8_t* status);
 ReturnType PCF8574_ClearFlagStatus(PCF8574_HandleType *hpcf,
 								PCF8574_Operation op);
+ReturnType PCF8574_SetPinMode(PCF8574_HandleType *hpcf,
+		PCF8574_PinType pin,
+		uint8_t mode);
 void Callback_IRQ_INT_Pin(void);
 void Callback_PCF8574TxComplete(void);
 void Callback_PCF8574RxComplete(void);

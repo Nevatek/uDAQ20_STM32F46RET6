@@ -62,9 +62,6 @@ I2C_HandleTypeDef* GetInstance_I2C1(void);
 /* Private defines -----------------------------------------------------------*/
 #define DAC81416_CS_Pin GPIO_PIN_3
 #define DAC81416_CS_GPIO_Port GPIOC
-#define PCF8574_IRQ_Pin GPIO_PIN_3
-#define PCF8574_IRQ_GPIO_Port GPIOA
-#define PCF8574_IRQ_EXTI_IRQn EXTI3_IRQn
 #define AD7616_CS__Pin GPIO_PIN_4
 #define AD7616_CS__GPIO_Port GPIOA
 #define AD7616_CHSEL2_Pin GPIO_PIN_10
@@ -73,6 +70,9 @@ I2C_HandleTypeDef* GetInstance_I2C1(void);
 #define AD7616_HW_RNGSEL0_GPIO_Port GPIOC
 #define AD7616_HW_RNGSEL1_Pin GPIO_PIN_8
 #define AD7616_HW_RNGSEL1_GPIO_Port GPIOC
+#define PCF8574_IRQ_Pin GPIO_PIN_9
+#define PCF8574_IRQ_GPIO_Port GPIOC
+#define PCF8574_IRQ_EXTI_IRQn EXTI9_5_IRQn
 #define AD7616_CHSEL1_Pin GPIO_PIN_8
 #define AD7616_CHSEL1_GPIO_Port GPIOA
 #define AD7616_CHSEL0_Pin GPIO_PIN_9

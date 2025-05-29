@@ -23,6 +23,14 @@ static uint8_t Appl_GpioExpanderHandler(void);
 void ApplicationLayer_Init(void)
 {
 	Drv_AD7616_Init();
+	PCF8574_SetPinMode(&g_Pcf1, PIN0, TRUE);
+	PCF8574_SetPinMode(&g_Pcf1, PIN1, FALSE);
+	PCF8574_SetPinMode(&g_Pcf1, PIN2, TRUE);
+	PCF8574_SetPinMode(&g_Pcf1, PIN3, TRUE);
+	PCF8574_SetPinMode(&g_Pcf1, PIN4, FALSE);
+	PCF8574_SetPinMode(&g_Pcf1, PIN5, TRUE);
+	PCF8574_SetPinMode(&g_Pcf1, PIN6, TRUE);
+	PCF8574_SetPinMode(&g_Pcf1, PIN7, TRUE);
 	PCF8574_Init(&g_Pcf1, 0x20);
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************

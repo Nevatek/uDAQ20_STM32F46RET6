@@ -21,6 +21,9 @@
 #define PCF8574_I2C_DELAY		1000U
 #define PCF8574_I2C_DATA_SIZE	1U		/* 8bit*/
 
+#define ALL_PIN_INPUT	255U
+#define ALL_PIN_OUTPUT	0U
+
 #define TOGGLE_BIT(REG, BIT)   ((REG) ^= (BIT))
 PCF8574_HandleType *p_HpcfHandle = NULL;
 /************************* typedefs ****************************************/
@@ -424,7 +427,56 @@ ReturnType i2c_write(uint8_t address, uint8_t* pData, I2C_TRANSFER_TYPE mode)
 
 	return ret;
 }
+/*********************.PCF8574_SetPinMode().********************************
+ .Purpose        : Set the pin mode 0: output 1: input
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+ReturnType PCF8574_SetPinMode(PCF8574_HandleType *hpcf,
+		PCF8574_PinType pin,
+		uint8_t mode)
+{
+	ReturnType ret 	 = RETURN_ERROR;
+	uint8_t tempData = 0;
 
+	tempData = hpcf->pinMode.all;
+
+	if(hpcf != NULL)
+	{
+		/* whole 8 pin toggle */
+		if(pin == ALL_PINS)
+		{
+			/* Set or clear only the specific bit */
+			if (mode)
+			{
+				tempData = ALL_PIN_INPUT;
+			}
+			else
+			{
+				tempData = ALL_PIN_OUTPUT;
+			}
+		}
+		/* individual pin toggle */
+		else
+		{
+			/* Set or clear only the specific bit */
+			if (mode)
+			{
+				SET_BIT(tempData, (1 << pin));
+			}
+			else
+			{
+				CLEAR_BIT(tempData, (1 << pin));
+			}
+		}
+
+		hpcf->pinMode.all = tempData;
+	}
+
+
+	return ret;
+}
 /*********************.HAL_I2C_MasterTxCpltCallback().************************
  .Purpose        : Callback for transmission complete for IT & DMA
  .Returns        :  RETURN_ERROR
