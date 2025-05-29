@@ -137,4 +137,6 @@ ReturnType PCF8574_GetFlagStatus(PCF8574_HandleType *hpcf,
 ReturnType PCF8574_ClearFlagStatus(PCF8574_HandleType *hpcf,
 								PCF8574_Operation op);
 void Callback_IRQ_INT_Pin(void);
+void Callback_PCF8574TxComplete(void);
+void Callback_PCF8574RxComplete(void);
 #endif /* DRV_PCF8574_H_ */

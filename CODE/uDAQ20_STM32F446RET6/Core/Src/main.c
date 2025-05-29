@@ -25,6 +25,7 @@
 #include "Drv_AD7616.h"
 #include "Drv_SoftDelay.h"
 #include "DRV_PCF8574.h"
+#include "DRV_DAC81416.h"
 #include "ApplicationLayer.h"
 /* USER CODE END Includes */
 
@@ -67,6 +68,10 @@ SPI_HandleTypeDef *GetInstance_SPI1(void)
 {
 	return (&hspi1);
 }
+SPI_HandleTypeDef *GetInstance_SPI2(void)
+{
+	return (&hspi2);
+}
 I2C_HandleTypeDef* GetInstance_I2C1(void)
 {
 	return &hi2c1;
@@ -95,6 +100,82 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		/* ISR for IO Start */
 		Callback_IRQ_INT_Pin();
 		/*  ISR for IO End */
+	}
+}
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for GPIO interrupt Rising and falling
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef * hspi)
+{
+	if(hspi == GetInstance_SPI1())
+	{
+		/*AD7616 IRQ*/
+		Callback_AD7616RxComplete();
+	}
+}
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for GPIO interrupt Rising and falling
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef * hspi)
+{
+	if(hspi == GetInstance_SPI1())
+	{
+		/*AD7616 IRQ*/
+		Callback_AD7616TxComplete();
+	}
+
+	if(hspi == GetInstance_SPI2())
+	{
+		/*DAC81416 IRQ*/
+		Callback_DAC81416TxComplete();
+	}
+}
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for GPIO interrupt Rising and falling
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+	if(hspi == GetInstance_SPI2())
+	{
+		/*DAC81416 IRQ*/
+		Callback_DAC81416TxRxComplete();
+	}
+}
+/*********************.HAL_I2C_MasterTxCpltCallback().************************
+ .Purpose        : Callback for transmission complete for IT & DMA
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+	if(hi2c == GetInstance_I2C1())
+	{
+		/*PCF8574 IRQ*/
+		Callback_PCF8574TxComplete();
+	}
+}
+/*********************.HAL_I2C_MasterTxCpltCallback().************************
+ .Purpose        : Callback for transmission complete for IT & DMA
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+	if(hi2c == GetInstance_I2C1())
+	{
+		/*PCF8574 IRQ*/
+		Callback_PCF8574RxComplete();
 	}
 }
 /* USER CODE END 0 */
@@ -351,6 +432,9 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(DAC81416_CS_GPIO_Port, DAC81416_CS_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(AD7616_CS__GPIO_Port, AD7616_CS__Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
@@ -361,6 +445,13 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, AD7616_CHSEL1_Pin|AD7616_CHSEL0_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : DAC81416_CS_Pin AD7616_HW_RNGSEL0_Pin AD7616_HW_RNGSEL1_Pin */
+  GPIO_InitStruct.Pin = DAC81416_CS_Pin|AD7616_HW_RNGSEL0_Pin|AD7616_HW_RNGSEL1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PCF8574_IRQ_Pin */
   GPIO_InitStruct.Pin = PCF8574_IRQ_Pin;
@@ -381,13 +472,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : AD7616_HW_RNGSEL0_Pin AD7616_HW_RNGSEL1_Pin */
-  GPIO_InitStruct.Pin = AD7616_HW_RNGSEL0_Pin|AD7616_HW_RNGSEL1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : AD7616_BUSY_IQR_Pin */
   GPIO_InitStruct.Pin = AD7616_BUSY_IQR_Pin;

@@ -431,23 +431,19 @@ ReturnType i2c_write(uint8_t address, uint8_t* pData, I2C_TRANSFER_TYPE mode)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
+inline void Callback_PCF8574TxComplete(void)
 {
-	I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
-	if(pI2c == hi2c)
+	if(p_HpcfHandle->currOperation == IO_TOGGLE)
 	{
-		if(p_HpcfHandle->currOperation == IO_TOGGLE)
-		{
-			p_HpcfHandle->flags.ToggleStatus_Flag = TRUE;
-		}
-		else
-		{
-			p_HpcfHandle->flags.WriteStatus_Flag = TRUE;
-			/* ISR for Write Start */
+		p_HpcfHandle->flags.ToggleStatus_Flag = TRUE;
+	}
+	else
+	{
+		p_HpcfHandle->flags.WriteStatus_Flag = TRUE;
+		/* ISR for Write Start */
 
-			/* ISR for Write End */
+		/* ISR for Write End */
 
-		}
 	}
 }
 
@@ -457,17 +453,13 @@ void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
+inline void Callback_PCF8574RxComplete(void)
 {
-	I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
-	if(pI2c == hi2c)
-	{
-		p_HpcfHandle->flags.ReadStatus_Flag = TRUE;
+	p_HpcfHandle->flags.ReadStatus_Flag = TRUE;
 
-		/* ISR for Read Start */
+	/* ISR for Read Start */
 
-		/* ISR for Read End */
-	}
+	/* ISR for Read End */
 }
 
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
@@ -476,7 +468,7 @@ void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-void Callback_IRQ_INT_Pin(void)
+inline void Callback_IRQ_INT_Pin(void)
 {
 	/* change  GetInstance_PFC1 () based on your pfc handler */
 	p_HpcfHandle->flags.InterruptStatus_Flag = TRUE;

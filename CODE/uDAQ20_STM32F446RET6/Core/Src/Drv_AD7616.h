@@ -66,6 +66,8 @@ typedef enum
 
 void Drv_AD7616_Init(void);
 void ISRCallback_Ad7616_Busy(void);
+void Callback_AD7616RxComplete(void);
+void Callback_AD7616TxComplete(void);
 void Drv_AD7616_SelectChannel(AD7616_CHANNEL m_Ch);
 void Drv_AD7616_SelectHWInputVoltageRange(HW_RANGE_SEL m_inpVR);
 void Drv_AD7616_TriggerAdcConvst(void);
