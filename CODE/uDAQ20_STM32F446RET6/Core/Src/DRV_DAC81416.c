@@ -30,10 +30,14 @@ DAC81416_OUTPUT_ST outputPin[] =
 		{DAC_PIN_CLR, 		NULL, 0}
 };
 
+static uint8_t g_u8DacStreamBuff[DAC_STREAM_BUFF_LENGTH];/**/
+
 DAC81416_SERIAL_ACCESS g_txData;
 DAC81416_SERIAL_ACCESS g_rxData;
 
 DAC81416_REG_DEVICEID g_mDevId;
+DAC81416_REG_SPICONFIG g_mSpiReg;
+
 uint8_t g_u8WriteStFlag = FALSE;
 uint8_t g_u8ReadStFlag  = FALSE;
 stcTimer g_DacTimeout;
@@ -55,22 +59,19 @@ static uint8_t DAC81416_Spi_Write(uint8_t* pBuff, uint16_t size);
  ****************************************************************************/
 void DAC81416_Init(void)
 {
-	DAC81416_REG_SPICONFIG spiReg = {0};
-
-
 	DAC81416_WritePin(DAC_PIN_RESET, TRUE);
-	HAL_Delay(10);
+	HAL_Delay(DAC816416_RESET_DELAY_MS);
 	DAC81416_WritePin(DAC_PIN_RESET, FALSE);
-	HAL_Delay(10);
+	HAL_Delay(DAC816416_RESET_DELAY_MS);
 	DAC81416_WritePin(DAC_PIN_RESET, TRUE);
-	HAL_Delay(1);
+	HAL_Delay(DAC816416_RESET_DELAY_MS);
 
-	DAC81416_WriteRegister_Blocking(DAC_REG_NOP, 0x0000);
-	DAC81416_ReadRegister_Blocking(DAC_REG_DEVICEID , &g_mDevId.u16SHORT);
+	DAC81416_WriteRegister_Blocking(DAC_REG_NOP, 0x0000);/*Wrinting dummy writing operation to NOP register*/
+	DAC81416_ReadRegister_Blocking(DAC_REG_DEVICEID , &g_mDevId.u16SHORT);/*Reading device ID*/
 
-	spiReg.BIT.SDO_EN = TRUE;/*When set to 1 the SDO pin is operational.*/
-	spiReg.BIT.DEV_PWDWN = 0U;
-	DAC81416_WriteRegister_Blocking(DAC_REG_SPICONFIG, spiReg.u16SHORT);
+	g_mSpiReg.BIT.SDO_EN = TRUE;/*When set to 1 the SDO pin is operational.*/
+	g_mSpiReg.BIT.DEV_PWDWN = 0U;
+	DAC81416_WriteRegister_Blocking(DAC_REG_SPICONFIG, g_mSpiReg.u16SHORT);/*Setting SPI config register*/
 }
 /*********************.Drv_AD7616_TriggerAdcConvst().*****************************
  .Purpose        : Function to trigger start of converion of ADC
@@ -107,6 +108,27 @@ uint8_t DAC81416_WriteRegister(DAC81416_REG_MAP m_reg, uint16_t pU16TxData)
 		{
 			u8Ret = TRUE;
 		}
+	}
+	return u8Ret;
+}
+/*********************.Drv_AD7616_TriggerAdcConvst().*****************************
+ .Purpose        : Function to trigger start of converion of ADC
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+uint8_t DAC81416_WriteDacStreaming(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pU16TxData , uint16_t u16Len)
+{
+	uint8_t u8Ret = FALSE;
+	uint8_t  u8DatLen = (0U);
+	memset(g_u8DacStreamBuff , 0x00 , sizeof(g_u8DacStreamBuff));
+	g_u8DacStreamBuff[0U] = DAC_REG_DAC0;
+	u8DatLen = (u16Len < (1U - sizeof(g_u8DacStreamBuff))?u16Len : (1U - sizeof(g_u8DacStreamBuff)));
+	memcpy((uint8_t*)&g_u8DacStreamBuff[1U] , (uint8_t*)pU16TxData , u8DatLen);
+	g_mSpiState = SPI_STATE_WRITE_DATA;
+	if(TRUE == DAC81416_Spi_Write((uint8_t*)&(g_u8DacStreamBuff), u8DatLen))
+	{
+		u8Ret = TRUE;
 	}
 	return u8Ret;
 }
@@ -397,4 +419,22 @@ inline void Callback_DAC81416RxComplete(void)
 		g_u8ReadStFlag = TRUE;
 		g_mSpiState = SPI_STATE_IDLE;
 	}
+}
+
+/**************************Middleware - DAC816416**************************************************/
+void Appl_DAC816416WriteDacRegister(DAC81416_DAC_CHANNEL m_Ch , uint16_t u16Data)
+{
+	DAC81416_REG_MAP m_reg = DAC_REG_DAC0 + m_Ch;
+	DAC81416_WriteRegister(m_reg , u16Data);
+}
+void Appl_DAC816416WriteDacRegister_EnableStreamingMode(void)
+{
+	g_mSpiReg.BIT.STR_EN = TRUE;
+	DAC81416_WriteRegister_Blocking(DAC_REG_SPICONFIG, g_mSpiReg.u16SHORT);/*Setting SPI config register*/
+}
+void Appl_DAC816416WriteDacRegister_StreamingMode(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pu16Data , uint8_t u8ChannelCnt)
+{
+	uint8_t u8DataLen = 0U;
+	u8DataLen = (u8ChannelCnt * 2U) + 1U;
+	DAC81416_WriteDacStreaming(m_Ch , pu16Data , u8DataLen);
 }

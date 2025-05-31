@@ -10,7 +10,9 @@
 
 /************************** defines ******************************************/
 /************************** typedefs *****************************************/
-#define DAC_SPI_MAX_TX_TIMEOUT_MS (5U)
+#define DAC_SPI_MAX_TX_TIMEOUT_MS 		(5U)
+#define DAC816416_RESET_DELAY_MS	 	(2U)
+#define DAC_STREAM_BUFF_LENGTH (33U)/*32bytes for channels and 1 byte for address*/
 typedef enum
 {
 	SPI_STATE_IDLE,
@@ -18,6 +20,27 @@ typedef enum
 	SPI_STATE_WRITE_CMD,
 	SPI_STATE_READ_DATA
 } spi_state_t;
+
+typedef enum
+{
+	DAC_CHANNEL_0	= 0,		// Channel 0 ID
+	DAC_CHANNEL_1 ,				// Channel 1 ID
+	DAC_CHANNEL_2 ,				// Channel 2 ID
+	DAC_CHANNEL_3 ,				// Channel 3 ID
+	DAC_CHANNEL_4 ,				// Channel 4 ID
+	DAC_CHANNEL_5 ,				// Channel 5 ID
+	DAC_CHANNEL_6 ,				// Channel 6 ID
+	DAC_CHANNEL_7 ,				// Channel 7 ID
+	DAC_CHANNEL_8 ,				// Channel 8 ID
+	DAC_CHANNEL_9 ,				// Channel 9 ID
+	DAC_CHANNEL_10 ,			// Channel 10 ID
+	DAC_CHANNEL_11 ,			// Channel 11 ID
+	DAC_CHANNEL_12 ,			// Channel 12 ID
+	DAC_CHANNEL_13 ,			// Channel 13 ID
+	DAC_CHANNEL_14 ,			// Channel 14 ID
+	DAC_CHANNEL_15 ,			// Channel 15 ID
+	DAC_CHANNEL_MAX
+} DAC81416_DAC_CHANNEL;
 
 typedef enum
 {
@@ -381,8 +404,13 @@ uint8_t DAC81416_GetRegReadValue(uint16_t *pU16TxData);
 uint8_t DAC81416_WriteRegister(DAC81416_REG_MAP m_reg, uint16_t pU16TxData);
 uint8_t DAC81416_WriteRegister_Blocking(DAC81416_REG_MAP m_reg, uint16_t pU16TxData);
 uint8_t DAC81416_ReadRegister_Blocking(DAC81416_REG_MAP m_reg, uint16_t *pU16RxData);
+uint8_t DAC81416_WriteDacStreaming(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pU16TxData , uint16_t u16Len);
 spi_state_t DAC816416_GetSpiState(void);
 
 void Callback_DAC81416TxComplete(void);
 void Callback_DAC81416RxComplete(void);
+
+/*Middleware functions*/
+void Appl_DAC816416WriteDacRegister(DAC81416_DAC_CHANNEL m_Ch , uint16_t u16Data);
+void Appl_DAC816416WriteDacRegister_StreamingMode(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pu16Data , uint8_t u8ChannelCnt);
 #endif /* DRV_DAC81416_H_ */
