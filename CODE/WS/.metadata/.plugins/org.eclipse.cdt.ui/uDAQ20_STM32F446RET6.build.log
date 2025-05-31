@@ -1,17 +1,10 @@
-15:39:33 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+15:58:45 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
 make -j4 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: uDAQ20_STM32F446RET6.elf
- 
 arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
-arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
    text	   data	    bss	    dec	    hex	filename
-  52592	    352	   9176	  62120	   f2a8	uDAQ20_STM32F446RET6.elf
+  52448	    352	   9176	  61976	   f218	uDAQ20_STM32F446RET6.elf
 Finished building: default.size.stdout
  
-Finished building: uDAQ20_STM32F446RET6.list
- 
 
-15:39:35 Build Finished. 0 errors, 0 warnings. (took 2s.243ms)
+15:58:46 Build Finished. 0 errors, 0 warnings. (took 482ms)
 

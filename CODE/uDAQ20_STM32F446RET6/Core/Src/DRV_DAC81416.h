@@ -10,7 +10,6 @@
 
 /************************** defines ******************************************/
 /************************** typedefs *****************************************/
-#define SPI_DATA_SIZE 2	// 16bit
 #define DAC_SPI_MAX_TX_TIMEOUT_MS (5U)
 typedef enum
 {
@@ -88,14 +87,18 @@ typedef union
 	uint16_t u16SHORT;
 }DAC81416_REG_DEVICEID;
 
-typedef struct
+typedef union
 {
-	uint16_t TEMP_ALM 	:1;		/* 1 = indicates die temperature is over +140°C.
-								  * A thermal alarm event forces the DAC outputs
-								  * to go into power_down mode.*/
-	uint16_t DAC_BUSY	:1;		/* indicates DAC registers are not ready for updates.*/
-	uint16_t CRC_ALM 	:1; 	/* indicates a CRC error. */
-	uint16_t 			:13; 	/* This bit is reserved.*/
+	struct
+	{
+		uint16_t TEMP_ALM 	:1;		/* 1 = indicates die temperature is over +140°C.
+									  * A thermal alarm event forces the DAC outputs
+									  * to go into power_down mode.*/
+		uint16_t DAC_BUSY	:1;		/* indicates DAC registers are not ready for updates.*/
+		uint16_t CRC_ALM 	:1; 	/* indicates a CRC error. */
+		uint16_t 			:13; 	/* This bit is reserved.*/
+	}BIT;
+	uint16_t u16SHORT;
 }DAC81416_REG_STATUS;
 
 typedef union
@@ -123,61 +126,74 @@ typedef union
 	uint16_t u16SHORT;
 }DAC81416_REG_SPICONFIG;
 
-typedef struct
+typedef union
 {
-	uint16_t DAC_0_1_DIFF_EN      : 1;  /* Enable differential mode for DAC 0/1 */
-	uint16_t DAC_2_3_DIFF_EN      : 1;  /* Enable differential mode for DAC 2/3 */
-	uint16_t DAC_4_5_DIFF_EN      : 1;  /* Enable differential mode for DAC 4/5 */
-	uint16_t DAC_6_7_DIFF_EN      : 1;  /* Enable differential mode for DAC 6/7 */
-	uint16_t DAC_8_9_DIFF_EN      : 1;  /* Enable differential mode for DAC 8/9 */
-	uint16_t DAC_10_11_DIFF_EN    : 1;  /* Enable differential mode for DAC 10/11 */
-	uint16_t DAC_12_13_DIFF_EN    : 1;  /* Enable differential mode for DAC 12/13 */
-	uint16_t DAC_14_15_DIFF_EN    : 1;  /* Enable differential mode for DAC 14/15 */
-	uint16_t                      : 6;  /* Reserved */
-	uint16_t REF_PWDWN            : 1;  /* Power down internal reference */
-	uint16_t                      : 1;  /* Reserved */
+	struct
+	{
+		uint16_t DAC_0_1_DIFF_EN      : 1;  /* Enable differential mode for DAC 0/1 */
+		uint16_t DAC_2_3_DIFF_EN      : 1;  /* Enable differential mode for DAC 2/3 */
+		uint16_t DAC_4_5_DIFF_EN      : 1;  /* Enable differential mode for DAC 4/5 */
+		uint16_t DAC_6_7_DIFF_EN      : 1;  /* Enable differential mode for DAC 6/7 */
+		uint16_t DAC_8_9_DIFF_EN      : 1;  /* Enable differential mode for DAC 8/9 */
+		uint16_t DAC_10_11_DIFF_EN    : 1;  /* Enable differential mode for DAC 10/11 */
+		uint16_t DAC_12_13_DIFF_EN    : 1;  /* Enable differential mode for DAC 12/13 */
+		uint16_t DAC_14_15_DIFF_EN    : 1;  /* Enable differential mode for DAC 14/15 */
+		uint16_t                      : 6;  /* Reserved */
+		uint16_t REF_PWDWN            : 1;  /* Power down internal reference */
+		uint16_t                      : 1;  /* Reserved */
+	}BIT;
+	uint16_t u16SHORT;
 } DAC81416_REG_DIFFCONFIG;
 
 /* BRDCONFIG Register – Enables broadcast update for each DAC channel (0 to 15) */
-typedef struct
+typedef union
 {
-	uint16_t DAC0_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC0 */
-	uint16_t DAC1_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC1 */
-	uint16_t DAC2_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC2 */
-	uint16_t DAC3_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC3 */
-	uint16_t DAC4_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC4 */
-	uint16_t DAC5_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC5 */
-	uint16_t DAC6_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC6 */
-	uint16_t DAC7_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC7 */
-	uint16_t DAC8_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC8 */
-	uint16_t DAC9_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC9 */
-	uint16_t DAC10_BRDCAST_EN : 1;  /* Enable broadcast for DAC10 */
-	uint16_t DAC11_BRDCAST_EN : 1;  /* Enable broadcast for DAC11 */
-	uint16_t DAC12_BRDCAST_EN : 1;  /* Enable broadcast for DAC12 */
-	uint16_t DAC13_BRDCAST_EN : 1;  /* Enable broadcast for DAC13 */
-	uint16_t DAC14_BRDCAST_EN : 1;  /* Enable broadcast for DAC14 */
-	uint16_t DAC15_BRDCAST_EN : 1;  /* Enable broadcast for DAC15 */
+	struct
+	{
+		uint16_t DAC0_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC0 */
+		uint16_t DAC1_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC1 */
+		uint16_t DAC2_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC2 */
+		uint16_t DAC3_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC3 */
+		uint16_t DAC4_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC4 */
+		uint16_t DAC5_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC5 */
+		uint16_t DAC6_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC6 */
+		uint16_t DAC7_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC7 */
+		uint16_t DAC8_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC8 */
+		uint16_t DAC9_BRDCAST_EN  : 1;  /*  Enable broadcast for DAC9 */
+		uint16_t DAC10_BRDCAST_EN : 1;  /* Enable broadcast for DAC10 */
+		uint16_t DAC11_BRDCAST_EN : 1;  /* Enable broadcast for DAC11 */
+		uint16_t DAC12_BRDCAST_EN : 1;  /* Enable broadcast for DAC12 */
+		uint16_t DAC13_BRDCAST_EN : 1;  /* Enable broadcast for DAC13 */
+		uint16_t DAC14_BRDCAST_EN : 1;  /* Enable broadcast for DAC14 */
+		uint16_t DAC15_BRDCAST_EN : 1;  /* Enable broadcast for DAC15 */
+	}BIT;
+	uint16_t u16SHORT;
+
 } DAC81416_REG_BRDCONFIG;
 
 /* SYNCCONFIG Register – Enables synchronous update mode for each DAC channel (0 to 15) */
-typedef struct
+typedef union
 {
-	uint16_t DAC0_SYNC_EN  : 1;  /*  Enable sync mode for DAC0 */
-	uint16_t DAC1_SYNC_EN  : 1;  /*  Enable sync mode for DAC1 */
-	uint16_t DAC2_SYNC_EN  : 1;  /*  Enable sync mode for DAC2 */
-	uint16_t DAC3_SYNC_EN  : 1;  /*  Enable sync mode for DAC3 */
-	uint16_t DAC4_SYNC_EN  : 1;  /*  Enable sync mode for DAC4 */
-	uint16_t DAC5_SYNC_EN  : 1;  /*  Enable sync mode for DAC5 */
-	uint16_t DAC6_SYNC_EN  : 1;  /*  Enable sync mode for DAC6 */
-	uint16_t DAC7_SYNC_EN  : 1;  /*  Enable sync mode for DAC7 */
-	uint16_t DAC8_SYNC_EN  : 1;  /*  Enable sync mode for DAC8 */
-	uint16_t DAC9_SYNC_EN  : 1;  /*  Enable sync mode for DAC9 */
-	uint16_t DAC10_SYNC_EN : 1;  /* Enable sync mode for DAC10 */
-	uint16_t DAC11_SYNC_EN : 1;  /* Enable sync mode for DAC11 */
-	uint16_t DAC12_SYNC_EN : 1;  /* Enable sync mode for DAC12 */
-	uint16_t DAC13_SYNC_EN : 1;  /* Enable sync mode for DAC13 */
-	uint16_t DAC14_SYNC_EN : 1;  /* Enable sync mode for DAC14 */
-	uint16_t DAC15_SYNC_EN : 1;  /* Enable sync mode for DAC15 */
+	struct
+	{
+		uint16_t DAC0_SYNC_EN  : 1;  /*  Enable sync mode for DAC0 */
+		uint16_t DAC1_SYNC_EN  : 1;  /*  Enable sync mode for DAC1 */
+		uint16_t DAC2_SYNC_EN  : 1;  /*  Enable sync mode for DAC2 */
+		uint16_t DAC3_SYNC_EN  : 1;  /*  Enable sync mode for DAC3 */
+		uint16_t DAC4_SYNC_EN  : 1;  /*  Enable sync mode for DAC4 */
+		uint16_t DAC5_SYNC_EN  : 1;  /*  Enable sync mode for DAC5 */
+		uint16_t DAC6_SYNC_EN  : 1;  /*  Enable sync mode for DAC6 */
+		uint16_t DAC7_SYNC_EN  : 1;  /*  Enable sync mode for DAC7 */
+		uint16_t DAC8_SYNC_EN  : 1;  /*  Enable sync mode for DAC8 */
+		uint16_t DAC9_SYNC_EN  : 1;  /*  Enable sync mode for DAC9 */
+		uint16_t DAC10_SYNC_EN : 1;  /* Enable sync mode for DAC10 */
+		uint16_t DAC11_SYNC_EN : 1;  /* Enable sync mode for DAC11 */
+		uint16_t DAC12_SYNC_EN : 1;  /* Enable sync mode for DAC12 */
+		uint16_t DAC13_SYNC_EN : 1;  /* Enable sync mode for DAC13 */
+		uint16_t DAC14_SYNC_EN : 1;  /* Enable sync mode for DAC14 */
+		uint16_t DAC15_SYNC_EN : 1;  /* Enable sync mode for DAC15 */
+	}BIT;
+	uint16_t u16SHORT;
 } DAC81416_REG_SYNCCONFIG;
 
 /* TOGGCONFIG0 Register – Configures toggle mode for DAC channels 8 to 15.
@@ -188,16 +204,21 @@ typedef struct
  *   10 = Toggle mode enabled: TOGGLE1
  *   11 = Toggle mode enabled: TOGGLE2
  */
-typedef struct
+typedef union
 {
-	uint16_t DAC8_AB_TOGG_EN  : 2;  /* Toggle mode config for DAC8  */
-	uint16_t DAC9_AB_TOGG_EN  : 2;  /* Toggle mode config for DAC9  */
-	uint16_t DAC10_AB_TOGG_EN : 2;  /* Toggle mode config for DAC10 */
-	uint16_t DAC11_AB_TOGG_EN : 2;  /* Toggle mode config for DAC11 */
-	uint16_t DAC12_AB_TOGG_EN : 2;  /* Toggle mode config for DAC12 */
-	uint16_t DAC13_AB_TOGG_EN : 2;  /* Toggle mode config for DAC13 */
-	uint16_t DAC14_AB_TOGG_EN : 2;  /* Toggle mode config for DAC14 */
-	uint16_t DAC15_AB_TOGG_EN : 2;  /* Toggle mode config for DAC15 */
+	struct
+	{
+		uint16_t DAC8_AB_TOGG_EN  : 2;  /* Toggle mode config for DAC8  */
+		uint16_t DAC9_AB_TOGG_EN  : 2;  /* Toggle mode config for DAC9  */
+		uint16_t DAC10_AB_TOGG_EN : 2;  /* Toggle mode config for DAC10 */
+		uint16_t DAC11_AB_TOGG_EN : 2;  /* Toggle mode config for DAC11 */
+		uint16_t DAC12_AB_TOGG_EN : 2;  /* Toggle mode config for DAC12 */
+		uint16_t DAC13_AB_TOGG_EN : 2;  /* Toggle mode config for DAC13 */
+		uint16_t DAC14_AB_TOGG_EN : 2;  /* Toggle mode config for DAC14 */
+		uint16_t DAC15_AB_TOGG_EN : 2;  /* Toggle mode config for DAC15 */
+	}BIT;
+	uint16_t u16SHORT;
+
 } DAC81416_REG_TOGGCONFIG0;
 
 /* TOGGCONFIG1 Register – Configures toggle mode for DAC channels 0 to 7.
@@ -208,40 +229,50 @@ typedef struct
  *   10 = Toggle mode enabled: TOGGLE1
  *   11 = Toggle mode enabled: TOGGLE2
  */
-typedef struct
+typedef union
 {
-	uint16_t DAC0_AB_TOGG_EN : 2;  /* Toggle mode config for DAC0 */
-	uint16_t DAC1_AB_TOGG_EN : 2;  /* Toggle mode config for DAC1 */
-	uint16_t DAC2_AB_TOGG_EN : 2;  /* Toggle mode config for DAC2 */
-	uint16_t DAC3_AB_TOGG_EN : 2;  /* Toggle mode config for DAC3 */
-	uint16_t DAC4_AB_TOGG_EN : 2;  /* Toggle mode config for DAC4 */
-	uint16_t DAC5_AB_TOGG_EN : 2;  /* Toggle mode config for DAC5 */
-	uint16_t DAC6_AB_TOGG_EN : 2;  /* Toggle mode config for DAC6 */
-	uint16_t DAC7_AB_TOGG_EN : 2;  /* Toggle mode config for DAC7 */
+	struct
+	{
+		uint16_t DAC0_AB_TOGG_EN : 2;  /* Toggle mode config for DAC0 */
+		uint16_t DAC1_AB_TOGG_EN : 2;  /* Toggle mode config for DAC1 */
+		uint16_t DAC2_AB_TOGG_EN : 2;  /* Toggle mode config for DAC2 */
+		uint16_t DAC3_AB_TOGG_EN : 2;  /* Toggle mode config for DAC3 */
+		uint16_t DAC4_AB_TOGG_EN : 2;  /* Toggle mode config for DAC4 */
+		uint16_t DAC5_AB_TOGG_EN : 2;  /* Toggle mode config for DAC5 */
+		uint16_t DAC6_AB_TOGG_EN : 2;  /* Toggle mode config for DAC6 */
+		uint16_t DAC7_AB_TOGG_EN : 2;  /* Toggle mode config for DAC7 */
+	}BIT;
+	uint16_t u16SHORT;
+
 } DAC81416_REG_TOGGCONFIG1;
 
 /* DACPWDWN Register – Controls the power-down mode for DAC channels 0 to 15.
  * When set to 1, the corresponding DAC is in power-down mode, and its
  * output is connected to GND through a 10-kΩ internal resistor.
  */
-typedef struct
+typedef union
 {
-	uint16_t DAC0_PWDWN  : 1;  /*  Power-down mode for DAC0  */
-	uint16_t DAC1_PWDWN  : 1;  /*  Power-down mode for DAC1  */
-	uint16_t DAC2_PWDWN  : 1;  /*  Power-down mode for DAC2  */
-	uint16_t DAC3_PWDWN  : 1;  /* Power-down mode for DAC3 */
-	uint16_t DAC4_PWDWN  : 1;  /* Power-down mode for DAC4 */
-	uint16_t DAC5_PWDWN  : 1;  /* Power-down mode for DAC5 */
-	uint16_t DAC6_PWDWN  : 1;  /* Power-down mode for DAC6 */
-	uint16_t DAC7_PWDWN  : 1;  /* Power-down mode for DAC7 */
-	uint16_t DAC8_PWDWN  : 1;  /* Power-down mode for DAC8  */
-	uint16_t DAC9_PWDWN  : 1;  /* Power-down mode for DAC9  */
-	uint16_t DAC10_PWDWN : 1;  /* Power-down mode for DAC10 */
-	uint16_t DAC11_PWDWN : 1;  /* Power-down mode for DAC11 */
-	uint16_t DAC12_PWDWN : 1;  /* Power-down mode for DAC12 */
-	uint16_t DAC13_PWDWN : 1;  /* Power-down mode for DAC13 */
-	uint16_t DAC14_PWDWN : 1;  /* Power-down mode for DAC14 */
-	uint16_t DAC15_PWDWN : 1;  /* Power-down mode for DAC15 */
+	struct
+	{
+		uint16_t DAC0_PWDWN  : 1;  /*  Power-down mode for DAC0  */
+		uint16_t DAC1_PWDWN  : 1;  /*  Power-down mode for DAC1  */
+		uint16_t DAC2_PWDWN  : 1;  /*  Power-down mode for DAC2  */
+		uint16_t DAC3_PWDWN  : 1;  /* Power-down mode for DAC3 */
+		uint16_t DAC4_PWDWN  : 1;  /* Power-down mode for DAC4 */
+		uint16_t DAC5_PWDWN  : 1;  /* Power-down mode for DAC5 */
+		uint16_t DAC6_PWDWN  : 1;  /* Power-down mode for DAC6 */
+		uint16_t DAC7_PWDWN  : 1;  /* Power-down mode for DAC7 */
+		uint16_t DAC8_PWDWN  : 1;  /* Power-down mode for DAC8  */
+		uint16_t DAC9_PWDWN  : 1;  /* Power-down mode for DAC9  */
+		uint16_t DAC10_PWDWN : 1;  /* Power-down mode for DAC10 */
+		uint16_t DAC11_PWDWN : 1;  /* Power-down mode for DAC11 */
+		uint16_t DAC12_PWDWN : 1;  /* Power-down mode for DAC12 */
+		uint16_t DAC13_PWDWN : 1;  /* Power-down mode for DAC13 */
+		uint16_t DAC14_PWDWN : 1;  /* Power-down mode for DAC14 */
+		uint16_t DAC15_PWDWN : 1;  /* Power-down mode for DAC15 */
+	}BIT;
+	uint16_t u16SHORT;
+
 } DAC81416_REG_DACPWDWN;
 
 /* DACRANGEn Register – Configures the output range for DAC channels a, b, c, and d.
@@ -258,36 +289,51 @@ typedef struct
  *   1110 = -2.5 V to +2.5 V
  * All other values are invalid.
  */
-typedef struct
+typedef union
 {
-	uint16_t DACd_RANGE : 4;  /* Output range for DACd */
-	uint16_t DACc_RANGE : 4;  /* Output range for DACc */
-	uint16_t DACb_RANGE : 4;  /* Output range for DACb */
-	uint16_t DACa_RANGE : 4;  /* Output range for DACa */
+	struct
+	{
+		uint16_t DACd_RANGE : 4;  /* Output range for DACd */
+		uint16_t DACc_RANGE : 4;  /* Output range for DACc */
+		uint16_t DACb_RANGE : 4;  /* Output range for DACb */
+		uint16_t DACa_RANGE : 4;  /* Output range for DACa */
+	}BIT;
+	uint16_t u16SHORT;
+
 } DAC81416_REG_DACRANGE;
 
 /* TRIGGER Register – Controls various trigger actions like alarm reset,
    soft toggle, and loading DACs synchronously. */
-typedef struct
+typedef union
 {
-	uint16_t SOFT_RESET: 4;   /* 1010h = Soft reset to default state. */
-	uint16_t LDAC      : 1;   /* 1h = Load DACs synchronously as per SYNCCONFIG. */
-	uint16_t AB_TOG0   : 1;   /* 1h = Toggle between Register A and B
-                                for DACs in toggle mode 0. */
-	uint16_t AB_TOG1   : 1;   /* 1h = Toggle between Register A and B
-                                for DACs in toggle mode 1. */
-	uint16_t AB_TOG2   : 1;   /* 1h = Toggle between Register A and B
-                                for DACs in toggle mode 2. */
-	uint16_t ALM_RESET : 1;   /* 1h = Clear alarm event. */
-	uint16_t RESERVED  : 6;   /* Reserved bits. */
+	struct
+	{
+		uint16_t SOFT_RESET: 4;   /* 1010h = Soft reset to default state. */
+		uint16_t LDAC      : 1;   /* 1h = Load DACs synchronously as per SYNCCONFIG. */
+		uint16_t AB_TOG0   : 1;   /* 1h = Toggle between Register A and B
+	                                for DACs in toggle mode 0. */
+		uint16_t AB_TOG1   : 1;   /* 1h = Toggle between Register A and B
+	                                for DACs in toggle mode 1. */
+		uint16_t AB_TOG2   : 1;   /* 1h = Toggle between Register A and B
+	                                for DACs in toggle mode 2. */
+		uint16_t ALM_RESET : 1;   /* 1h = Clear alarm event. */
+		uint16_t RESERVED  : 6;   /* Reserved bits. */
+	}BIT;
+	uint16_t u16SHORT;
+
 } DAC81416_REG_TRIGGER;
 
 /* BRDCAST Register – Forces DAC channels configured for broadcast to
    update their data registers with the BRDCAST-DATA value. The data
    is MSB aligned in straight binary format. */
-typedef struct
+typedef union
 {
-	uint16_t BRDCAST_DATA : 16; /* Data to update DAC channels configured for broadcast. */
+	struct
+	{
+		uint16_t BRDCAST_DATA : 16; /* Data to update DAC channels configured for broadcast. */
+	}BIT;
+	uint16_t u16SHORT;
+
 } DAC81416_REG_BRDCAST;
 
 
@@ -295,9 +341,13 @@ typedef struct
    aligned straight binary format. In differential mode, data is
    loaded into the lowest-valued DAC in the pair, and writes to the
    higher DAC are ignored. */
-typedef struct
+typedef union
 {
-	uint16_t DACn_DATA : 16; /* Data to be loaded to DACn (16-bit, 14-bit, or 12-bit). */
+	struct
+	{
+		uint16_t DACn_DATA : 16; /* Data to be loaded to DACn (16-bit, 14-bit, or 12-bit). */
+	}BIT;
+	uint16_t u16SHORT;
 } DAC81416_REG_DACn;
 
 typedef struct
@@ -319,21 +369,8 @@ typedef union
 		uint32_t          : 8U;  /* Reserved/unused for alignment (bits 24–31). */
 	}bit;
 	uint32_t all;
-} DAC81416_SERIAL_TXRX_ACCESS;
+} DAC81416_SERIAL_ACCESS;
 
-//typedef union
-//{
-//	struct
-//	{
-//		uint32_t ADDR     : 6U;  /* Register address A[5:0]. Specifies target register. */
-//		uint32_t DC       : 1U;  /* Don't care bit (bit 22). */
-//		uint32_t RW       : 1U;  /* Read/Write bit. 0 = write, 1 = read. */
-//		uint32_t DATALSB     : 8U; /* Data bits. If write: value to write. If read: don't care. */
-//		uint32_t DATAMSB     : 8U; /* Data bits. If write: value to write. If read: don't care. */
-//		uint32_t          : 8U;  /* Reserved/unused for alignment (bits 24–31). */
-//	}bit;
-//	uint32_t all;
-//} DAC81416_SERIAL_TX_ACCESS;
 /************************** function prototypes *****************************************/
 void DAC81416_Init(void);
 uint8_t DAC81416_ReadRegister(DAC81416_REG_MAP m_reg);

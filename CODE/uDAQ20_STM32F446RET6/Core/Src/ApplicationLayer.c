@@ -55,18 +55,18 @@ void ApplicationLayer_Exe(void)
 		/*If data capture completed - push data to USB*/
 	}
 
-	uint16_t u16Reg = 0U;
-	if(SPI_STATE_IDLE == DAC816416_GetSpiState())
-	{
-
-		if(TRUE == DAC81416_GetStatus(DAC_FLAG_READ))
-		{
-			DAC81416_REG_DEVICEID DevId;
-			DAC81416_GetRegReadValue(&u16Reg);
-			DevId.u16SHORT = u16Reg;
-			DAC81416_ClearStatus(DAC_FLAG_READ);
-		}
-	}
+//	uint16_t u16Reg = 0U;
+//	if(SPI_STATE_IDLE == DAC816416_GetSpiState())
+//	{
+//
+//		if(TRUE == DAC81416_GetStatus(DAC_FLAG_READ))
+//		{
+//			DAC81416_REG_DEVICEID DevId;
+//			DAC81416_GetRegReadValue(&u16Reg);
+//			DevId.u16SHORT = u16Reg;
+//			DAC81416_ClearStatus(DAC_FLAG_READ);
+//		}
+//	}
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
