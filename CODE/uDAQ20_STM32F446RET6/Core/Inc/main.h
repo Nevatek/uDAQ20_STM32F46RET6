@@ -60,6 +60,8 @@ I2C_HandleTypeDef* GetInstance_I2C1(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define DAC816416_RST_Pin GPIO_PIN_0
+#define DAC816416_RST_GPIO_Port GPIOC
 #define DAC81416_CS_Pin GPIO_PIN_3
 #define DAC81416_CS_GPIO_Port GPIOC
 #define AD7616_CS__Pin GPIO_PIN_4

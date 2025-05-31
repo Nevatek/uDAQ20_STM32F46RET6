@@ -21,6 +21,7 @@
 		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
 		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\aldri\Downloads\Driver_STM32446RE_PCF8574_New\uDAQ_Merged2.zip"/>
 			<item value="C:\Users\aldri\Downloads\Driver_STM32446RE_PCF8574_New\uDAQ_Merged.zip"/>
 		</list>
 	</section>

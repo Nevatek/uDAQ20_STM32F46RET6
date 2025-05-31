@@ -10,6 +10,15 @@
 
 /************************** defines ******************************************/
 /************************** typedefs *****************************************/
+#define SPI_DATA_SIZE 2	// 16bit
+
+typedef enum
+{
+	SPI_STATE_IDLE,
+	SPI_STATE_WRITE_DATA,
+	SPI_STATE_WRITE_CMD,
+	SPI_STATE_READ_DATA
+} spi_state_t;
 
 typedef enum
 {
@@ -69,10 +78,14 @@ typedef enum
 } DAC81416_REG_MAP;
 
 
-typedef struct
+typedef union
 {
-	uint16_t VERSIONID 	: 2; /* Version ID : Subject to change.*/
-	uint16_t DEVICEID 	: 14; /* Device ID  : DAC81416: 29Ch */
+	struct
+	{
+		uint16_t VERSIONID 	: 2; /* Version ID : Subject to change.*/
+		uint16_t DEVICEID 	: 14; /* Device ID  : DAC81416: 29Ch */
+	}BIT;
+	uint16_t u16SHORT;
 }DAC81416_REG_DEVICEID;
 
 typedef struct
@@ -85,25 +98,29 @@ typedef struct
 	uint16_t 			:13; 	/* This bit is reserved.*/
 }DAC81416_REG_STATUS;
 
-typedef struct
+typedef union
 {
-	uint16_t 				: 1; /* This bit is reserved.*/
-	uint16_t FSDO 			: 1; /* Fast SDO bit (half_cycle speedup).
-								  * 0 = SDO updates duringS CLK rising edges.
-								  * 1 = SDO updates during SCLK falling edges.*/
-	uint16_t SDO_EN 		: 1; /* 1 = the SDO pin is operational.*/
-	uint16_t STR_EN 		: 1; /* 1 = streaming mode operation is enabled.*/
-	uint16_t CRC_EN 		: 1; /* 1 = frame error checking is enabled.*/
-	uint16_t DEV_PWDWN 		: 1; /* 1 = sets the device in power_down mode
-								  * 0 = sets the device in active mode*/
-	uint16_t SOFTTOGGLE_EN 	: 1; /* 1 = enables soft toggle operation.*/
-	uint16_t 				: 1; /* This bit is reserved.*/
-	uint16_t 				: 1; /* This bit is reserved.*/
-	uint16_t CRCALM_EN 		: 1; /* 1 a CRC error triggers the ALMOUT pin.*/
-	uint16_t DACBUSY_EN 	: 1; /* 1 = ALMOUT pin is set between DAC output updates.
-								  * this alarm resets automatically.*/
-	uint16_t TEMPALM_EN 	: 1; /* 1 a thermal alarm triggers the ALMOUT pin.*/
-	uint16_t 				: 4; /* This bit is reserved.*/
+	struct
+	{
+		uint16_t 				: 1; /* This bit is reserved.*/
+		uint16_t FSDO 			: 1; /* Fast SDO bit (half_cycle speedup).
+									  * 0 = SDO updates duringS CLK rising edges.
+									  * 1 = SDO updates during SCLK falling edges.*/
+		uint16_t SDO_EN 		: 1; /* 1 = the SDO pin is operational.*/
+		uint16_t STR_EN 		: 1; /* 1 = streaming mode operation is enabled.*/
+		uint16_t CRC_EN 		: 1; /* 1 = frame error checking is enabled.*/
+		uint16_t DEV_PWDWN 		: 1; /* 1 = sets the device in power_down mode
+									  * 0 = sets the device in active mode*/
+		uint16_t SOFTTOGGLE_EN 	: 1; /* 1 = enables soft toggle operation.*/
+		uint16_t 				: 1; /* This bit is reserved.*/
+		uint16_t 				: 1; /* This bit is reserved.*/
+		uint16_t CRCALM_EN 		: 1; /* 1 a CRC error triggers the ALMOUT pin.*/
+		uint16_t DACBUSY_EN 	: 1; /* 1 = ALMOUT pin is set between DAC output updates.
+									  * this alarm resets automatically.*/
+		uint16_t TEMPALM_EN 	: 1; /* 1 a thermal alarm triggers the ALMOUT pin.*/
+		uint16_t 				: 4; /* This bit is reserved.*/
+	}BIT;
+	uint16_t u16SHORT;
 }DAC81416_REG_SPICONFIG;
 
 typedef struct
@@ -283,13 +300,49 @@ typedef struct
 	uint16_t DACn_DATA : 16; /* Data to be loaded to DACn (16-bit, 14-bit, or 12-bit). */
 } DAC81416_REG_DACn;
 
+typedef struct
+{
+	DAC81416_PIN_TYPE 	type;
+	GPIO_TypeDef* 		port;
+	uint16_t 			pin;
+}DAC81416_OUTPUT_ST;
+
+typedef union
+{
+	struct
+	{
+		uint32_t ADDR     : 6U;  /* Register address A[5:0]. Specifies target register. */
+		uint32_t DC       : 1U;  /* Don't care bit (bit 22). */
+		uint32_t RW       : 1U;  /* Read/Write bit. 0 = write, 1 = read. */
+		uint32_t DATALSB     : 8U; /* Data bits. If write: value to write. If read: don't care. */
+		uint32_t DATAMSB     : 8U; /* Data bits. If write: value to write. If read: don't care. */
+		uint32_t          : 8U;  /* Reserved/unused for alignment (bits 24–31). */
+	}bit;
+	uint32_t all;
+} DAC81416_SERIAL_TXRX_ACCESS;
+
+//typedef union
+//{
+//	struct
+//	{
+//		uint32_t ADDR     : 6U;  /* Register address A[5:0]. Specifies target register. */
+//		uint32_t DC       : 1U;  /* Don't care bit (bit 22). */
+//		uint32_t RW       : 1U;  /* Read/Write bit. 0 = write, 1 = read. */
+//		uint32_t DATALSB     : 8U; /* Data bits. If write: value to write. If read: don't care. */
+//		uint32_t DATAMSB     : 8U; /* Data bits. If write: value to write. If read: don't care. */
+//		uint32_t          : 8U;  /* Reserved/unused for alignment (bits 24–31). */
+//	}bit;
+//	uint32_t all;
+//} DAC81416_SERIAL_TX_ACCESS;
 /************************** function prototypes *****************************************/
-void DAC81416_Init();
+void DAC81416_Init(void);
 uint8_t DAC81416_ReadRegister(DAC81416_REG_MAP m_reg);
 uint8_t DAC81416_SetStatus(DAC81416_FLAG_TYPE type, uint8_t status);
+uint8_t DAC81416_ClearStatus(DAC81416_FLAG_TYPE type);
 uint8_t DAC81416_GetStatus(DAC81416_FLAG_TYPE type);
-uint8_t DAC81416_GetValue(uint16_t *pU16TxData);
+uint8_t DAC81416_GetRegReadValue(uint16_t *pU16TxData);
 uint8_t DAC81416_WriteRegister(DAC81416_REG_MAP m_reg, uint16_t pU16TxData);
+spi_state_t DAC816416_GetSpiState(void);
 
 void Callback_DAC81416TxComplete(void);
 void Callback_DAC81416TxRxComplete(void);

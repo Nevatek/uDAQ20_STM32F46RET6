@@ -17,35 +17,6 @@
 #include "DRV_DAC81416.h"
 
 /**************************** defines ***************************************/
-#define SPI_DATA_SIZE 2	// 16bit
-
-typedef enum {
-	SPI_STATE_IDLE,
-	SPI_STATE_WRITE_DATA,
-	SPI_STATE_WRITE_CMD,
-	SPI_STATE_READ_DATA
-} spi_state_t;
-
-typedef struct
-{
-	DAC81416_PIN_TYPE 	type;
-	GPIO_TypeDef* 		port;
-	uint16_t 			pin;
-}DAC81416_OUTPUT_ST;
-
-typedef struct
-{
-	union
-	{
-	uint32_t DATA     : 16U; /* Data bits. If write: value to write. If read: don't care. */
-	uint32_t ADDR     : 6U;  /* Register address A[5:0]. Specifies target register. */
-	uint32_t DC       : 1U;  /* Don't care bit (bit 22). */
-	uint32_t RW       : 1U;  /* Read/Write bit. 0 = write, 1 = read. */
-	uint32_t          : 8U;  /* Reserved/unused for alignment (bits 24–31). */
-	}bit;
-	uint32_t all;
-} DAC81416_SERIAL_ACCESS;
-
 
 DAC81416_OUTPUT_ST outputPin[] =
 {
@@ -54,12 +25,12 @@ DAC81416_OUTPUT_ST outputPin[] =
 		{DAC_PIN_TOGGLE1, 	NULL, 0},
 		{DAC_PIN_TOGGLE2, 	NULL, 0},
 		{DAC_PIN_LDAC, 		NULL, 0},
-		{DAC_PIN_RESET, 	NULL, 0},
+		{DAC_PIN_RESET, 	DAC816416_RST_GPIO_Port, DAC816416_RST_Pin},
 		{DAC_PIN_CLR, 		NULL, 0}
 };
 
-DAC81416_SERIAL_ACCESS g_txData;
-DAC81416_SERIAL_ACCESS g_rxData;
+DAC81416_SERIAL_TXRX_ACCESS g_txData;
+DAC81416_SERIAL_TXRX_ACCESS g_rxData;
 const uint8_t g_dummyData[3] = {0x01, 0x00, 0x00};
 
 
@@ -68,7 +39,7 @@ uint8_t readStatusFlag  = FALSE;
 
 
 volatile spi_state_t spiState = SPI_STATE_IDLE;
-
+static inline uint32_t mirror32(uint32_t x);
 /************************* function prototypes *****************************/
 /* Controller specific functions */
 void io_WritePin(DAC81416_PIN_TYPE type, uint8_t state);
@@ -79,43 +50,62 @@ uint8_t spi_Write(uint8_t* pBuff, uint16_t size);
 
 /************************* function definitions ****************************/
 
-void DAC81416_Init()
+void DAC81416_Init(void)
 {
-
-
 	DAC81416_REG_SPICONFIG spiReg = {0};
 
-	spiReg.SDO_EN = 1;
+	spiReg.BIT.SDO_EN = TRUE;/*When set to 1 the SDO pin is operational.*/
+	spiReg.BIT.DEV_PWDWN = 0U;
+//	spiReg.BIT.FSDO = 1U;/*SDO update on falling edges*/
 
-	uint16_t tmpData = *(uint16_t*)&spiReg;
+	io_WritePin(DAC_PIN_RESET, TRUE);
+	HAL_Delay(10);
+	io_WritePin(DAC_PIN_RESET, FALSE);
+	HAL_Delay(10);
+	io_WritePin(DAC_PIN_RESET, TRUE);
+	HAL_Delay(1);
 
-	DAC81416_WriteRegister(DAC_REG_SPICONFIG, tmpData);
+	DAC81416_WriteRegister(DAC_REG_SPICONFIG, spiReg.u16SHORT = 0x0000);
+//	DAC81416_WriteRegister(DAC_REG_BRDCONFIG, 0xAAAA);
+	while(SPI_STATE_IDLE != spiState);
 
 }
+spi_state_t DAC816416_GetSpiState(void)
+{
+	return (spiState);
+}
+static inline uint8_t mirror8(uint8_t b) {
+    b = (b >> 1 & 0x55) | (b << 1 & 0xAA);
+    b = (b >> 2 & 0x33) | (b << 2 & 0xCC);
+    b = (b >> 4 & 0x0F) | (b << 4 & 0xF0);
+    return b;
+}
 
+static inline uint32_t mirror_each_byte32(uint32_t x) {
+    return ((uint32_t)mirror8((x >> 0)  & 0xFF) << 0)  |
+           ((uint32_t)mirror8((x >> 8)  & 0xFF) << 8)  |
+           ((uint32_t)mirror8((x >> 16) & 0xFF) << 16) |
+           ((uint32_t)mirror8((x >> 24) & 0xFF) << 24);
+}
 uint8_t DAC81416_WriteRegister(DAC81416_REG_MAP m_reg, uint16_t pU16TxData)
 {
 	uint8_t ret = FALSE;
-
 	if(spiState == SPI_STATE_IDLE)
 	{
 		writeStatusFlag = FALSE;
 
-		io_WritePin(DAC_PIN_CS, 0);
+		memset((uint8_t*)&g_txData, 0U , sizeof(g_txData));
 
-		memset((uint8_t*)&g_txData, 0, 4);
-
-		g_txData.bit.RW	  	= 0;
+		g_txData.bit.RW	  	= FALSE;
 		g_txData.bit.ADDR 	= m_reg;
-		g_txData.bit.DATA	= pU16TxData;
-
+		g_txData.bit.DATALSB	= 0xFF & (pU16TxData >> 8U);
+		g_txData.bit.DATAMSB 	= 0xFF & (pU16TxData);
+		g_txData.all = mirror_each_byte32(g_txData.all);
+		spiState = SPI_STATE_WRITE_DATA;
 		if(TRUE == spi_Write((uint8_t*)&(g_txData.all), 3))
 		{
-			spiState = SPI_STATE_WRITE_DATA;
+
 		}
-
-		io_WritePin(DAC_PIN_CS, 1);
-
 		ret = TRUE;
 	}
 	return ret;
@@ -125,19 +115,16 @@ uint8_t DAC81416_ReadRegister(DAC81416_REG_MAP m_reg)
 {
 	if(spiState == SPI_STATE_IDLE)
 	{
-		io_WritePin(DAC_PIN_CS, 0);
+		memset((uint8_t*)&g_txData, 0U, sizeof(g_txData));
 
-		memset((uint8_t*)&g_txData, 0, 4);
-
-		g_txData.bit.RW	  	= 0;
+		g_txData.bit.RW	  	= TRUE;
 		g_txData.bit.ADDR 	= m_reg;
 
+		spiState = SPI_STATE_WRITE_CMD;
 		if(TRUE == spi_Write((uint8_t*)&(g_txData.all), 3))
 		{
-			spiState = SPI_STATE_WRITE_CMD;
+			/*NOP*/
 		}
-
-		io_WritePin(DAC_PIN_CS, 1);
 
 		return TRUE;
 	}
@@ -146,12 +133,47 @@ uint8_t DAC81416_ReadRegister(DAC81416_REG_MAP m_reg)
 
 uint8_t DAC81416_SetStatus(DAC81416_FLAG_TYPE type, uint8_t status)
 {
+	uint8_t u8St = FALSE;
 	switch(type)
 	{
-	case DAC_FLAG_WRITE:	writeStatusFlag = status; return TRUE;
-	case DAC_FLAG_READ:		readStatusFlag = status;  return TRUE;
-	default: 				return FALSE;
+		case DAC_FLAG_WRITE:
+		{
+			writeStatusFlag = status;
+			u8St = TRUE;
+		}break;
+		case DAC_FLAG_READ:
+		{
+			readStatusFlag = status;
+			u8St = TRUE;
+		}break;
+		default:
+		{
+			u8St = FALSE;
+		}break;
 	}
+	return u8St;
+}
+uint8_t DAC81416_ClearStatus(DAC81416_FLAG_TYPE type)
+{
+	uint8_t u8St = FALSE;
+	switch(type)
+	{
+		case DAC_FLAG_WRITE:
+		{
+			writeStatusFlag = FALSE;
+			u8St = TRUE;
+		}break;
+		case DAC_FLAG_READ:
+		{
+			readStatusFlag = FALSE;
+			u8St = TRUE;
+		}break;
+		default:
+		{
+			u8St = FALSE;
+		}break;
+	}
+	return u8St;
 }
 
 uint8_t DAC81416_GetStatus(DAC81416_FLAG_TYPE type)
@@ -160,15 +182,24 @@ uint8_t DAC81416_GetStatus(DAC81416_FLAG_TYPE type)
 
 	switch(type)
 	{
-	case DAC_FLAG_WRITE:	ret = writeStatusFlag;
-	case DAC_FLAG_READ:		ret = readStatusFlag;
-	default: 				ret = FALSE;
+		case DAC_FLAG_WRITE:
+		{
+			ret = writeStatusFlag;
+		}break;
+		case DAC_FLAG_READ:
+		{
+			ret = readStatusFlag;
+		}break;
+		default:
+		{
+			ret = FALSE;
+		}break;
 	}
 
 	return ret;
 }
 
-uint8_t DAC81416_GetValue(uint16_t *pU16TxData)
+uint8_t DAC81416_GetRegReadValue(uint16_t *pU16TxData)
 {
 	uint8_t ret = FALSE;
 
@@ -180,7 +211,8 @@ uint8_t DAC81416_GetValue(uint16_t *pU16TxData)
 	if((g_rxData.bit.RW == g_txData.bit.RW) &&
 			(g_rxData.bit.ADDR == g_txData.bit.ADDR))
 	{
-		*pU16TxData = g_rxData.bit.DATA;
+		*pU16TxData = g_rxData.bit.DATALSB << 8U;
+		*pU16TxData |= g_rxData.bit.DATAMSB;
 		ret = TRUE;
 	}
 
@@ -197,9 +229,10 @@ void io_WritePin(DAC81416_PIN_TYPE type, uint8_t state)
 
 uint8_t spi_Read(uint8_t* pBuff, uint16_t size)
 {
-
+	uint32_t u32Dummy = 0U;
 	SPI_HandleTypeDef *pspi = GetInstance_SPI2();
-	if(HAL_OK == HAL_SPI_TransmitReceive_DMA(pspi, (uint8_t*)&(g_txData.all), pBuff, size))
+	io_WritePin(DAC_PIN_CS, 0);
+	if(HAL_OK == HAL_SPI_TransmitReceive_IT(pspi , (uint8_t*)&u32Dummy , (uint8_t*)pBuff, size))
 	{
 		return TRUE;
 	}
@@ -207,25 +240,32 @@ uint8_t spi_Read(uint8_t* pBuff, uint16_t size)
 }
 uint8_t spi_Write(uint8_t* pBuff, uint16_t size)
 {
+	HAL_StatusTypeDef Err = HAL_ERROR;
+	uint8_t u8Status = FALSE;
 	SPI_HandleTypeDef *pspi = GetInstance_SPI2();
 
-	if(HAL_OK == HAL_SPI_Transmit_DMA(pspi, pBuff, size))
+	io_WritePin(DAC_PIN_CS, 0);
+	Err = HAL_SPI_Transmit_IT(pspi, pBuff, size);
+	if(HAL_OK == Err)
 	{
-		return TRUE;
+		u8Status = TRUE;
 	}
 
-	return FALSE;
+	return u8Status;
 }
 
 inline void Callback_DAC81416TxComplete(void)
 {
+	io_WritePin(DAC_PIN_CS, 1);
 	switch (spiState)
 	{
 		case SPI_STATE_WRITE_CMD:
 		{
+			spiState = SPI_STATE_READ_DATA;
+			memset(&g_rxData , 0U , sizeof(g_rxData));
 			if(TRUE == spi_Read((uint8_t*)&(g_rxData.all), 3))
 			{
-				spiState = SPI_STATE_READ_DATA;
+				/*NOP*/
 			}
 
 			break;
@@ -247,6 +287,7 @@ inline void Callback_DAC81416TxComplete(void)
 
 inline void Callback_DAC81416TxRxComplete(void)
 {
+	io_WritePin(DAC_PIN_CS, 1);
 	if(spiState == SPI_STATE_READ_DATA)
 	{
 		readStatusFlag = TRUE;
