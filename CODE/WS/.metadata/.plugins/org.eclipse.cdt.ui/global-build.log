@@ -7173,3 +7173,513 @@ Finished building: default.size.stdout
  
 Finished building: uDAQ20_STM32F446RET6.list
  
+14:33:02 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c:42:24: warning: 'mirror32' declared 'static' but never defined [-Wunused-function]
+   42 | static inline uint32_t mirror32(uint32_t x);
+      |                        ^~~~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52572	    352	   9152	  62076	   f27c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+14:37:36 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c:42:24: warning: 'mirror32' declared 'static' but never defined [-Wunused-function]
+   42 | static inline uint32_t mirror32(uint32_t x);
+      |                        ^~~~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52572	    352	   9152	  62076	   f27c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+14:39:27 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+../Core/Src/DRV_DAC81416.c:42:24: warning: 'mirror32' declared 'static' but never defined [-Wunused-function]
+   42 | static inline uint32_t mirror32(uint32_t x);
+      |                        ^~~~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52568	    352	   9152	  62072	   f278	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+14:40:11 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52568	    352	   9152	  62072	   f278	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+14:41:08 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52568	    352	   9152	  62072	   f278	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+14:42:50 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:55:32: warning: variable 'spiReg' set but not used [-Wunused-but-set-variable]
+   55 |         DAC81416_REG_SPICONFIG spiReg = {0};
+      |                                ^~~~~~
+../Core/Src/DRV_DAC81416.c: At top level:
+../Core/Src/DRV_DAC81416.c:42:24: warning: 'mirror32' declared 'static' but never defined [-Wunused-function]
+   42 | static inline uint32_t mirror32(uint32_t x);
+      |                        ^~~~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52560	    352	   9152	  62064	   f270	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+14:43:02 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:55:32: warning: variable 'spiReg' set but not used [-Wunused-but-set-variable]
+   55 |         DAC81416_REG_SPICONFIG spiReg = {0};
+      |                                ^~~~~~
+../Core/Src/DRV_DAC81416.c: At top level:
+../Core/Src/DRV_DAC81416.c:42:24: warning: 'mirror32' declared 'static' but never defined [-Wunused-function]
+   42 | static inline uint32_t mirror32(uint32_t x);
+      |                        ^~~~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52560	    352	   9152	  62064	   f270	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+14:53:14 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:55:32: warning: variable 'spiReg' set but not used [-Wunused-but-set-variable]
+   55 |         DAC81416_REG_SPICONFIG spiReg = {0};
+      |                                ^~~~~~
+../Core/Src/DRV_DAC81416.c: At top level:
+../Core/Src/DRV_DAC81416.c:42:24: warning: 'mirror32' declared 'static' but never defined [-Wunused-function]
+   42 | static inline uint32_t mirror32(uint32_t x);
+      |                        ^~~~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52352	    352	   9152	  61856	   f1a0	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+14:53:35 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+   text	   data	    bss	    dec	    hex	filename
+  52352	    352	   9152	  61856	   f1a0	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+14:55:15 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:54:32: warning: variable 'spiReg' set but not used [-Wunused-but-set-variable]
+   54 |         DAC81416_REG_SPICONFIG spiReg = {0};
+      |                                ^~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52352	    352	   9152	  61856	   f1a0	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+14:56:23 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52360	    352	   9152	  61864	   f1a8	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+14:58:08 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:54:32: warning: variable 'spiReg' set but not used [-Wunused-but-set-variable]
+   54 |         DAC81416_REG_SPICONFIG spiReg = {0};
+      |                                ^~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52188	    352	   9152	  61692	   f0fc	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+14:59:11 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:54:32: warning: variable 'spiReg' set but not used [-Wunused-but-set-variable]
+   54 |         DAC81416_REG_SPICONFIG spiReg = {0};
+      |                                ^~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52356	    352	   9152	  61860	   f1a4	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:00:00 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:54:32: warning: variable 'spiReg' set but not used [-Wunused-but-set-variable]
+   54 |         DAC81416_REG_SPICONFIG spiReg = {0};
+      |                                ^~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52408	    352	   9152	  61912	   f1d8	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:00:43 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:54:32: warning: variable 'spiReg' set but not used [-Wunused-but-set-variable]
+   54 |         DAC81416_REG_SPICONFIG spiReg = {0};
+      |                                ^~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52380	    352	   9152	  61884	   f1bc	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:01:38 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:54:32: warning: variable 'spiReg' set but not used [-Wunused-but-set-variable]
+   54 |         DAC81416_REG_SPICONFIG spiReg = {0};
+      |                                ^~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52380	    352	   9152	  61884	   f1bc	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:02:22 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:54:32: warning: variable 'spiReg' set but not used [-Wunused-but-set-variable]
+   54 |         DAC81416_REG_SPICONFIG spiReg = {0};
+      |                                ^~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52188	    352	   9152	  61692	   f0fc	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:03:12 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52368	    352	   9152	  61872	   f1b0	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:03:44 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52388	    352	   9152	  61892	   f1c4	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:04:13 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:54:32: warning: variable 'spiReg' set but not used [-Wunused-but-set-variable]
+   54 |         DAC81416_REG_SPICONFIG spiReg = {0};
+      |                                ^~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52372	    352	   9152	  61876	   f1b4	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:06:09 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52412	    352	   9152	  61916	   f1dc	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:09:54 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+../Core/Src/DRV_DAC81416.c:39:1: error: unknown type name 'stcTimer'
+   39 | stcTimer g_DacTimeout;
+      | ^~~~~~~~
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_WriteRegister_Blocking':
+../Core/Src/DRV_DAC81416.c:101:9: warning: implicit declaration of function 'StartTimer' [-Wimplicit-function-declaration]
+  101 |         StartTimer(&(g_DacTimeout) , DAC_SPI_MAX_TIMEOUT_MS);
+      |         ^~~~~~~~~~
+../Core/Src/DRV_DAC81416.c:104:28: warning: implicit declaration of function 'Timer_IsTimeout' [-Wimplicit-function-declaration]
+  104 |                 if(TRUE == Timer_IsTimeout(&(g_DacTimeout)))
+      |                            ^~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/DRV_DAC81416.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+15:10:21 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52448	    352	   9176	  61976	   f218	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:10:30 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+   text	   data	    bss	    dec	    hex	filename
+  52448	    352	   9176	  61976	   f218	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+15:11:04 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52448	    352	   9176	  61976	   f218	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:12:52 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:55:32: warning: variable 'spiReg' set but not used [-Wunused-but-set-variable]
+   55 |         DAC81416_REG_SPICONFIG spiReg = {0};
+      |                                ^~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52432	    352	   9176	  61960	   f208	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:13:52 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52444	    352	   9176	  61972	   f214	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:16:07 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52452	    352	   9176	  61980	   f21c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 

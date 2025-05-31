@@ -112,6 +112,12 @@ void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef * hspi)
 		/*AD7616 IRQ*/
 		Callback_AD7616RxComplete();
 	}
+
+	if(hspi == GetInstance_SPI2())
+	{
+		/*DAC81416 IRQ*/
+		Callback_DAC81416RxComplete();
+	}
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
@@ -141,11 +147,7 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef * hspi)
  ****************************************************************************/
 void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi)
 {
-	if(hspi == GetInstance_SPI2())
-	{
-		/*DAC81416 IRQ*/
-		Callback_DAC81416TxRxComplete();
-	}
+
 }
 /*********************.HAL_I2C_MasterTxCpltCallback().************************
  .Purpose        : Callback for transmission complete for IT & DMA

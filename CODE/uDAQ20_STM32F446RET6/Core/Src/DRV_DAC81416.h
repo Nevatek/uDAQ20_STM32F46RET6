@@ -11,7 +11,7 @@
 /************************** defines ******************************************/
 /************************** typedefs *****************************************/
 #define SPI_DATA_SIZE 2	// 16bit
-
+#define DAC_SPI_MAX_TX_TIMEOUT_MS (5U)
 typedef enum
 {
 	SPI_STATE_IDLE,
@@ -342,8 +342,9 @@ uint8_t DAC81416_ClearStatus(DAC81416_FLAG_TYPE type);
 uint8_t DAC81416_GetStatus(DAC81416_FLAG_TYPE type);
 uint8_t DAC81416_GetRegReadValue(uint16_t *pU16TxData);
 uint8_t DAC81416_WriteRegister(DAC81416_REG_MAP m_reg, uint16_t pU16TxData);
+uint8_t DAC81416_WriteRegister_Blocking(DAC81416_REG_MAP m_reg, uint16_t pU16TxData);
 spi_state_t DAC816416_GetSpiState(void);
 
 void Callback_DAC81416TxComplete(void);
-void Callback_DAC81416TxRxComplete(void);
+void Callback_DAC81416RxComplete(void);
 #endif /* DRV_DAC81416_H_ */

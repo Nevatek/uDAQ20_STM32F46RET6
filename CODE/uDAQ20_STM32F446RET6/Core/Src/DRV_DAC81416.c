@@ -14,6 +14,7 @@
 /**************************** includes **************************************/
 #include "main.h"
 #include <string.h>
+#include "Appl_Timer.h"
 #include "DRV_DAC81416.h"
 
 /**************************** defines ***************************************/
@@ -36,10 +37,9 @@ const uint8_t g_dummyData[3] = {0x01, 0x00, 0x00};
 
 uint8_t writeStatusFlag = FALSE;
 uint8_t readStatusFlag  = FALSE;
-
+stcTimer g_DacTimeout;
 
 volatile spi_state_t spiState = SPI_STATE_IDLE;
-static inline uint32_t mirror32(uint32_t x);
 /************************* function prototypes *****************************/
 /* Controller specific functions */
 void io_WritePin(DAC81416_PIN_TYPE type, uint8_t state);
@@ -56,7 +56,7 @@ void DAC81416_Init(void)
 
 	spiReg.BIT.SDO_EN = TRUE;/*When set to 1 the SDO pin is operational.*/
 	spiReg.BIT.DEV_PWDWN = 0U;
-//	spiReg.BIT.FSDO = 1U;/*SDO update on falling edges*/
+	spiReg.BIT.TEMPALM_EN = 1;
 
 	io_WritePin(DAC_PIN_RESET, TRUE);
 	HAL_Delay(10);
@@ -65,28 +65,14 @@ void DAC81416_Init(void)
 	io_WritePin(DAC_PIN_RESET, TRUE);
 	HAL_Delay(1);
 
-	DAC81416_WriteRegister(DAC_REG_SPICONFIG, spiReg.u16SHORT = 0x0000);
-//	DAC81416_WriteRegister(DAC_REG_BRDCONFIG, 0xAAAA);
-	while(SPI_STATE_IDLE != spiState);
-
+	DAC81416_WriteRegister_Blocking(DAC_REG_NOP, 0x0000);
+	DAC81416_WriteRegister_Blocking(DAC_REG_SPICONFIG, spiReg.u16SHORT);
 }
 spi_state_t DAC816416_GetSpiState(void)
 {
 	return (spiState);
 }
-static inline uint8_t mirror8(uint8_t b) {
-    b = (b >> 1 & 0x55) | (b << 1 & 0xAA);
-    b = (b >> 2 & 0x33) | (b << 2 & 0xCC);
-    b = (b >> 4 & 0x0F) | (b << 4 & 0xF0);
-    return b;
-}
 
-static inline uint32_t mirror_each_byte32(uint32_t x) {
-    return ((uint32_t)mirror8((x >> 0)  & 0xFF) << 0)  |
-           ((uint32_t)mirror8((x >> 8)  & 0xFF) << 8)  |
-           ((uint32_t)mirror8((x >> 16) & 0xFF) << 16) |
-           ((uint32_t)mirror8((x >> 24) & 0xFF) << 24);
-}
 uint8_t DAC81416_WriteRegister(DAC81416_REG_MAP m_reg, uint16_t pU16TxData)
 {
 	uint8_t ret = FALSE;
@@ -100,7 +86,7 @@ uint8_t DAC81416_WriteRegister(DAC81416_REG_MAP m_reg, uint16_t pU16TxData)
 		g_txData.bit.ADDR 	= m_reg;
 		g_txData.bit.DATALSB	= 0xFF & (pU16TxData >> 8U);
 		g_txData.bit.DATAMSB 	= 0xFF & (pU16TxData);
-		g_txData.all = mirror_each_byte32(g_txData.all);
+
 		spiState = SPI_STATE_WRITE_DATA;
 		if(TRUE == spi_Write((uint8_t*)&(g_txData.all), 3))
 		{
@@ -110,6 +96,23 @@ uint8_t DAC81416_WriteRegister(DAC81416_REG_MAP m_reg, uint16_t pU16TxData)
 	}
 	return ret;
 }
+uint8_t DAC81416_WriteRegister_Blocking(DAC81416_REG_MAP m_reg, uint16_t pU16TxData)
+{
+	uint8_t ret = FALSE;
+	ret = DAC81416_WriteRegister(m_reg, pU16TxData);
+	StartTimer(&(g_DacTimeout) , DAC_SPI_MAX_TX_TIMEOUT_MS);
+	while(SPI_STATE_IDLE != spiState)
+	{
+		if(TRUE == Timer_IsTimeout(&(g_DacTimeout)))
+		{
+			spiState = SPI_STATE_IDLE;
+			ret = FALSE;
+			break;
+		}
+	}
+	return ret;
+}
+
 
 uint8_t DAC81416_ReadRegister(DAC81416_REG_MAP m_reg)
 {
@@ -229,10 +232,9 @@ void io_WritePin(DAC81416_PIN_TYPE type, uint8_t state)
 
 uint8_t spi_Read(uint8_t* pBuff, uint16_t size)
 {
-	uint32_t u32Dummy = 0U;
 	SPI_HandleTypeDef *pspi = GetInstance_SPI2();
 	io_WritePin(DAC_PIN_CS, 0);
-	if(HAL_OK == HAL_SPI_TransmitReceive_IT(pspi , (uint8_t*)&u32Dummy , (uint8_t*)pBuff, size))
+	if(HAL_OK == HAL_SPI_Receive_IT(pspi , (uint8_t*)pBuff, size))
 	{
 		return TRUE;
 	}
@@ -285,7 +287,7 @@ inline void Callback_DAC81416TxComplete(void)
 	}
 }
 
-inline void Callback_DAC81416TxRxComplete(void)
+inline void Callback_DAC81416RxComplete(void)
 {
 	io_WritePin(DAC_PIN_CS, 1);
 	if(spiState == SPI_STATE_READ_DATA)
