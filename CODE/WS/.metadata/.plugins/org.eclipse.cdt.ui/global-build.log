@@ -7683,3 +7683,104 @@ Finished building: default.size.stdout
  
 Finished building: uDAQ20_STM32F446RET6.list
  
+15:23:42 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:47: warning: variable 'DevId' set but not used [-Wunused-but-set-variable]
+   64 |                         DAC81416_REG_DEVICEID DevId;
+      |                                               ^~~~~
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_ReadRegister_Blocking':
+../Core/Src/DRV_DAC81416.c:118:44: error: 'pU16TxData' undeclared (first use in this function); did you mean 'pU16RxData'?
+  118 |         ret = DAC81416_ReadRegister(m_reg, pU16TxData);
+      |                                            ^~~~~~~~~~
+      |                                            pU16RxData
+../Core/Src/DRV_DAC81416.c:118:44: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/DRV_DAC81416.c:118:15: error: too many arguments to function 'DAC81416_ReadRegister'
+  118 |         ret = DAC81416_ReadRegister(m_reg, pU16TxData);
+      |               ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/DRV_DAC81416.c:18:
+../Core/Src/DRV_DAC81416.h:339:9: note: declared here
+  339 | uint8_t DAC81416_ReadRegister(DAC81416_REG_MAP m_reg);
+      |         ^~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/DRV_DAC81416.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+15:23:52 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_ReadRegister_Blocking':
+../Core/Src/DRV_DAC81416.c:118:15: error: too many arguments to function 'DAC81416_ReadRegister'
+  118 |         ret = DAC81416_ReadRegister(m_reg, pU16RxData);
+      |               ^~~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/DRV_DAC81416.c:18:
+../Core/Src/DRV_DAC81416.h:339:9: note: declared here
+  339 | uint8_t DAC81416_ReadRegister(DAC81416_REG_MAP m_reg);
+      |         ^~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/DRV_DAC81416.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+15:24:11 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52448	    352	   9176	  61976	   f218	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:25:47 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+../Core/Src/DRV_DAC81416.c: In function 'DAC81416_Init':
+../Core/Src/DRV_DAC81416.c:66:40: error: incompatible type for argument 1 of 'DAC81416_ReadRegister_Blocking'
+   66 |         DAC81416_ReadRegister_Blocking(&g_mDevId.u16SHORT);
+      |                                        ^~~~~~~~~~~~~~~~~~
+      |                                        |
+      |                                        uint16_t * {aka short unsigned int *}
+In file included from ../Core/Src/DRV_DAC81416.c:18:
+../Core/Src/DRV_DAC81416.h:346:57: note: expected 'DAC81416_REG_MAP' but argument is of type 'uint16_t *' {aka 'short unsigned int *'}
+  346 | uint8_t DAC81416_ReadRegister_Blocking(DAC81416_REG_MAP m_reg, uint16_t *pU16RxData);
+      |                                        ~~~~~~~~~~~~~~~~~^~~~~
+../Core/Src/DRV_DAC81416.c:66:9: error: too few arguments to function 'DAC81416_ReadRegister_Blocking'
+   66 |         DAC81416_ReadRegister_Blocking(&g_mDevId.u16SHORT);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/DRV_DAC81416.h:346:9: note: declared here
+  346 | uint8_t DAC81416_ReadRegister_Blocking(DAC81416_REG_MAP m_reg, uint16_t *pU16RxData);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/DRV_DAC81416.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+15:27:08 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52592	    352	   9176	  62120	   f2a8	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+15:39:33 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  52592	    352	   9176	  62120	   f2a8	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 

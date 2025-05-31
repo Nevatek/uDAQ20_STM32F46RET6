@@ -34,7 +34,7 @@ DAC81416_SERIAL_TXRX_ACCESS g_txData;
 DAC81416_SERIAL_TXRX_ACCESS g_rxData;
 const uint8_t g_dummyData[3] = {0x01, 0x00, 0x00};
 
-
+DAC81416_REG_DEVICEID g_mDevId;
 uint8_t writeStatusFlag = FALSE;
 uint8_t readStatusFlag  = FALSE;
 stcTimer g_DacTimeout;
@@ -54,9 +54,6 @@ void DAC81416_Init(void)
 {
 	DAC81416_REG_SPICONFIG spiReg = {0};
 
-	spiReg.BIT.SDO_EN = TRUE;/*When set to 1 the SDO pin is operational.*/
-	spiReg.BIT.DEV_PWDWN = 0U;
-	spiReg.BIT.TEMPALM_EN = 1;
 
 	io_WritePin(DAC_PIN_RESET, TRUE);
 	HAL_Delay(10);
@@ -66,6 +63,10 @@ void DAC81416_Init(void)
 	HAL_Delay(1);
 
 	DAC81416_WriteRegister_Blocking(DAC_REG_NOP, 0x0000);
+	DAC81416_ReadRegister_Blocking(DAC_REG_DEVICEID , &g_mDevId.u16SHORT);
+
+	spiReg.BIT.SDO_EN = TRUE;/*When set to 1 the SDO pin is operational.*/
+	spiReg.BIT.DEV_PWDWN = 0U;
 	DAC81416_WriteRegister_Blocking(DAC_REG_SPICONFIG, spiReg.u16SHORT);
 }
 spi_state_t DAC816416_GetSpiState(void)
@@ -100,6 +101,10 @@ uint8_t DAC81416_WriteRegister_Blocking(DAC81416_REG_MAP m_reg, uint16_t pU16TxD
 {
 	uint8_t ret = FALSE;
 	ret = DAC81416_WriteRegister(m_reg, pU16TxData);
+	if(FALSE == ret)
+	{
+		return ret;
+	}
 	StartTimer(&(g_DacTimeout) , DAC_SPI_MAX_TX_TIMEOUT_MS);
 	while(SPI_STATE_IDLE != spiState)
 	{
@@ -110,9 +115,32 @@ uint8_t DAC81416_WriteRegister_Blocking(DAC81416_REG_MAP m_reg, uint16_t pU16TxD
 			break;
 		}
 	}
+	return ret = TRUE;
+}
+uint8_t DAC81416_ReadRegister_Blocking(DAC81416_REG_MAP m_reg, uint16_t *pU16RxData)
+{
+	uint8_t ret = FALSE;
+	ret = DAC81416_ReadRegister(m_reg);
+	if(FALSE == ret)
+	{
+		return ret;
+	}
+	StartTimer(&(g_DacTimeout) , DAC_SPI_MAX_TX_TIMEOUT_MS);
+	while(SPI_STATE_IDLE != spiState)
+	{
+		if(TRUE == Timer_IsTimeout(&(g_DacTimeout)))
+		{
+			spiState = SPI_STATE_IDLE;
+			ret = FALSE;
+			break;
+		}
+	}
+	if(TRUE == DAC81416_GetStatus(DAC_FLAG_READ))
+	{
+		ret = DAC81416_GetRegReadValue(pU16RxData);
+	}
 	return ret;
 }
-
 
 uint8_t DAC81416_ReadRegister(DAC81416_REG_MAP m_reg)
 {
