@@ -432,6 +432,11 @@ void Appl_DAC816416WriteDacRegister_EnableStreamingMode(void)
 	g_mSpiReg.BIT.STR_EN = TRUE;
 	DAC81416_WriteRegister_Blocking(DAC_REG_SPICONFIG, g_mSpiReg.u16SHORT);/*Setting SPI config register*/
 }
+void Appl_DAC816416WriteDacRegister_DisableStreamingMode(void)
+{
+	g_mSpiReg.BIT.STR_EN = FALSE;
+	DAC81416_WriteRegister_Blocking(DAC_REG_SPICONFIG, g_mSpiReg.u16SHORT);/*Setting SPI config register*/
+}
 void Appl_DAC816416WriteDacRegister_StreamingMode(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pu16Data , uint8_t u8ChannelCnt)
 {
 	uint8_t u8DataLen = 0U;

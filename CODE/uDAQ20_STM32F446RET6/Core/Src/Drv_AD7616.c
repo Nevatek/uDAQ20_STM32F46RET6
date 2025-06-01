@@ -95,7 +95,7 @@ void Drv_AD7616_Init(void)
 	HAL_GPIO_WritePin(AD7616_RESET_GPIO_Port , AD7616_RESET_Pin , GPIO_PIN_SET);/*Make RESET pin HIGH*/
 	HAL_GPIO_WritePin(AD7616_CS__GPIO_Port , AD7616_CS__Pin , GPIO_PIN_SET);/*Make CS pin HIGH*/
 	Drv_AD7616_SelectChannel(m_MaxChannelScan = AD7616_CHAB7/*MAX Channel to scan*/);/*Sequencer will read from channel 0 - Configured channel*/
-	Drv_AD7616_SelectHWInputVoltageRange(RANGE_SEL_PM_5V);/*Select HARDWARE MODE and INP voltage range*/
+	Drv_AD7616_SelectHWInputVoltageRange(RANGE_SEL_PM_2_5V);/*Select HARDWARE MODE and INP voltage range*/
 	HAL_GPIO_WritePin(AD7616_CONV_GPIO_Port , AD7616_CONV_Pin , GPIO_PIN_RESET);/*Make CONV pin RESET*/
 
 	HAL_Delay(TIME_RESET_WAIT);

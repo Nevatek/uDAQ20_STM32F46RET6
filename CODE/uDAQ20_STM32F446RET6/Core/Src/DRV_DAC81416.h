@@ -411,6 +411,8 @@ void Callback_DAC81416TxComplete(void);
 void Callback_DAC81416RxComplete(void);
 
 /*Middleware functions*/
+void Appl_DAC816416WriteDacRegister_EnableStreamingMode(void);
+void Appl_DAC816416WriteDacRegister_DisableStreamingMode(void);
 void Appl_DAC816416WriteDacRegister(DAC81416_DAC_CHANNEL m_Ch , uint16_t u16Data);
 void Appl_DAC816416WriteDacRegister_StreamingMode(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pu16Data , uint8_t u8ChannelCnt);
 #endif /* DRV_DAC81416_H_ */
