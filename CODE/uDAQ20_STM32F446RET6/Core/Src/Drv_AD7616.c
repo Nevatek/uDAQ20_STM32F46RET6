@@ -95,7 +95,7 @@ void Drv_AD7616_Init(void)
 	HAL_GPIO_WritePin(AD7616_RESET_GPIO_Port , AD7616_RESET_Pin , GPIO_PIN_SET);/*Make RESET pin HIGH*/
 	HAL_GPIO_WritePin(AD7616_CS__GPIO_Port , AD7616_CS__Pin , GPIO_PIN_SET);/*Make CS pin HIGH*/
 	Drv_AD7616_SelectChannel(m_MaxChannelScan = AD7616_CHAB7/*MAX Channel to scan*/);/*Sequencer will read from channel 0 - Configured channel*/
-	Drv_AD7616_SelectHWInputVoltageRange(RANGE_SEL_PM_2_5V);/*Select HARDWARE MODE and INP voltage range*/
+	Drv_AD7616_SelectHWInputVoltageRange(RANGE_SEL_PM_5V);/*Select HARDWARE MODE and INP voltage range*/
 	HAL_GPIO_WritePin(AD7616_CONV_GPIO_Port , AD7616_CONV_Pin , GPIO_PIN_RESET);/*Make CONV pin RESET*/
 
 	HAL_Delay(TIME_RESET_WAIT);
@@ -407,12 +407,12 @@ void Drv_AD7616_Handler(void)
 #else
 					g_u16ADCDataVal_ChannelA[u8Channel] = 0U;
 					g_u16ADCDataVal_ChannelB[u8Channel] = 0U;
-					g_u16ADCDataVal_ChannelA[u8Channel] = 0xFF00 & (pBuff[(u8Index) + 1U] << 8U);
-					g_u16ADCDataVal_ChannelA[u8Channel] |= 0x00FF & (pBuff[(u8Index) + 0U]);
+					g_u16ADCDataVal_ChannelA[u8Channel] = 0x00FF & (pBuff[(u8Index) + 1U]);
+					g_u16ADCDataVal_ChannelA[u8Channel] |= 0xFF00 & (pBuff[(u8Index) + 0U] << 8U);
 
 
-					g_u16ADCDataVal_ChannelB[u8Channel] = (pBuff[((u8Index + 2U)) + 1U] << 8U);
-					g_u16ADCDataVal_ChannelB[u8Channel] |= (pBuff[((u8Index + 2U)) + 0U]);
+					g_u16ADCDataVal_ChannelB[u8Channel] = 0x00FF & (pBuff[((u8Index + 2U)) + 1U]);
+					g_u16ADCDataVal_ChannelB[u8Channel] |= 0xFF00 & (pBuff[((u8Index + 2U)) + 0U] << 8U);
 #endif
 #if (TRUE)
 					/*
