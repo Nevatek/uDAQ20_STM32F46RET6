@@ -7,6 +7,7 @@
 
 
 #include "main.h"
+#include "string.h"
 #include "Drv_AD7616.h"
 #include "DRV_PCF8574.h"
 #include "DRV_DAC81416.h"
@@ -15,6 +16,8 @@
 static PCF8574_HandleType g_Pcf1;
 static uint8_t g_u8PinsState = 0U;
 static uint8_t Appl_GpioExpanderHandler(void);
+
+static uint16_t u16arrBuff[16];
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
  .Returns        :  RETURN_ERROR
@@ -35,7 +38,11 @@ void ApplicationLayer_Init(void)
 	PCF8574_Init(&g_Pcf1, 0x20);
 	DAC81416_Init();
 
-	DAC81416_ReadRegister(DAC_REG_SPICONFIG);
+//	Appl_DAC816416WriteDacRegister(DAC_CHANNEL_8 , 65535/2);
+//	HAL_Delay(300);
+//	static uint16_t dacReg[16] = {0};
+//	memset(dacReg , 0xFFFF , sizeof(dacReg));
+//	Appl_DAC816416WriteDacRegister_StreamingMode(DAC_CHANNEL_0 , dacReg , 16);
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
@@ -49,6 +56,17 @@ void ApplicationLayer_Exe(void)
 	if(en_AD7616_READING_CMPLTED == Drv_AD7616_GetState())
 	{
 		/*If data capture completed - push data to USB*/
+
+		/*
+		 * TESTING WITH DAC
+		 */
+		uint16_t *pChA = NULL;
+		uint16_t *pChB = NULL;
+		memset(u16arrBuff , 0 , sizeof(u16arrBuff));
+		Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+		memcpy(u16arrBuff , pChA , AD7616_CHMAX);
+		memcpy(&u16arrBuff[8] , pChB , AD7616_CHMAX);
+		Appl_DAC816416WriteDacRegister_StreamingMode(DAC_CHANNEL_0 , u16arrBuff , 16);
 	}
 	if(TRUE == Appl_GpioExpanderHandler())
 	{
@@ -97,4 +115,19 @@ uint8_t Appl_GpioExpanderHandler(void)
 		u8DataAvail = TRUE;
 	}
 	return (u8DataAvail);
+}
+void ConvertArrayToBigEndian(uint16_t * array, size_t length)
+{
+    size_t i;
+
+    if (array != NULL)
+    {
+        for (i = 0U; i < length; ++i)
+        {
+            uint16_t value = array[i];
+            uint16_t msb = (uint16_t)(((uint16_t)((value >> 8U) & 0x00FFU)) & 0x00FFU);
+            uint16_t lsb = (uint16_t)((value & 0x00FFU) << 8U);
+            array[i] = (uint16_t)(msb | lsb);
+        }
+    }
 }

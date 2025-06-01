@@ -30,8 +30,8 @@ uint8_t g_u16SpiReadBuffer[(AD7616_MAX_NUM_CHANNEL * AD7616_LEN_PER_CHANNEL_IN_B
 /*
  * Buffer to read ADC data from register of AD7616
  */
-uint16_t g_u16ADCDataVal_ChannelA[AD7616_CHMAX];
-uint16_t g_u16ADCDataVal_ChannelB[AD7616_CHMAX];
+int16_t g_u16ADCDataVal_ChannelA[AD7616_CHMAX];
+int16_t g_u16ADCDataVal_ChannelB[AD7616_CHMAX];
 
 AD7616_STATE m_State = en_AD7616_IDLE;/*State machine state variable*/
 AD7616_CHANNEL m_MaxChannelScan = AD7616_CHAB0;/*variable to store id of last channel to be scanned in each cycle*/
@@ -112,11 +112,11 @@ void Drv_AD7616_Init(void)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-uint8_t Drv_AD7616_GetInstanceAdcBuffer(uint16_t *pChA , uint16_t *pChB)
+uint8_t Drv_AD7616_GetInstanceAdcBuffer(uint16_t **pChA , uint16_t **pChB)
 {
 	uint8_t u8ValidityFlag = TRUE;/*Copy default validity flag*/
-	pChA = (&g_u16ADCDataVal_ChannelA[0U]);/*Copy address of ADC buffer channel A*/
-	pChB = (&g_u16ADCDataVal_ChannelB[0U]);/*Copy address of ADC buffer channel B*/
+	*pChA = (&g_u16ADCDataVal_ChannelA[0U]);/*Copy address of ADC buffer channel A*/
+	*pChB = (&g_u16ADCDataVal_ChannelB[0U]);/*Copy address of ADC buffer channel B*/
 #if (AD7616_CRC_ENABLED_FLAG)
 	u8ValidityFlag = g_u8RxCrcValidity;/*Copy adc data validity flag*/
 #endif
@@ -414,7 +414,7 @@ void Drv_AD7616_Handler(void)
 					g_u16ADCDataVal_ChannelB[u8Channel] = 0x00FF & (pBuff[((u8Index + 2U)) + 1U]);
 					g_u16ADCDataVal_ChannelB[u8Channel] |= 0xFF00 & (pBuff[((u8Index + 2U)) + 0U] << 8U);
 #endif
-#if (TRUE)
+#if (FALSE)
 					/*
 					 * Work around - issue : some time 0xFFFF is comming as random when signal value is ZERO
 					 */

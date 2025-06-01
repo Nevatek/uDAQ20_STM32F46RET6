@@ -72,6 +72,7 @@ void Drv_AD7616_SelectChannel(AD7616_CHANNEL m_Ch);
 void Drv_AD7616_SelectHWInputVoltageRange(HW_RANGE_SEL m_inpVR);
 void Drv_AD7616_TriggerAdcConvst(void);
 uint8_t Drv_AD7616_GetStatus_DeviceConvCmplte(void);
+uint8_t Drv_AD7616_GetInstanceAdcBuffer(uint16_t **pChA , uint16_t **pChB);
 uint8_t Drv_AD7616_GetStatus_TX_Complete(void);
 uint8_t Drv_AD7616_GetStatus_RX_Available(void);
 uint8_t* Drv_AD7616_ReadSpiADC_1W(void);

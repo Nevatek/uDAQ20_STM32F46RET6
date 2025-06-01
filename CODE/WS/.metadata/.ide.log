@@ -622,3 +622,585 @@
 2025-06-01 14:04:21,815 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
 2025-06-01 14:04:21,816 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
 2025-06-01 14:04:21,816 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:16,428 [INFO] MainUpdater:2872 - connection check result : 10
+2025-06-01 14:30:16,429 [INFO] MainUpdater:2872 - connection check result : 10
+2025-06-01 14:30:16,715 [INFO] MicroXplorer:468 - Change Database Path : 
+2025-06-01 14:30:16,715 [INFO] MicroXplorer:498 - Change Database Version : DB.6.0.130
+2025-06-01 14:30:16,765 [ERROR] ProjectManagerView:394 - 
+java.lang.NullPointerException: Cannot invoke "javax.swing.JTextField.getText()" because the return value of "java.util.List.get(int)" is null
+	at com.st.microxplorer.plugins.projectmanager.gui.ProjectChoiceTab$9.caretUpdate(ProjectChoiceTab.java:2616) ~[filemanager.jar:?]
+	at javax.swing.text.JTextComponent.fireCaretUpdate(JTextComponent.java:408) ~[?:?]
+	at javax.swing.text.JTextComponent$MutableCaretEvent.fire(JTextComponent.java:4484) ~[?:?]
+	at javax.swing.text.JTextComponent$MutableCaretEvent.stateChanged(JTextComponent.java:4506) ~[?:?]
+	at javax.swing.text.DefaultCaret.fireStateChanged(DefaultCaret.java:857) ~[?:?]
+	at javax.swing.text.DefaultCaret.changeCaretPosition(DefaultCaret.java:1343) ~[?:?]
+	at javax.swing.text.DefaultCaret.handleSetDot(DefaultCaret.java:1242) ~[?:?]
+	at javax.swing.text.DefaultCaret.setDot(DefaultCaret.java:1223) ~[?:?]
+	at javax.swing.text.DefaultCaret$Handler.insertUpdate(DefaultCaret.java:1819) ~[?:?]
+	at javax.swing.text.AbstractDocument.fireInsertUpdate(AbstractDocument.java:227) ~[?:?]
+	at javax.swing.text.AbstractDocument.handleInsertString(AbstractDocument.java:781) ~[?:?]
+	at javax.swing.text.AbstractDocument.insertString(AbstractDocument.java:740) ~[?:?]
+	at javax.swing.text.PlainDocument.insertString(PlainDocument.java:131) ~[?:?]
+	at javax.swing.text.AbstractDocument.replace(AbstractDocument.java:699) ~[?:?]
+	at javax.swing.text.JTextComponent.setText(JTextComponent.java:1725) ~[?:?]
+	at com.st.microxplorer.plugins.projectmanager.gui.ProjectChoiceTab.createHeapStackFields(ProjectChoiceTab.java:975) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.projectmanager.gui.ProjectChoiceTab.buildLinkSettingsPanel(ProjectChoiceTab.java:3666) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.projectmanager.gui.ProjectChoiceTab.defineWindowsFields(ProjectChoiceTab.java:1934) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.projectmanager.gui.ProjectChoiceTab.updateSettings(ProjectChoiceTab.java:553) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.projectmanager.gui.ProjectSettingsPanel.UpdateDialog(ProjectSettingsPanel.java:245) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.projectmanager.ProjectManagerView.propertyChange(ProjectManagerView.java:391) ~[filemanager.jar:?]
+	at java.beans.PropertyChangeSupport.fire(PropertyChangeSupport.java:343) ~[?:?]
+	at java.beans.PropertyChangeSupport.firePropertyChange(PropertyChangeSupport.java:335) ~[?:?]
+	at java.beans.PropertyChangeSupport.firePropertyChange(PropertyChangeSupport.java:268) ~[?:?]
+	at com.st.microxplorer.util.MXPropertyChangeSupport.firePropertyChange(MXPropertyChangeSupport.java:54) ~[STM32CubeMX.jar:?]
+	at com.st.microxplorer.mxsystem.MxSystem.closeConfig(MxSystem.java:899) ~[STM32CubeMX.jar:?]
+	at com.st.microxplorer.maingui.MainPanel.closeConfig(MainPanel.java:789) ~[STM32CubeMX.jar:?]
+	at com.st.microxplorer.plugins.filemanager.engine.OpenFileManager.loadConfigurationFile(OpenFileManager.java:265) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.filemanager.engine.MainFileManager.userLoadConfig(MainFileManager.java:340) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.filemanager.engine.MainFileManager.userLoadConfig(MainFileManager.java:318) ~[filemanager.jar:?]
+	at com.st.microxplorer.plugins.filemanager.FileManagerView.getSpecificTask(FileManagerView.java:246) ~[filemanager.jar:?]
+	at com.st.stm32cube.common.mx.editor.CubeMxEditor.getMxTabbedPaneInstance(CubeMxEditor.java:1198) ~[com.st.stm32cube.common.mx_6.13.0.202411220809/:?]
+	at com.st.stm32cube.common.mx.editor.CubeMxEditor$12$1.createSwingComponent(CubeMxEditor.java:1068) ~[com.st.stm32cube.common.mx_6.13.0.202411220809/:?]
+	at com.st.stm32cube.common.mx.oss.core.awtswtbridge.EmbeddedSwingComposite.doComponentCreation(EmbeddedSwingComposite.java:492) ~[com.st.stm32cube.common.mx.oss_6.13.0.202411220809/:?]
+	at com.st.stm32cube.common.mx.oss.core.awtswtbridge.EmbeddedSwingComposite$4.run(EmbeddedSwingComposite.java:291) ~[com.st.stm32cube.common.mx.oss_6.13.0.202411220809/:?]
+	at com.st.stm32cube.common.mx.oss.core.awtswtbridge.AwtEnvironment$2.run(AwtEnvironment.java:166) ~[com.st.stm32cube.common.mx.oss_6.13.0.202411220809/:?]
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:318) ~[?:?]
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:773) ~[?:?]
+	at java.awt.EventQueue$4.run(EventQueue.java:720) ~[?:?]
+	at java.awt.EventQueue$4.run(EventQueue.java:714) ~[?:?]
+	at java.security.AccessController.doPrivileged(AccessController.java:400) ~[?:?]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:87) ~[?:?]
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:742) ~[?:?]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203) ~[?:?]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124) ~[?:?]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113) ~[?:?]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109) ~[?:?]
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101) ~[?:?]
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:90) ~[?:?]
+2025-06-01 14:30:16,778 [WARN] ThirdParty:871 - waiting for thirdparty lock release [close project]
+2025-06-01 14:30:16,778 [INFO] ThirdParty:873 - entering critical section [close project]
+2025-06-01 14:30:16,778 [INFO] ThirdParty:883 - exiting critical section [close project]
+2025-06-01 14:30:16,785 [INFO] PinOutPanel:1589 - setPackage(No Configuration,No Configuration)
+2025-06-01 14:30:16,802 [WARN] IpParametersView:154 - Warning: This peripheral hasn't parameters
+2025-06-01 14:30:16,873 [WARN] MainPanel:289 - <html><b><center>Warning: This peripheral has no parameters to be configured<br></b></html>
+2025-06-01 14:30:16,878 [ERROR] MainPanel:599 - java.lang.IndexOutOfBoundsException: Index: 0, Tab count: 0
+2025-06-01 14:30:16,913 [INFO] UtilMem:75 - Begin LoadConfig() Used Memory: 810698144 Bytes (1073741824)
+2025-06-01 14:30:16,915 [INFO] MicroXplorer:468 - Change Database Path : 
+2025-06-01 14:30:16,915 [INFO] MicroXplorer:498 - Change Database Version : DB.6.0.130
+2025-06-01 14:30:16,915 [INFO] OpenFileManager:332 - Change cursor
+2025-06-01 14:30:16,944 [INFO] Mcu:2035 - Initializing MCU STM32F446R(C-E)Tx STM32F446RETx STM32F446RET6
+2025-06-01 14:30:20,672 [INFO] Context:748 - Trying to add GPIOservice into a context  which must be forbidden
+2025-06-01 14:30:21,792 [INFO] RtosManager:555 - Registered RTOS mode: class=CMSIS, group=RTOS, mode=CMSIS_V1, owner=FREERTOS
+2025-06-01 14:30:21,793 [INFO] RtosManager:555 - Registered RTOS mode: class=CMSIS, group=RTOS2, mode=CMSIS_V2, owner=FREERTOS
+2025-06-01 14:30:21,793 [INFO] RtosManager:555 - Registered RTOS mode: class=RTOS, group=Core, mode=CMSIS_V1, owner=FREERTOS
+2025-06-01 14:30:21,793 [INFO] RtosManager:555 - Registered RTOS mode: class=RTOS, group=Core, mode=CMSIS_V2, owner=FREERTOS
+2025-06-01 14:30:21,794 [WARN] ModelIntegratedComponent:184 - Missing modes for component STMicroelectronics:FreeRTOS:0.0.1:STMicroelectronics:RTOS:FreeRTOS:Core:::10.2.0:
+2025-06-01 14:30:21,808 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,808 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,809 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,809 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,809 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,809 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,809 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,809 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,809 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,809 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,809 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,809 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,810 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,811 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,811 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,811 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,811 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,811 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,811 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,811 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,811 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,811 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,811 [WARN] ModelIntegratedComponent:63 - No mode defined for component null
+2025-06-01 14:30:21,811 [WARN] ModelPack:524 - Component already loaded: STMicroelectronics:HAL Drivers:0.0.0:STMicroelectronics:Device:STMicro_Driver:XSPI:HAL::0.0.1:HAL_XSPI
+2025-06-01 14:30:22,141 [INFO] ThirdPartyModel:298 - Start build external matchings
+2025-06-01 14:30:23,147 [INFO] ThirdPartyModel:316 - End build external matchings
+2025-06-01 14:30:23,217 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:23,217 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:23,217 [INFO] ImportTextPane:218 - (OptionalMessage_ERROR) IP (RCC) : Invalid parameter (FamilyName)
+2025-06-01 14:30:23,218 [INFO] ImportTextPane:218 - (OptionalMessage_ERROR) IP (RCC) : Parameter (MCO2PinFreq_Value) has invalid value (180000000)
+2025-06-01 14:30:23,220 [WARN] IP:2251 - DEVICE_SERIAL0_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:23,221 [WARN] IP:2251 - DEVICE_SERIAL1_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:23,221 [WARN] IP:2251 - DEVICE_SERIAL2_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:23,753 [INFO] UtilMem:75 - End LoadConfig() Used Memory: 837681584 Bytes (1073741824)
+2025-06-01 14:30:23,797 [WARN] ThirdParty:833 - waiting for thirdparty lock release [change project]
+2025-06-01 14:30:23,797 [INFO] ThirdParty:835 - entering critical section [change project]
+2025-06-01 14:30:23,797 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics USBPD 4.1
+2025-06-01 14:30:23,797 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics USB_HOST 2.0.0
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-MOTENVWB1 1.4.0
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-F4 1.1.0
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics LIBJPEG 8.0.0
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-ATR-ASTRA1 2.0.2
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-ATR-ASTRA1 2.0.1
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-SMBUS 2.1.0
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-WB05N 1.1.0
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-ISPU 2.1.0
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-FREERTOS 1.2.0
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-ST60 1.0.0
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-F7 1.1.0
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-L5 2.0.0
+2025-06-01 14:30:23,798 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics USB_DEVICE 2.0.0
+2025-06-01 14:30:23,799 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-NFC6 3.1.0
+2025-06-01 14:30:23,799 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-MEMS1 11.0.0
+2025-06-01 14:30:23,799 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FreeRTOS 0.0.1
+2025-06-01 14:30:23,799 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-DPower 1.2.0
+2025-06-01 14:30:23,799 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-FLIGHT1 5.0.2
+2025-06-01 14:30:23,799 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :Infineon AIROC-Wi-Fi-Bluetooth-STM32 1.7.0
+2025-06-01 14:30:23,799 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics PDM2PCM 3.3.0
+2025-06-01 14:30:23,800 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-DISPLAY 3.0.0
+2025-06-01 14:30:23,800 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLE1 7.0.0
+2025-06-01 14:30:23,800 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-NFC10 1.0.0
+2025-06-01 14:30:23,800 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLEMGR 4.0.0
+2025-06-01 14:30:23,800 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-FREERTOS 1.3.1
+2025-06-01 14:30:23,800 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics HAL Drivers 0.0.0
+2025-06-01 14:30:23,800 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :emotas I-CUBE-CANOPEN 1.3.0
+2025-06-01 14:30:23,800 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-FREERTOS 1.3.0
+2025-06-01 14:30:23,801 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-NFC7 1.0.1
+2025-06-01 14:30:23,801 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics MBEDTLS 2.14.1
+2025-06-01 14:30:23,801 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLEMGR 3.1.0
+2025-06-01 14:30:23,801 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AI 10.0.0
+2025-06-01 14:30:23,801 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-SMARTAG2 1.2.0
+2025-06-01 14:30:23,801 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-FLIGHT1 5.1.0
+2025-06-01 14:30:23,801 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-MEMS1 11.1.0
+2025-06-01 14:30:23,801 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-WL 2.0.0
+2025-06-01 14:30:23,801 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-DPower 1.3.0
+2025-06-01 14:30:23,801 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-MOTENV1 5.0.0
+2025-06-01 14:30:23,801 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics USB_DEVICE 1.0.0
+2025-06-01 14:30:23,801 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :wolfSSL I-CUBE-wolfMQTT 1.19.0
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-L4 2.0.0
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics ThreadX 0.0.2
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :WES I-CUBE-Cesium 1.3.0
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics lwIP 2.1.2
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-SFXS2LP1 4.0.0
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLE2 3.3.0
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics PDM2PCM 3.2.0
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-H7 3.3.0
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-NFC9 1.0.0
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLE1 7.1.0
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics USB_DEVICE 3.0.0
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TCPP 4.1.0
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-IPS 3.0.0
+2025-06-01 14:30:23,802 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-WB 2.0.0
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-GNSS1 7.0.0
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-GNSS1 7.0.1
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOUCHGFX 4.25.0
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AI 10.1.0
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-STBOX1 2.0.0
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-MEMS1 11.2.0
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-G0 1.1.0
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-SAFEA1 1.2.2
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-NFC4 3.0.0
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-SUBG2 5.0.0
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-H7RS 1.1.0
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics STM32_WPAN 1.0.0
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :EmbeddedOffice I-CUBE-FS-RTOS 1.0.1
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics lwIP 2.0.3
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :Cesanta I-CUBE-Mongoose 7.13.0
+2025-06-01 14:30:23,803 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics USB_HOST 1.0.0
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-G4 2.0.0
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-WB05N 2.0.0
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics PDM2PCM 3.1.0
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-NFC7 2.0.0
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TCPP 4.2.0
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :RealThread X-CUBE-RT-Thread_Nano 4.1.1
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-ATR-SIGFOX1 3.2.0
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :quantropi X-CUBE-qispace-sdk-base 1.9.3
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-EEPRMA1 5.1.0
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics MBEDTLS 2.16.2
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-IPS 3.1.0
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-ALS 1.0.2
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :wolfSSL I-CUBE-wolfSSL 5.7.4
+2025-06-01 14:30:23,804 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :ITTIA_DB I-CUBE-ITTIADB 8.9.0
+2025-06-01 14:30:23,805 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOUCHGFX 4.24.2
+2025-06-01 14:30:23,805 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOUCHGFX 4.24.1
+2025-06-01 14:30:23,805 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :wolfSSL I-CUBE-wolfTPM 3.4.0
+2025-06-01 14:30:23,805 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :portGmbH I-Cube-SoM-uGOAL 1.1.0
+2025-06-01 14:30:23,805 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics ThreadX 1.0.0
+2025-06-01 14:30:23,805 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :SEGGER I-CUBE-embOS 1.3.1
+2025-06-01 14:30:23,805 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-ALGOBUILD 1.4.0
+2025-06-01 14:30:23,805 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-H7RS 1.0.0
+2025-06-01 14:30:23,805 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOF1 3.4.2
+2025-06-01 14:30:23,805 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOF1 3.4.3
+2025-06-01 14:30:23,805 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AI 9.1.0
+2025-06-01 14:30:23,805 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :wolfSSL I-CUBE-wolfSSH 1.4.17
+2025-06-01 14:30:23,805 [INFO] ThirdParty:841 - exiting critical section [change project]
+2025-06-01 14:30:24,449 [INFO] PinOutPanel:1589 - setPackage(No Configuration,No Configuration)
+2025-06-01 14:30:24,450 [INFO] PinOutPanel:1589 - setPackage(STM32F446RETx,LQFP64)
+2025-06-01 14:30:25,057 [INFO] UtilMem:75 - Before build in PCC Used Memory: 709471472 Bytes (1073741824)
+2025-06-01 14:30:25,500 [INFO] UtilMem:75 - After build in PCC Used Memory: 762056768 Bytes (1073741824)
+2025-06-01 14:30:25,515 [INFO] ApiDbMcu:508 - Load IP Config File for USB_DEVICE
+2025-06-01 14:30:25,567 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,567 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,567 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,568 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,568 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,568 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,569 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,569 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,569 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,569 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,570 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,570 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,570 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,571 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,571 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,571 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,571 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,571 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,571 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,572 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,572 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,572 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,572 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,572 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,573 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,573 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,573 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,573 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,573 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,574 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,574 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,574 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,574 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,575 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,575 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,575 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,575 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,576 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,576 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,576 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,576 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,576 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,577 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,577 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,577 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,578 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,578 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,578 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,579 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,580 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,581 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,581 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,582 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,582 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,583 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,583 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,583 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,584 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,584 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,585 [INFO] IPUIPlugin:80 - create IPUIPlugin
+2025-06-01 14:30:25,589 [INFO] ApiDbMcu:508 - Load IP Config File for PDM2PCM
+2025-06-01 14:30:25,590 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:25,590 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:25,721 [INFO] CADModel:165 - CPN selected for project levelSTM32F446RET6
+2025-06-01 14:30:25,722 [INFO] CADModel:114 - Register for checkConnection events
+2025-06-01 14:30:25,783 [INFO] OpenFileManager:363 - Restore cursor
+2025-06-01 14:30:25,855 [WARN] IP:2251 - DEVICE_SERIAL0_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:25,855 [WARN] IP:2251 - DEVICE_SERIAL1_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:25,855 [WARN] IP:2251 - DEVICE_SERIAL2_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:25,856 [WARN] IP:2251 - DEVICE_SERIAL0_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:25,857 [WARN] IP:2251 - DEVICE_SERIAL1_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:25,857 [WARN] IP:2251 - DEVICE_SERIAL2_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:25,943 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:25,943 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:25,944 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:25,944 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:37,211 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-06-01 14:30:37,409 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-06-01 14:30:41,049 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-06-01 14:30:41,211 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-06-01 14:30:42,450 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 706505600 Bytes (1073741824)
+2025-06-01 14:30:42,588 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 726663168 Bytes (1073741824)
+2025-06-01 14:30:43,591 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 807403520 Bytes (1073741824)
+2025-06-01 14:30:44,585 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SPI
+2025-06-01 14:30:44,585 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SPI
+2025-06-01 14:30:44,585 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: USB_OTG_HS
+2025-06-01 14:30:44,585 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: USB_DEVICE
+2025-06-01 14:30:44,585 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SYS
+2025-06-01 14:30:44,585 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: RCC
+2025-06-01 14:30:44,585 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: I2C
+2025-06-01 14:30:44,585 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: NVIC
+2025-06-01 14:30:44,586 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: GPIO
+2025-06-01 14:30:44,587 [INFO] CodeGenerator:896 - code generatio: config db path: C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.13.0.202411220809\\db\
+2025-06-01 14:30:44,593 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:44,593 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:44,629 [WARN] IP:2251 - DEVICE_SERIAL0_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:44,630 [WARN] IP:2251 - DEVICE_SERIAL1_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:44,633 [WARN] IP:2251 - DEVICE_SERIAL2_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:30:44,893 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\license.tmp_save
+2025-06-01 14:30:45,388 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\license.tmp
+2025-06-01 14:30:45,555 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\gpio.tmp_save
+2025-06-01 14:30:45,869 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\gpio.tmp
+2025-06-01 14:30:46,012 [WARN] IPConfigManager:3034 - Warning: the RefConfig PWREx_EnableUSBVoltageDetector is not available in your config.xml file
+2025-06-01 14:30:46,042 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_vars.tmp_save
+2025-06-01 14:30:46,291 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_vars.tmp
+2025-06-01 14:30:46,309 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_inc.tmp_save
+2025-06-01 14:30:46,445 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_inc.tmp
+2025-06-01 14:30:46,484 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_HalInit.tmp_save
+2025-06-01 14:30:46,794 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_HalInit.tmp
+2025-06-01 14:30:46,813 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_Msp.tmp_save
+2025-06-01 14:30:47,003 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_Msp.tmp
+2025-06-01 14:30:47,556 [INFO] Middleware:1450 - No code input for Bsp Dependency
+2025-06-01 14:30:47,619 [INFO] Middleware:1450 - No code input for Bsp Dependency
+2025-06-01 14:30:47,660 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usb_device.c_save
+2025-06-01 14:30:47,888 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usb_device.c
+2025-06-01 14:30:47,911 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usb_device.h_save
+2025-06-01 14:30:48,072 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usb_device.h
+2025-06-01 14:30:48,113 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\Target\usbd_conf.h_save
+2025-06-01 14:30:48,252 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\Target\usbd_conf.h
+2025-06-01 14:30:48,290 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\Target\usbd_conf.c_save
+2025-06-01 14:30:48,476 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\Target\usbd_conf.c
+2025-06-01 14:30:48,512 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_desc.h_save
+2025-06-01 14:30:48,672 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_desc.h
+2025-06-01 14:30:48,708 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_desc.c_save
+2025-06-01 14:30:48,873 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_desc.c
+2025-06-01 14:30:48,901 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_cdc_if.h_save
+2025-06-01 14:30:49,026 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_cdc_if.h
+2025-06-01 14:30:49,059 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_cdc_if.c_save
+2025-06-01 14:30:49,195 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_cdc_if.c
+2025-06-01 14:30:49,239 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_it.c_save
+2025-06-01 14:30:49,472 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_it.c
+2025-06-01 14:30:49,509 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\stm32f4xx_it.h_save
+2025-06-01 14:30:49,647 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\stm32f4xx_it.h
+2025-06-01 14:30:49,706 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_hal_msp.c_save
+2025-06-01 14:30:49,900 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_hal_msp.c
+2025-06-01 14:30:49,923 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\system.tmp_save
+2025-06-01 14:30:50,015 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\system.tmp
+2025-06-01 14:30:50,062 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_hal_timebase_tim.c_save
+2025-06-01 14:30:50,169 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_hal_timebase_tim.c
+2025-06-01 14:30:50,206 [INFO] CodeEngine:311 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\stm32f4xx_hal_conf.h_save
+2025-06-01 14:30:50,341 [INFO] CodeEngine:335 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\stm32f4xx_hal_conf.h
+2025-06-01 14:30:50,383 [WARN] IPConfigManager:3034 - Warning: the RefConfig PLL2P_FOR_MCO is not available in your config.xml file
+2025-06-01 14:30:50,395 [INFO] ApiDbMcu:508 - Load IP Config File for I2C1
+2025-06-01 14:30:50,402 [INFO] ApiDbMcu:508 - Load IP Config File for SPI1
+2025-06-01 14:30:50,407 [INFO] ApiDbMcu:508 - Load IP Config File for SPI2
+2025-06-01 14:30:50,411 [INFO] ApiDbMcu:508 - Load IP Config File for RCC
+2025-06-01 14:30:50,452 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\main.h_save
+2025-06-01 14:30:50,614 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\main.h
+2025-06-01 14:30:50,645 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\main.c_save
+2025-06-01 14:30:50,832 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\main.c
+2025-06-01 14:30:51,502 [INFO] ProjectBuilder:3289 - Time for Copy HAL[1] : 374mS.
+2025-06-01 14:30:51,514 [INFO] ProjectBuilder:4876 - Project Generator version: 4.5.0-RC5
+2025-06-01 14:30:51,654 [INFO] ConfigFileManager:1579 - The Die is : DIE421
+2025-06-01 14:30:51,678 [INFO] ApiDbMcu:508 - Load IP Config File for FATFS
+2025-06-01 14:30:51,700 [INFO] ApiDbMcu:508 - Load IP Config File for FREERTOS
+2025-06-01 14:30:51,716 [INFO] ApiDbMcu:508 - Load IP Config File for LIBJPEG
+2025-06-01 14:30:51,743 [INFO] ApiDbMcu:508 - Load IP Config File for MBEDTLS
+2025-06-01 14:30:51,761 [INFO] ApiDbMcu:508 - Load IP Config File for USB_HOST
+2025-06-01 14:30:52,862 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
+2025-06-01 14:30:56,255 [INFO] ProjectBuilder:5154 - Time for Generating toolchain IDE Files: 4741mS.
+2025-06-01 14:30:56,256 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 1mS.
+2025-06-01 14:30:56,260 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 0mS.
+2025-06-01 14:43:40,739 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-06-01 14:43:42,520 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 905969664 Bytes (1073741824)
+2025-06-01 14:43:42,654 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 927166768 Bytes (1073741824)
+2025-06-01 14:43:43,438 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 970981376 Bytes (1073741824)
+2025-06-01 14:43:43,909 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SPI
+2025-06-01 14:43:43,909 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SPI
+2025-06-01 14:43:43,909 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: USB_OTG_HS
+2025-06-01 14:43:43,909 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: USB_DEVICE
+2025-06-01 14:43:43,909 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SYS
+2025-06-01 14:43:43,909 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: RCC
+2025-06-01 14:43:43,909 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: I2C
+2025-06-01 14:43:43,909 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: NVIC
+2025-06-01 14:43:43,909 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: GPIO
+2025-06-01 14:43:43,911 [INFO] CodeGenerator:896 - code generatio: config db path: C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.13.0.202411220809\\db\
+2025-06-01 14:43:43,937 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-06-01 14:43:43,937 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-06-01 14:43:43,974 [WARN] IP:2251 - DEVICE_SERIAL0_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:43:43,975 [WARN] IP:2251 - DEVICE_SERIAL1_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:43:43,975 [WARN] IP:2251 - DEVICE_SERIAL2_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:43:44,100 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\license.tmp_save
+2025-06-01 14:43:44,369 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\license.tmp
+2025-06-01 14:43:44,430 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\gpio.tmp_save
+2025-06-01 14:43:44,650 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\gpio.tmp
+2025-06-01 14:43:44,747 [WARN] IPConfigManager:3034 - Warning: the RefConfig PWREx_EnableUSBVoltageDetector is not available in your config.xml file
+2025-06-01 14:43:44,758 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_vars.tmp_save
+2025-06-01 14:43:45,050 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_vars.tmp
+2025-06-01 14:43:45,055 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_inc.tmp_save
+2025-06-01 14:43:45,132 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_inc.tmp
+2025-06-01 14:43:45,139 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_HalInit.tmp_save
+2025-06-01 14:43:45,348 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_HalInit.tmp
+2025-06-01 14:43:45,354 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_Msp.tmp_save
+2025-06-01 14:43:45,648 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_Msp.tmp
+2025-06-01 14:43:46,050 [INFO] Middleware:1450 - No code input for Bsp Dependency
+2025-06-01 14:43:46,099 [INFO] Middleware:1450 - No code input for Bsp Dependency
+2025-06-01 14:43:46,130 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usb_device.c_save
+2025-06-01 14:43:46,344 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usb_device.c
+2025-06-01 14:43:46,350 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usb_device.h_save
+2025-06-01 14:43:46,470 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usb_device.h
+2025-06-01 14:43:46,479 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\Target\usbd_conf.h_save
+2025-06-01 14:43:46,659 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\Target\usbd_conf.h
+2025-06-01 14:43:46,682 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\Target\usbd_conf.c_save
+2025-06-01 14:43:46,865 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\Target\usbd_conf.c
+2025-06-01 14:43:46,872 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_desc.h_save
+2025-06-01 14:43:46,992 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_desc.h
+2025-06-01 14:43:47,034 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_desc.c_save
+2025-06-01 14:43:47,160 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_desc.c
+2025-06-01 14:43:47,167 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_cdc_if.h_save
+2025-06-01 14:43:47,265 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_cdc_if.h
+2025-06-01 14:43:47,286 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_cdc_if.c_save
+2025-06-01 14:43:47,453 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_cdc_if.c
+2025-06-01 14:43:47,487 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_it.c_save
+2025-06-01 14:43:47,773 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_it.c
+2025-06-01 14:43:47,780 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\stm32f4xx_it.h_save
+2025-06-01 14:43:47,921 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\stm32f4xx_it.h
+2025-06-01 14:43:47,981 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_hal_msp.c_save
+2025-06-01 14:43:48,175 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_hal_msp.c
+2025-06-01 14:43:48,182 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\system.tmp_save
+2025-06-01 14:43:48,259 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\system.tmp
+2025-06-01 14:43:48,281 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_hal_timebase_tim.c_save
+2025-06-01 14:43:48,403 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_hal_timebase_tim.c
+2025-06-01 14:43:48,429 [INFO] CodeEngine:311 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\stm32f4xx_hal_conf.h_save
+2025-06-01 14:43:48,607 [INFO] CodeEngine:335 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\stm32f4xx_hal_conf.h
+2025-06-01 14:43:48,648 [WARN] IPConfigManager:3034 - Warning: the RefConfig PLL2P_FOR_MCO is not available in your config.xml file
+2025-06-01 14:43:48,706 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\main.h_save
+2025-06-01 14:43:48,898 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\main.h
+2025-06-01 14:43:48,941 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\main.c_save
+2025-06-01 14:43:49,152 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\main.c
+2025-06-01 14:43:49,941 [INFO] ProjectBuilder:3289 - Time for Copy HAL[1] : 545mS.
+2025-06-01 14:43:49,976 [INFO] ProjectBuilder:4876 - Project Generator version: 4.5.0-RC5
+2025-06-01 14:43:50,111 [INFO] ConfigFileManager:1579 - The Die is : DIE421
+2025-06-01 14:43:52,342 [INFO] ProjectBuilder:5154 - Time for Generating toolchain IDE Files: 2367mS.
+2025-06-01 14:43:52,343 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 0mS.
+2025-06-01 14:43:52,347 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 0mS.
+2025-06-01 14:53:22,819 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-06-01 14:53:23,003 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-06-01 14:53:24,298 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 962927760 Bytes (1073741824)
+2025-06-01 14:53:24,488 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 983040000 Bytes (1073741824)
+2025-06-01 14:53:25,427 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 790102016 Bytes (1073741824)
+2025-06-01 14:53:25,837 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SPI
+2025-06-01 14:53:25,837 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SPI
+2025-06-01 14:53:25,837 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: USB_OTG_HS
+2025-06-01 14:53:25,837 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: USB_DEVICE
+2025-06-01 14:53:25,838 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SYS
+2025-06-01 14:53:25,838 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: RCC
+2025-06-01 14:53:25,838 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: I2C
+2025-06-01 14:53:25,838 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: NVIC
+2025-06-01 14:53:25,838 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: GPIO
+2025-06-01 14:53:25,840 [INFO] CodeGenerator:896 - code generatio: config db path: C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.13.0.202411220809\\db\
+2025-06-01 14:53:25,843 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-06-01 14:53:25,844 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-06-01 14:53:25,877 [WARN] IP:2251 - DEVICE_SERIAL0_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:53:25,877 [WARN] IP:2251 - DEVICE_SERIAL1_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:53:25,877 [WARN] IP:2251 - DEVICE_SERIAL2_CDC_HS not found: check if there is a RefParameter without a condition.
+2025-06-01 14:53:26,003 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\license.tmp_save
+2025-06-01 14:53:26,417 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\license.tmp
+2025-06-01 14:53:26,564 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\gpio.tmp_save
+2025-06-01 14:53:26,835 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\gpio.tmp
+2025-06-01 14:53:26,953 [WARN] IPConfigManager:3034 - Warning: the RefConfig PWREx_EnableUSBVoltageDetector is not available in your config.xml file
+2025-06-01 14:53:26,965 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_vars.tmp_save
+2025-06-01 14:53:27,348 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_vars.tmp
+2025-06-01 14:53:27,353 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_inc.tmp_save
+2025-06-01 14:53:27,481 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_inc.tmp
+2025-06-01 14:53:27,486 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_HalInit.tmp_save
+2025-06-01 14:53:27,665 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_HalInit.tmp
+2025-06-01 14:53:27,669 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_Msp.tmp_save
+2025-06-01 14:53:27,837 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\usb_otg_hs_Msp.tmp
+2025-06-01 14:53:28,338 [INFO] Middleware:1450 - No code input for Bsp Dependency
+2025-06-01 14:53:28,392 [INFO] Middleware:1450 - No code input for Bsp Dependency
+2025-06-01 14:53:28,415 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usb_device.c_save
+2025-06-01 14:53:28,650 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usb_device.c
+2025-06-01 14:53:28,659 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usb_device.h_save
+2025-06-01 14:53:28,846 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usb_device.h
+2025-06-01 14:53:28,856 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\Target\usbd_conf.h_save
+2025-06-01 14:53:29,004 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\Target\usbd_conf.h
+2025-06-01 14:53:29,030 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\Target\usbd_conf.c_save
+2025-06-01 14:53:29,216 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\Target\usbd_conf.c
+2025-06-01 14:53:29,226 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_desc.h_save
+2025-06-01 14:53:29,342 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_desc.h
+2025-06-01 14:53:29,362 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_desc.c_save
+2025-06-01 14:53:29,548 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_desc.c
+2025-06-01 14:53:29,558 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_cdc_if.h_save
+2025-06-01 14:53:29,666 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_cdc_if.h
+2025-06-01 14:53:29,689 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_cdc_if.c_save
+2025-06-01 14:53:29,839 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\USB_DEVICE\App\usbd_cdc_if.c
+2025-06-01 14:53:29,882 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_it.c_save
+2025-06-01 14:53:30,444 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_it.c
+2025-06-01 14:53:30,451 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\stm32f4xx_it.h_save
+2025-06-01 14:53:30,546 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\stm32f4xx_it.h
+2025-06-01 14:53:30,587 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_hal_msp.c_save
+2025-06-01 14:53:30,814 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_hal_msp.c
+2025-06-01 14:53:30,818 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\system.tmp_save
+2025-06-01 14:53:30,910 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\MXTmpFiles\system.tmp
+2025-06-01 14:53:30,936 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_hal_timebase_tim.c_save
+2025-06-01 14:53:31,035 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\stm32f4xx_hal_timebase_tim.c
+2025-06-01 14:53:31,068 [INFO] CodeEngine:311 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\stm32f4xx_hal_conf.h_save
+2025-06-01 14:53:31,271 [INFO] CodeEngine:335 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\stm32f4xx_hal_conf.h
+2025-06-01 14:53:31,335 [WARN] IPConfigManager:3034 - Warning: the RefConfig PLL2P_FOR_MCO is not available in your config.xml file
+2025-06-01 14:53:31,367 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\main.h_save
+2025-06-01 14:53:31,522 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Inc\main.h
+2025-06-01 14:53:31,548 [INFO] CodeEngine:255 - oldGeneratedFile, D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\main.c_save
+2025-06-01 14:53:31,769 [INFO] CodeEngine:279 - Generated code: D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\Core\Src\main.c
+2025-06-01 14:53:32,316 [INFO] ProjectBuilder:3289 - Time for Copy HAL[1] : 285mS.
+2025-06-01 14:53:32,322 [INFO] ProjectBuilder:4876 - Project Generator version: 4.5.0-RC5
+2025-06-01 14:53:32,441 [INFO] ConfigFileManager:1579 - The Die is : DIE421
+2025-06-01 14:53:34,354 [INFO] ProjectBuilder:5154 - Time for Generating toolchain IDE Files: 2032mS.
+2025-06-01 14:53:34,355 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 1mS.
+2025-06-01 14:53:34,359 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 0mS.
+2025-06-01 16:04:20,867 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:04:20,869 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:04:20,870 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:04:21,026 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:04:21,028 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:04:21,029 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:05:36,140 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:05:36,142 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:05:36,143 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:05:36,275 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:05:36,275 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:05:36,276 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:06:11,898 [INFO] WebApp:190 - Connection lost
+2025-06-01 16:06:14,659 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:06:14,660 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:06:14,660 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:06:14,843 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:06:14,844 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:06:14,844 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:07:39,035 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:07:39,036 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:07:39,036 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:07:39,067 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:07:39,068 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:07:39,068 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:08:20,620 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:08:20,621 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:08:20,622 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:08:20,670 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:08:20,671 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:08:20,672 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:08:56,252 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:08:56,252 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:08:56,253 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:08:56,416 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:08:56,417 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:08:56,418 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:09:55,512 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:09:55,513 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:09:55,513 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:09:55,543 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:09:55,544 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:09:55,544 [ERROR] ConfigurationRetriever:142 - IOException on connection: sw-center.st.com
+2025-06-01 16:10:08,516 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 16:10:08.513 ERROR Chromium process exit code: -2,147,483,645
+2025-06-01 16:10:08,517 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 
+2025-06-01 16:10:08,518 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 16:10:08.517 ERROR Crash dump dir: C:\Users\aldri\AppData\Local\JxBrowser\7.39.2\CrashReports
+2025-06-01 16:10:08,518 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 
+2025-06-01 16:10:08,521 [ERROR] WebApp:398 - JxBrowser engine crashed! Exit code: -2147483645

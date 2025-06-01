@@ -37,6 +37,8 @@ DAC81416_SERIAL_ACCESS g_rxData;
 
 DAC81416_REG_DEVICEID g_mDevId;
 DAC81416_REG_SPICONFIG g_mSpiReg;
+DAC81416_REG_DIFFCONFIG g_mDiffConfigReg;
+DAC81416_REG_DACPWDWN g_mDacPWDWNReg;
 
 uint8_t g_u8WriteStFlag = FALSE;
 uint8_t g_u8ReadStFlag  = FALSE;
@@ -46,7 +48,6 @@ volatile spi_state_t g_mSpiState = SPI_STATE_IDLE;
 /************************* function prototypes *****************************/
 /* Controller specific functions */
 static void DAC81416_WritePin(DAC81416_PIN_TYPE type, uint8_t state);
-
 static uint8_t DAC81416_Spi_Read(uint8_t* pBuff, uint16_t size);
 static uint8_t DAC81416_Spi_Write(uint8_t* pBuff, uint16_t size);
 
@@ -67,11 +68,28 @@ void DAC81416_Init(void)
 	HAL_Delay(DAC816416_RESET_DELAY_MS);
 
 	DAC81416_WriteRegister_Blocking(DAC_REG_NOP, 0x0000);/*Wrinting dummy writing operation to NOP register*/
-	DAC81416_ReadRegister_Blocking(DAC_REG_DEVICEID , &g_mDevId.u16SHORT);/*Reading device ID*/
 
-	g_mSpiReg.BIT.SDO_EN = TRUE;/*When set to 1 the SDO pin is operational.*/
+
+	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPWDWNReg.u16SHORT);/*Reading device ID*/
+
+	DAC81416_ReadRegister_Blocking(DAC_REG_SPICONFIG, &g_mSpiReg.u16SHORT);/*Setting SPI config register*/
 	g_mSpiReg.BIT.DEV_PWDWN = 0U;
 	DAC81416_WriteRegister_Blocking(DAC_REG_SPICONFIG, g_mSpiReg.u16SHORT);/*Setting SPI config register*/
+
+	DAC81416_ReadRegister_Blocking(DAC_REG_GENCONFIG, &g_mDiffConfigReg.u16SHORT);/*Setting SPI config register*/
+	g_mDiffConfigReg.BIT.REF_PWDWN = 0U;/*VREF Internal enabled*/
+	DAC81416_WriteRegister_Blocking(DAC_REG_GENCONFIG, g_mDiffConfigReg.u16SHORT);/*Setting SPI config register*/
+
+	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPWDWNReg.u16SHORT);/*Reading device ID*/
+
+
+	g_mDacPWDWNReg.u16SHORT = 0x0000;
+	DAC81416_WriteRegister_Blocking(DAC_REG_DACPWDWN, g_mDacPWDWNReg.u16SHORT);/*Setting SPI config register*/
+	g_mDacPWDWNReg.u16SHORT = 0xAA;
+	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPWDWNReg.u16SHORT);/*Reading device ID*/
+
+	DAC81416_ReadRegister_Blocking(DAC_REG_DEVICEID , &g_mDevId.u16SHORT);/*Reading device ID*/
+	Appl_DAC816416WriteDacRegister_EnableStreamingMode();
 }
 /*********************.Drv_AD7616_TriggerAdcConvst().*****************************
  .Purpose        : Function to trigger start of converion of ADC
@@ -429,17 +447,21 @@ void Appl_DAC816416WriteDacRegister(DAC81416_DAC_CHANNEL m_Ch , uint16_t u16Data
 }
 void Appl_DAC816416WriteDacRegister_EnableStreamingMode(void)
 {
+	DAC81416_ReadRegister_Blocking(DAC_REG_SPICONFIG, &g_mSpiReg.u16SHORT);/*Setting SPI config register*/
 	g_mSpiReg.BIT.STR_EN = TRUE;
 	DAC81416_WriteRegister_Blocking(DAC_REG_SPICONFIG, g_mSpiReg.u16SHORT);/*Setting SPI config register*/
 }
 void Appl_DAC816416WriteDacRegister_DisableStreamingMode(void)
 {
+	DAC81416_ReadRegister_Blocking(DAC_REG_SPICONFIG, &g_mSpiReg.u16SHORT);/*Setting SPI config register*/
 	g_mSpiReg.BIT.STR_EN = FALSE;
 	DAC81416_WriteRegister_Blocking(DAC_REG_SPICONFIG, g_mSpiReg.u16SHORT);/*Setting SPI config register*/
 }
+
 void Appl_DAC816416WriteDacRegister_StreamingMode(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pu16Data , uint8_t u8ChannelCnt)
 {
 	uint8_t u8DataLen = 0U;
+	ConvertArrayToBigEndian(pu16Data , u8ChannelCnt);
 	u8DataLen = (u8ChannelCnt * 2U) + 1U;
 	DAC81416_WriteDacStreaming(m_Ch , pu16Data , u8DataLen);
 }
