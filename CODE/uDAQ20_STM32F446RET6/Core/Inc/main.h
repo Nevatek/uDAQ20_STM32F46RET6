@@ -54,6 +54,7 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
+TIM_HandleTypeDef *GetInstance_DAC816416SYNC_TIM2(void);
 TIM_HandleTypeDef *GetInstance_AD7616SOC_TIM5(void);
 SPI_HandleTypeDef *GetInstance_SPI1(void);
 SPI_HandleTypeDef *GetInstance_SPI2(void);

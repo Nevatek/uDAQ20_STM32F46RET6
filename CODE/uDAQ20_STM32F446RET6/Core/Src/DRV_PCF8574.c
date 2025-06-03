@@ -41,7 +41,6 @@ void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c);
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 /************************* function definitions ****************************/
-
 /**************************.PCF8574_Init().**********************************
  .Purpose        : Initialization of PCF8574 handler
  .Returns        :  RETURN_ERROR
@@ -198,7 +197,16 @@ ReturnType PCF8574_Toggle(PCF8574_HandleType *hpcf,
 	}
 	return ret;
 }
-
+/*********************.PCF8574_GetPinState().********************************
+ .Purpose        : Get the 8 bit IO state
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+PCF8574_Operation PCF8574_GetOpStatus(PCF8574_HandleType *hpcf)
+{
+	return (hpcf->currOperation);
+}
 /*********************.PCF8574_GetPinState().********************************
  .Purpose        : Get the 8 bit IO state
  .Returns        :  RETURN_ERROR
@@ -435,7 +443,7 @@ ReturnType i2c_write(uint8_t address, uint8_t* pData, I2C_TRANSFER_TYPE mode)
  ****************************************************************************/
 ReturnType PCF8574_SetPinMode(PCF8574_HandleType *hpcf,
 		PCF8574_PinType pin,
-		uint8_t mode)
+		PCF8547_PIN_MODE mode)
 {
 	ReturnType ret 	 = RETURN_ERROR;
 	uint8_t tempData = 0;
@@ -448,7 +456,7 @@ ReturnType PCF8574_SetPinMode(PCF8574_HandleType *hpcf,
 		if(pin == ALL_PINS)
 		{
 			/* Set or clear only the specific bit */
-			if (mode)
+			if (GPX_PIN_MODE_INPUT == mode)
 			{
 				tempData = ALL_PIN_INPUT;
 			}
@@ -461,7 +469,7 @@ ReturnType PCF8574_SetPinMode(PCF8574_HandleType *hpcf,
 		else
 		{
 			/* Set or clear only the specific bit */
-			if (mode)
+			if (GPX_PIN_MODE_INPUT == mode)
 			{
 				SET_BIT(tempData, (1 << pin));
 			}
@@ -485,6 +493,7 @@ ReturnType PCF8574_SetPinMode(PCF8574_HandleType *hpcf,
  ****************************************************************************/
 inline void Callback_PCF8574TxComplete(void)
 {
+	p_HpcfHandle->currOperation = IO_IDLE;
 	if(p_HpcfHandle->currOperation == IO_TOGGLE)
 	{
 		p_HpcfHandle->flags.ToggleStatus_Flag = TRUE;
@@ -493,9 +502,7 @@ inline void Callback_PCF8574TxComplete(void)
 	{
 		p_HpcfHandle->flags.WriteStatus_Flag = TRUE;
 		/* ISR for Write Start */
-
 		/* ISR for Write End */
-
 	}
 }
 
@@ -510,7 +517,7 @@ inline void Callback_PCF8574RxComplete(void)
 	p_HpcfHandle->flags.ReadStatus_Flag = TRUE;
 
 	/* ISR for Read Start */
-
+	p_HpcfHandle->currOperation = IO_IDLE;
 	/* ISR for Read End */
 }
 

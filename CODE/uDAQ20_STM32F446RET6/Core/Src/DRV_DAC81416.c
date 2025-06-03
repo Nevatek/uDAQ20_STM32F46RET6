@@ -52,6 +52,7 @@ static uint8_t DAC81416_Spi_Read(uint8_t* pBuff, uint16_t size);
 static uint8_t DAC81416_Spi_Write(uint8_t* pBuff, uint16_t size);
 
 /************************* function definitions ****************************/
+
 /*********************.Drv_AD7616_TriggerAdcConvst().*****************************
  .Purpose        : Function to trigger start of converion of ADC
  .Returns        :  RETURN_ERROR

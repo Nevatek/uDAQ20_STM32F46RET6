@@ -17,6 +17,8 @@
 		<item key="caseSensitive" value="false"/>
 		<item key="searchFlags" value="227191"/>
 		<list key="previousPatterns">
+			<item value="g_ADCTim"/>
+			<item value="en_AD7616_READING_CMPLTED"/>
 			<item value="Drv_AD7616_GetInstanceAdcBuffer"/>
 			<item value="SPI_DATA_SIZE"/>
 			<item value="writeStatusFlag"/>

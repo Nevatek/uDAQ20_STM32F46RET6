@@ -12,6 +12,8 @@
 /************************** typedefs *****************************************/
 #define DAC_SPI_MAX_TX_TIMEOUT_MS 		(5U)
 #define DAC816416_RESET_DELAY_MS	 	(2U)
+#define DAC816416_MAX_NUM_OF_CHANNEL	(16U)
+#define DAC816416_MAX_OF_BYTE_PERCHANNEL	(2U)
 #define DAC_STREAM_BUFF_LENGTH (33U)/*32bytes for channels and 1 byte for address*/
 typedef enum
 {

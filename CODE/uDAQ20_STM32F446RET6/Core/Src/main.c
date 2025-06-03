@@ -26,6 +26,9 @@
 #include "Drv_SoftDelay.h"
 #include "DRV_PCF8574.h"
 #include "DRV_DAC81416.h"
+#include "Appl_ADC.h"
+#include "Appl_DAC.h"
+#include "Appl_GPIOExpander.h"
 #include "ApplicationLayer.h"
 /* USER CODE END Includes */
 
@@ -50,7 +53,9 @@ I2C_HandleTypeDef hi2c1;
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 
+TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim5;
+TIM_HandleTypeDef htim7;
 
 /* USER CODE BEGIN PV */
 
@@ -63,7 +68,38 @@ static void MX_SPI1_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_TIM5_Init(void);
+static void MX_TIM2_Init(void);
+static void MX_TIM7_Init(void);
 /* USER CODE BEGIN PFP */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  /* USER CODE BEGIN Callback 1 */
+  if (htim->Instance == TIM5)/*Timer 5 is used for start of conversion cycle for ADC AD7616*/
+  {
+	  ISRCallback_Ad7616_TriggerAdcConverison();/*Trigger ADC conversion*/
+  }
+
+  if (htim->Instance == TIM2)/*Timer 2 is used for DAC sync : DAC816416*/
+  {
+	  ISR_CallbackDAC81416_Sync();/*Trigger DAC*/
+  }
+
+  if (htim->Instance == TIM7)/*Timer 7 is used for PCF8574*/
+  {
+	  ISR_Callback_PCF8574SYNC();
+  }
+  /* USER CODE END Callback 1 */
+}
+/*
+ * Tiner 2 is used for DAC output sync DAC816416
+ */
+TIM_HandleTypeDef *GetInstance_DAC816416SYNC_TIM2(void)
+{
+	return (&htim2);
+}
 /*
  * Tiner 5 is used for conversion start trigger for ADC AD7616
  */
@@ -232,6 +268,8 @@ int main(void)
   MX_I2C1_Init();
   MX_SPI2_Init();
   MX_TIM5_Init();
+  MX_TIM2_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -414,6 +452,51 @@ static void MX_SPI2_Init(void)
 }
 
 /**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 90-1;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 4294967295;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+
+}
+
+/**
   * @brief TIM5 Initialization Function
   * @param None
   * @retval None
@@ -432,7 +515,7 @@ static void MX_TIM5_Init(void)
 
   /* USER CODE END TIM5_Init 1 */
   htim5.Instance = TIM5;
-  htim5.Init.Prescaler = 89;
+  htim5.Init.Prescaler = 90-1;
   htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim5.Init.Period = 4294967295;
   htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -455,6 +538,44 @@ static void MX_TIM5_Init(void)
   /* USER CODE BEGIN TIM5_Init 2 */
 
   /* USER CODE END TIM5_Init 2 */
+
+}
+
+/**
+  * @brief TIM7 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM7_Init(void)
+{
+
+  /* USER CODE BEGIN TIM7_Init 0 */
+
+  /* USER CODE END TIM7_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM7_Init 1 */
+
+  /* USER CODE END TIM7_Init 1 */
+  htim7.Instance = TIM7;
+  htim7.Init.Prescaler = 90-1;
+  htim7.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim7.Init.Period = 65535;
+  htim7.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim7) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim7, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM7_Init 2 */
+
+  /* USER CODE END TIM7_Init 2 */
 
 }
 
@@ -534,30 +655,6 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
-
-/**
-  * @brief  Period elapsed callback in non blocking mode
-  * @note   This function is called  when TIM1 interrupt took place, inside
-  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
-  * a global variable "uwTick" used as application time base.
-  * @param  htim : TIM handle
-  * @retval None
-  */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  /* USER CODE BEGIN Callback 0 */
-
-  /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM1) {
-    HAL_IncTick();
-  }
-  /* USER CODE BEGIN Callback 1 */
-  if (htim->Instance == TIM5)/*Timer 5 is used for start of conversion cycle for ADC AD7616*/
-  {
-	  ISRCallback_Ad7616_TriggerAdcConverison();/*Trigger ADC conversion*/
-  }
-  /* USER CODE END Callback 1 */
-}
 
 /**
   * @brief  This function is executed in case of error occurrence.

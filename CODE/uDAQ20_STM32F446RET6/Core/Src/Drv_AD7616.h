@@ -59,7 +59,6 @@ typedef enum
 typedef enum
 {
 	en_AD7616_IDLE = 0U,
-	en_AD7616_START_OF_CONV,
 	en_AD7616_READING_CHANNEL,
 }AD7616_STATE;
 

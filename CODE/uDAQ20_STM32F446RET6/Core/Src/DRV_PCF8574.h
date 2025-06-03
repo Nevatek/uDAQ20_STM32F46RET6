@@ -17,7 +17,9 @@
 /************************** defines ******************************************/
 
 /********************** typedef enums *****************************************/
-
+#define ADDRESS_I2C_PCF8574	(0x20)
+#define PCF8574_MAX_CHANNEL	(8U)
+#define PCF8574_GPIO_RESET_STATE (0xFF)
 /* I2c transfer types */
 typedef enum
 {
@@ -26,9 +28,16 @@ typedef enum
 	I2C_DMA
 }I2C_TRANSFER_TYPE;
 
+typedef enum
+{
+	GPX_PIN_MODE_OUTPUT = 0U,
+	GPX_PIN_MODE_INPUT = 1U,
+}PCF8547_PIN_MODE;
+
 /* Current operation  */
 typedef enum
 {
+	IO_IDLE = 0U,
     IO_READ,
     IO_WRITE,
     IO_TOGGLE,
@@ -129,7 +138,7 @@ ReturnType PCF8574_Write(PCF8574_HandleType *hpcf,
 ReturnType PCF8574_Toggle(PCF8574_HandleType *hpcf,
 							PCF8574_PinType pin,
 							I2C_TRANSFER_TYPE mode);
-
+PCF8574_Operation PCF8574_GetOpStatus(PCF8574_HandleType *hpcf);
 ReturnType PCF8574_GetPinState(PCF8574_HandleType *hpcf, uint8_t* state);
 ReturnType PCF8574_GetFlagStatus(PCF8574_HandleType *hpcf,
 								PCF8574_Operation op,
@@ -138,7 +147,7 @@ ReturnType PCF8574_ClearFlagStatus(PCF8574_HandleType *hpcf,
 								PCF8574_Operation op);
 ReturnType PCF8574_SetPinMode(PCF8574_HandleType *hpcf,
 		PCF8574_PinType pin,
-		uint8_t mode);
+		PCF8547_PIN_MODE mode);
 void Callback_IRQ_INT_Pin(void);
 void Callback_PCF8574TxComplete(void);
 void Callback_PCF8574RxComplete(void);
