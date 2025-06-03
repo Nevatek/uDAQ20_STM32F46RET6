@@ -10,6 +10,7 @@
 #include "Drv_AD7616.h"
 
 uint8_t g_u8AdcConvComplteFlag = FALSE;/*varibale to flag ADC conversion is completed*/
+uint8_t g_u8AD7616DataAvailFlag = FALSE;
 uint8_t g_u8SPI_WrCmplte = FALSE;/*varibale to flag SPI tarnsmission is completed*/
 uint8_t g_u8SPI_RdCmplte = FALSE;/*varibale to flag SPI reception is completed*/
 
@@ -35,7 +36,6 @@ int16_t g_u16ADCDataVal_ChannelB[AD7616_CHMAX];
 
 AD7616_STATE m_State = en_AD7616_IDLE;/*State machine state variable*/
 AD7616_CHANNEL m_MaxChannelScan = AD7616_CHAB0;/*variable to store id of last channel to be scanned in each cycle*/
-stcTimer g_ADCTim;/*Timer instance*/
 #if (AD7616_CRC_ENABLED_FLAG)
 static uint8_t crc_step(uint16_t data, uint8_t crc_in);
 static uint8_t get_bit(uint16_t word, uint8_t bit_pos);
@@ -57,7 +57,23 @@ inline void ISRCallback_Ad7616_Busy(void)
 	 */
 	HAL_GPIO_WritePin(AD7616_CONV_GPIO_Port , AD7616_CONV_Pin , GPIO_PIN_RESET);
 	/*If BUSY is LOW means , ADC conversion is completed*/
+	/*IF BUSY signal is low (END of converison) -> READ CHANNEL*/
+	Drv_AD7616_TriggerReadADCSpi_1W();/*Inititate reading*/
+	m_State = en_AD7616_READING_CHANNEL;
 	g_u8AdcConvComplteFlag = TRUE;
+}
+/*********************.ISRCallback_Ad7616_Busy().*****************************
+ .Purpose        : 	Callback for tigger converison start for ADC
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+inline void ISRCallback_Ad7616_TriggerAdcConverison(void)
+{
+	/*
+	 * Trigger conversion start
+	 */
+	Drv_AD7616_TriggerAdcConvst();/*TRIGGER SCAN CONV*/
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
@@ -105,6 +121,7 @@ void Drv_AD7616_Init(void)
 	HAL_GPIO_WritePin(AD7616_RESET_GPIO_Port , AD7616_RESET_Pin , GPIO_PIN_SET);/*Make RESET pin HIGH*/
 
 	HAL_Delay(TIME_RESET_WAIT);
+	HAL_TIM_Base_Start_IT(GetInstance_AD7616SOC_TIM5());
 }
 /*********************.Drv_AD7616_TriggerAdcConvst().*****************************
  .Purpose        : Function to get address of buffer to application layer and to get validity of adc data.
@@ -112,7 +129,7 @@ void Drv_AD7616_Init(void)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-uint8_t Drv_AD7616_GetInstanceAdcBuffer(uint16_t **pChA , uint16_t **pChB)
+uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB)
 {
 	uint8_t u8ValidityFlag = TRUE;/*Copy default validity flag*/
 	*pChA = (&g_u16ADCDataVal_ChannelA[0U]);/*Copy address of ADC buffer channel A*/
@@ -128,7 +145,7 @@ uint8_t Drv_AD7616_GetInstanceAdcBuffer(uint16_t **pChA , uint16_t **pChB)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-uint8_t Drv_AD7616_GetStatus_DeviceConvCmplte(void)
+inline uint8_t Drv_AD7616_GetStatus_DeviceConvCmplte(void)
 {
 	return g_u8AdcConvComplteFlag;/*get status of conversion complete*/
 }
@@ -138,7 +155,7 @@ uint8_t Drv_AD7616_GetStatus_DeviceConvCmplte(void)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-uint8_t Drv_AD7616_GetStatus_TX_Complete(void)
+inline uint8_t Drv_AD7616_GetStatus_TX_Complete(void)
 {
 	return g_u8SPI_WrCmplte;/*Get status of spi write complete*/
 }
@@ -148,7 +165,7 @@ uint8_t Drv_AD7616_GetStatus_TX_Complete(void)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-uint8_t Drv_AD7616_GetStatus_RX_Available(void)
+inline uint8_t Drv_AD7616_GetStatus_RX_Available(void)
 {
 	return g_u8SPI_RdCmplte;/*Get status of spi read complete*/
 }
@@ -186,6 +203,7 @@ void Drv_AD7616_SelectHWInputVoltageRange(HW_RANGE_SEL m_inpVR)
  ****************************************************************************/
 void Drv_AD7616_TriggerAdcConvst(void)
 {
+	g_u8AD7616DataAvailFlag = FALSE;
 	g_u8AdcConvComplteFlag = FALSE;
 	HAL_GPIO_WritePin(AD7616_CONV_GPIO_Port , AD7616_CONV_Pin , GPIO_PIN_SET);
 }
@@ -198,18 +216,18 @@ void Drv_AD7616_TriggerAdcConvst(void)
 
  .Note           :
  ****************************************************************************/
-void Drv_AD7616_TriggerReadADCSpi_1W(void)
+inline void Drv_AD7616_TriggerReadADCSpi_1W(void)
 {
-	uint8_t u8BytesToRead = 0U;
 	g_u8SPI_RdCmplte = FALSE;
-#if (AD7616_CRC_ENABLED_FLAG)
-	u8BytesToRead = (AD7616_MAX_NUM_CHANNEL * AD7616_LEN_PER_CHANNEL_IN_BYTES) + AD7616_SIZE_OF_CRC/*SIZE of CRC BYTE*/;
-#else
-	u8BytesToRead = (AD7616_MAX_NUM_CHANNEL * AD7616_LEN_PER_CHANNEL_IN_BYTES);
-#endif
 	HAL_GPIO_WritePin(AD7616_CS__GPIO_Port , AD7616_CS__Pin , GPIO_PIN_RESET);
+#if (AD7616_CRC_ENABLED_FLAG)
 	HAL_SPI_Receive_IT(GetInstance_SPI1(), &g_u16SpiReadBuffer[0U],
-			(u8BytesToRead)/*Read size of bytes*/);
+			/*Read size of bytes*/(AD7616_MAX_BYTES_TO_READ_1_SW + AD7616_SIZE_OF_CRC/*SIZE of CRC BYTE*/);
+#else
+	HAL_SPI_Receive_IT(GetInstance_SPI1(), &g_u16SpiReadBuffer[0U],
+							(AD7616_MAX_BYTES_TO_READ_1_SW)/*Read size of bytes*/);
+#endif
+
 }
 /*********************.Drv_AD7616_TriggerAdcConvst().*****************************
  .Purpose        : Function to trigger start of converion of ADC
@@ -227,9 +245,44 @@ uint8_t* Drv_AD7616_ReadSpiADC_1W(void)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-AD7616_STATE Drv_AD7616_GetState(void)
+uint8_t Drv_AD7616_GetState(void)
 {
-	return (m_State);
+	uint8_t u8Flag = g_u8AD7616DataAvailFlag;
+	g_u8AD7616DataAvailFlag = FALSE;/*Clear new data avail flag after reading*/
+	return (u8Flag);
+}
+/*********************.Drv_AD7616_TriggerAdcConvst().*****************************
+ .Purpose        : Function to trigger start of converion of ADC
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void Drv_AD7616_AdjustConversionPeriod(uint32_t u32Period_us)
+{
+    TIM_HandleTypeDef *phTim = GetInstance_AD7616SOC_TIM5();
+
+    if (u32Period_us < AD7616_SOC_TIMER_MIN_PERIOD_US)
+    {
+    	u32Period_us = AD7616_SOC_TIMER_MIN_PERIOD_US;
+    }
+    else if (u32Period_us > AD7616_SOC_TIMER_MAX_PERIOD_US)
+    {
+    	u32Period_us = AD7616_SOC_TIMER_MAX_PERIOD_US;
+    }
+    else
+    {
+        /*NOP*/
+    }
+
+    __disable_irq();
+
+    if (phTim->Instance != NULL)
+    {
+        __HAL_TIM_SET_AUTORELOAD(phTim, u32Period_us - 1UL);
+        __HAL_TIM_SET_COUNTER(phTim, 0UL);
+    }
+
+    __enable_irq();
 }
 #if (AD7616_CRC_ENABLED_FLAG)
 /*********************.Drv_AD7616_TriggerAdcConvst().*****************************
@@ -357,37 +410,7 @@ void Drv_AD7616_Handler(void)
 	{
 		case (en_AD7616_IDLE):
 		{
-			m_State = en_AD7616_START_OF_CONV;
-		}break;
 
-		case (en_AD7616_START_OF_CONV):
-		{
-			Drv_AD7616_TriggerAdcConvst();/*TRIGGER SCAN CONV*/
-			StartTimer(&(g_ADCTim) , TIMEOUT_AD7616_BUSY);/*MAX Timeout for BUSY or conversion time*/
-			m_State = en_AD7616_WAITING_FOR_BUSY_SIG_FALLING;
-		}break;
-
-		case (en_AD7616_WAITING_FOR_BUSY_SIG_FALLING):
-		{
-			if(TRUE == Drv_AD7616_GetStatus_DeviceConvCmplte())
-			{
-				/*IF BUSY signal is low (END of converison) -> READ CHANNEL*/
-				m_State = en_AD7616_READING_CHANNEL_ENTRY;
-			}
-			if(TRUE == Timer_IsTimeout(&(g_ADCTim)))
-			{
-				/*IF Conversion failed after timeout -> GOTO IDLE state*/
-				m_State = en_AD7616_IDLE;
-			}
-		}break;
-		case (en_AD7616_WAITING_FOR_BUSY_SIG_FALLING_BUSY):
-		{
-				m_State = en_AD7616_READING_CHANNEL_ENTRY;
-		}break;
-		case (en_AD7616_READING_CHANNEL_ENTRY):
-		{
-			Drv_AD7616_TriggerReadADCSpi_1W();/*Inititate reading*/
-			m_State = en_AD7616_READING_CHANNEL;
 		}break;
 		case (en_AD7616_READING_CHANNEL):
 		{
@@ -446,13 +469,14 @@ void Drv_AD7616_Handler(void)
 					u64CrcInvalidCnt++;
 				}
 #endif
-				/*If all channel got readed -> go to complete state*/
-				m_State = en_AD7616_READING_CMPLTED;
+				/*If all channel got readed*/
+				g_u8AD7616DataAvailFlag = TRUE;/*SET read complete flag*/
+				m_State = en_AD7616_IDLE;/*Switch back to IDLE state*/
 			}
 		}break;
-		case (en_AD7616_READING_CMPLTED):
+		default:
 		{
-			m_State = en_AD7616_IDLE;
+			/*NOP*/
 		}break;
 	}
 }

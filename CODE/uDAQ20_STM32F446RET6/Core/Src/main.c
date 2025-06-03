@@ -50,6 +50,8 @@ I2C_HandleTypeDef hi2c1;
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 
+TIM_HandleTypeDef htim5;
+
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -60,15 +62,32 @@ static void MX_GPIO_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_SPI2_Init(void);
+static void MX_TIM5_Init(void);
 /* USER CODE BEGIN PFP */
+/*
+ * Tiner 5 is used for conversion start trigger for ADC AD7616
+ */
+TIM_HandleTypeDef *GetInstance_AD7616SOC_TIM5(void)
+{
+	return (&htim5);
+}
+/*
+ * SPI 1 is used for ADC
+ */
 SPI_HandleTypeDef *GetInstance_SPI1(void)
 {
 	return (&hspi1);
 }
+/*
+ * SPI 2 is used for DAC
+ */
 SPI_HandleTypeDef *GetInstance_SPI2(void)
 {
 	return (&hspi2);
 }
+/*
+ * I2C 1 is used for PCF8574
+ */
 I2C_HandleTypeDef* GetInstance_I2C1(void)
 {
 	return &hi2c1;
@@ -212,6 +231,7 @@ int main(void)
   MX_SPI1_Init();
   MX_I2C1_Init();
   MX_SPI2_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -394,6 +414,51 @@ static void MX_SPI2_Init(void)
 }
 
 /**
+  * @brief TIM5 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM5_Init(void)
+{
+
+  /* USER CODE BEGIN TIM5_Init 0 */
+
+  /* USER CODE END TIM5_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM5_Init 1 */
+
+  /* USER CODE END TIM5_Init 1 */
+  htim5.Instance = TIM5;
+  htim5.Init.Prescaler = 89;
+  htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim5.Init.Period = 4294967295;
+  htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim5.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim5) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim5, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim5, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM5_Init 2 */
+
+  /* USER CODE END TIM5_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -487,7 +552,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-
+  if (htim->Instance == TIM5)/*Timer 5 is used for start of conversion cycle for ADC AD7616*/
+  {
+	  ISRCallback_Ad7616_TriggerAdcConverison();/*Trigger ADC conversion*/
+  }
   /* USER CODE END Callback 1 */
 }
 

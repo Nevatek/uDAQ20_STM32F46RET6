@@ -9686,3 +9686,830 @@ Finished building: default.size.stdout
  
 Finished building: uDAQ20_STM32F446RET6.list
  
+10:22:27 **** Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+../Core/Src/Drv_AD7616.c: In function 'Drv_AD7616_GetInstanceAdcBuffer':
+../Core/Src/Drv_AD7616.c:118:15: warning: pointer targets in assignment from 'int16_t *' {aka 'short int *'} to 'uint16_t *' {aka 'short unsigned int *'} differ in signedness [-Wpointer-sign]
+  118 |         *pChA = (&g_u16ADCDataVal_ChannelA[0U]);/*Copy address of ADC buffer channel A*/
+      |               ^
+../Core/Src/Drv_AD7616.c:119:15: warning: pointer targets in assignment from 'int16_t *' {aka 'short int *'} to 'uint16_t *' {aka 'short unsigned int *'} differ in signedness [-Wpointer-sign]
+  119 |         *pChB = (&g_u16ADCDataVal_ChannelB[0U]);/*Copy address of ADC buffer channel B*/
+      |               ^
+../Core/Src/Drv_AD7616.c: In function 'Drv_AD7616_Handler':
+../Core/Src/Drv_AD7616.c:453:23: error: 'en_AD7616_READING_CMPLTED' undeclared (first use in this function); did you mean 'en_AD7616_READING_CHANNEL'?
+  453 |                 case (en_AD7616_READING_CMPLTED):
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~
+      |                       en_AD7616_READING_CHANNEL
+../Core/Src/Drv_AD7616.c:453:23: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/Drv_AD7616.c:356:9: warning: enumeration value 'en_AD7616_READING_MAX' not handled in switch [-Wswitch]
+  356 |         switch (m_State)
+      |         ^~~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/Drv_AD7616.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:56:12: error: 'en_AD7616_READING_CMPLTED' undeclared (first use in this function); did you mean 'en_AD7616_READING_CHANNEL'?
+   56 |         if(en_AD7616_READING_CMPLTED == Drv_AD7616_GetState())
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~
+      |            en_AD7616_READING_CHANNEL
+../Core/Src/ApplicationLayer.c:56:12: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:58: Core/Src/ApplicationLayer.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+10:22:37 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/Drv_AD7616.c: In function 'Drv_AD7616_GetInstanceAdcBuffer':
+../Core/Src/Drv_AD7616.c:118:15: warning: pointer targets in assignment from 'int16_t *' {aka 'short int *'} to 'uint16_t *' {aka 'short unsigned int *'} differ in signedness [-Wpointer-sign]
+  118 |         *pChA = (&g_u16ADCDataVal_ChannelA[0U]);/*Copy address of ADC buffer channel A*/
+      |               ^
+../Core/Src/Drv_AD7616.c:119:15: warning: pointer targets in assignment from 'int16_t *' {aka 'short int *'} to 'uint16_t *' {aka 'short unsigned int *'} differ in signedness [-Wpointer-sign]
+  119 |         *pChB = (&g_u16ADCDataVal_ChannelB[0U]);/*Copy address of ADC buffer channel B*/
+      |               ^
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:56:12: error: 'en_AD7616_READING_CMPLTED' undeclared (first use in this function); did you mean 'en_AD7616_READING_CHANNEL'?
+   56 |         if(en_AD7616_READING_CMPLTED == Drv_AD7616_GetState())
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~
+      |            en_AD7616_READING_CHANNEL
+../Core/Src/ApplicationLayer.c:56:12: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:58: Core/Src/ApplicationLayer.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+10:24:09 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:56:12: error: 'en_AD7616_READING_CMPLTED' undeclared (first use in this function); did you mean 'en_AD7616_READING_CHANNEL'?
+   56 |         if(en_AD7616_READING_CMPLTED == Drv_AD7616_GetState())
+      |            ^~~~~~~~~~~~~~~~~~~~~~~~~
+      |            en_AD7616_READING_CHANNEL
+../Core/Src/ApplicationLayer.c:56:12: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/ApplicationLayer.c:66:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   66 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:66:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   66 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/ApplicationLayer.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+10:28:26 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:66:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   66 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:66:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   66 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54168	    352	   9328	  63848	   f968	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+10:34:43 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:66:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   66 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:66:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   66 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54200	    352	   9328	  63880	   f988	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+10:36:44 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:66:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   66 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:74:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   74 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:66:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   66 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:74:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   74 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54172	    352	   9328	  63852	   f96c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+10:54:08 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../USB_DEVICE/Target/usbd_conf.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/Target/usbd_conf.d" -MT"USB_DEVICE/Target/usbd_conf.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/Target/usbd_conf.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usb_device.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usb_device.d" -MT"USB_DEVICE/App/usb_device.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usb_device.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_cdc_if.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_cdc_if.d" -MT"USB_DEVICE/App/usbd_cdc_if.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_cdc_if.o"
+arm-none-eabi-gcc "../USB_DEVICE/App/usbd_desc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"USB_DEVICE/App/usbd_desc.d" -MT"USB_DEVICE/App/usbd_desc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "USB_DEVICE/App/usbd_desc.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.o"
+arm-none-eabi-gcc "../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.d" -MT"Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o"
+arm-none-eabi-gcc "../Core/Src/Appl_Timer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Appl_Timer.d" -MT"Core/Src/Appl_Timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Appl_Timer.o"
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/DRV_DAC81416.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_DAC81416.d" -MT"Core/Src/DRV_DAC81416.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_DAC81416.o"
+arm-none-eabi-gcc "../Core/Src/DRV_PCF8574.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/DRV_PCF8574.d" -MT"Core/Src/DRV_PCF8574.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/DRV_PCF8574.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:66:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   66 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:77:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   77 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:66:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   66 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:77:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   77 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+../Core/Src/DRV_DAC81416.c: In function 'Appl_DAC816416WriteDacRegister_StreamingMode':
+../Core/Src/DRV_DAC81416.c:464:9: warning: implicit declaration of function 'ConvertArrayToBigEndian' [-Wimplicit-function-declaration]
+  464 |         ConvertArrayToBigEndian(pu16Data , u8ChannelCnt);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/Drv_SoftDelay.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_SoftDelay.d" -MT"Core/Src/Drv_SoftDelay.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_SoftDelay.o"
+arm-none-eabi-gcc "../Core/Src/USB_CDC.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/USB_CDC.d" -MT"Core/Src/USB_CDC.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/USB_CDC.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/Drv_AD7616.c: In function 'Drv_AD7616_AdjustConversionPeriod':
+../Core/Src/Drv_AD7616.c:264:9: error: 'period_us' undeclared (first use in this function); did you mean 'u32Period_us'?
+  264 |     if (period_us < AD7616_SOC_TIMER_MIN_PERIOD_US)
+      |         ^~~~~~~~~
+      |         u32Period_us
+../Core/Src/Drv_AD7616.c:264:9: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/Drv_AD7616.c:279:9: error: 'htim5' undeclared (first use in this function)
+  279 |     if (htim5.Instance != NULL)
+      |         ^~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/Drv_AD7616.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/USB_CDC.c: In function 'USB_CDC_ParseRxBuffer':
+../Core/Src/USB_CDC.c:70:18: warning: variable 'u16ReadCrc' set but not used [-Wunused-but-set-variable]
+   70 |         uint16_t u16ReadCrc = 0U;
+      |                  ^~~~~~~~~~
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+10:54:21 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/Drv_AD7616.c: In function 'Drv_AD7616_AdjustConversionPeriod':
+../Core/Src/Drv_AD7616.c:274:27: error: 'period_us' undeclared (first use in this function); did you mean 'u32Period_us'?
+  274 |         adjusted_period = period_us;
+      |                           ^~~~~~~~~
+      |                           u32Period_us
+../Core/Src/Drv_AD7616.c:274:27: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/Drv_AD7616.c:279:9: error: 'htim5' undeclared (first use in this function)
+  279 |     if (htim5.Instance != NULL)
+      |         ^~~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/Drv_AD7616.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+10:54:27 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+../Core/Src/Drv_AD7616.c: In function 'Drv_AD7616_AdjustConversionPeriod':
+../Core/Src/Drv_AD7616.c:279:9: error: 'htim5' undeclared (first use in this function)
+  279 |     if (htim5.Instance != NULL)
+      |         ^~~~~
+../Core/Src/Drv_AD7616.c:279:9: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:58: Core/Src/Drv_AD7616.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+10:54:35 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54172	    352	   9328	  63852	   f96c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+10:55:10 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54172	    352	   9328	  63852	   f96c	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+10:58:50 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:77:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   77 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:77:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   77 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54292	    352	   9328	  63972	   f9e4	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+11:22:26 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+   text	   data	    bss	    dec	    hex	filename
+  54292	    352	   9328	  63972	   f9e4	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+12:14:25 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54304	    352	   9328	  63984	   f9f0	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:17:38 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:77:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   77 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:77:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   77 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54304	    352	   9328	  63984	   f9f0	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:21:24 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:76:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   76 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:76:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   76 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54284	    352	   9328	  63964	   f9dc	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:23:45 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54284	    352	   9328	  63964	   f9dc	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:24:39 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+../Core/Src/Drv_AD7616.c: In function 'Drv_AD7616_Handler':
+../Core/Src/Drv_AD7616.c:424:23: error: 'en_AD7616_WAITING_FOR_BUSY_SIG_FALLING' undeclared (first use in this function)
+  424 |                 case (en_AD7616_WAITING_FOR_BUSY_SIG_FALLING):
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/Drv_AD7616.c:424:23: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:58: Core/Src/Drv_AD7616.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+12:25:12 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54192	    352	   9312	  63856	   f970	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:25:16 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+   text	   data	    bss	    dec	    hex	filename
+  54192	    352	   9312	  63856	   f970	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+12:26:07 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54192	    352	   9312	  63856	   f970	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:27:32 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54192	    352	   9312	  63856	   f970	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:28:15 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54192	    352	   9312	  63856	   f970	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:29:23 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54192	    352	   9312	  63856	   f970	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:30:28 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54192	    352	   9312	  63856	   f970	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:31:19 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54192	    352	   9312	  63856	   f970	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:32:10 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54192	    352	   9312	  63856	   f970	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:32:49 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54192	    352	   9312	  63856	   f970	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:33:54 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:61:49: warning: passing argument 1 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                 ^~~~~
+      |                                                 |
+      |                                                 uint16_t ** {aka short unsigned int **}
+In file included from ../Core/Src/ApplicationLayer.c:11:
+../Core/Src/Drv_AD7616.h:75:51: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                         ~~~~~~~~~~^~~~
+../Core/Src/ApplicationLayer.c:61:56: warning: passing argument 2 of 'Drv_AD7616_GetInstanceAdcBuffer' from incompatible pointer type [-Wincompatible-pointer-types]
+   61 |                 Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
+      |                                                        ^~~~~
+      |                                                        |
+      |                                                        uint16_t ** {aka short unsigned int **}
+../Core/Src/Drv_AD7616.h:75:68: note: expected 'int16_t **' {aka 'short int **'} but argument is of type 'uint16_t **' {aka 'short unsigned int **'}
+   75 | uint8_t Drv_AD7616_GetInstanceAdcBuffer(int16_t **pChA , int16_t **pChB);
+      |                                                          ~~~~~~~~~~^~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54192	    352	   9312	  63856	   f970	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:35:41 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:78: warning: pointer targets in passing argument 2 of 'Appl_DAC816416WriteDacRegister_StreamingMode' differ in signedness [-Wpointer-sign]
+   64 |                 Appl_DAC816416WriteDacRegister_StreamingMode(DAC_CHANNEL_0 , u16arrBuff , 16);
+      |                                                                              ^~~~~~~~~~
+      |                                                                              |
+      |                                                                              int16_t * {aka short int *}
+In file included from ../Core/Src/ApplicationLayer.c:13:
+../Core/Src/DRV_DAC81416.h:417:89: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'int16_t *' {aka 'short int *'}
+  417 | void Appl_DAC816416WriteDacRegister_StreamingMode(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pu16Data , uint8_t u8ChannelCnt);
+      |                                                                               ~~~~~~~~~~^~~~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54192	    352	   9312	  63856	   f970	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 
+12:40:42 **** Incremental Build of configuration Debug for project uDAQ20_STM32F446RET6 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/ApplicationLayer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ApplicationLayer.d" -MT"Core/Src/ApplicationLayer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/ApplicationLayer.o"
+arm-none-eabi-gcc "../Core/Src/Drv_AD7616.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/Drv_AD7616.d" -MT"Core/Src/Drv_AD7616.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/Drv_AD7616.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F446xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+../Core/Src/ApplicationLayer.c: In function 'ApplicationLayer_Exe':
+../Core/Src/ApplicationLayer.c:64:78: warning: pointer targets in passing argument 2 of 'Appl_DAC816416WriteDacRegister_StreamingMode' differ in signedness [-Wpointer-sign]
+   64 |                 Appl_DAC816416WriteDacRegister_StreamingMode(DAC_CHANNEL_0 , u16arrBuff , 16);
+      |                                                                              ^~~~~~~~~~
+      |                                                                              |
+      |                                                                              int16_t * {aka short int *}
+In file included from ../Core/Src/ApplicationLayer.c:13:
+../Core/Src/DRV_DAC81416.h:417:89: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'int16_t *' {aka 'short int *'}
+  417 | void Appl_DAC816416WriteDacRegister_StreamingMode(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pu16Data , uint8_t u8ChannelCnt);
+      |                                                                               ~~~~~~~~~~^~~~~~~~
+arm-none-eabi-gcc -o "uDAQ20_STM32F446RET6.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\projects\Nevatek\uDAQ20_STM32F46RET6\CODE\uDAQ20_STM32F446RET6\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="uDAQ20_STM32F446RET6.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: uDAQ20_STM32F446RET6.elf
+ 
+arm-none-eabi-size  uDAQ20_STM32F446RET6.elf 
+arm-none-eabi-objdump -h -S uDAQ20_STM32F446RET6.elf  > "uDAQ20_STM32F446RET6.list"
+   text	   data	    bss	    dec	    hex	filename
+  54176	    352	   9312	  63840	   f960	uDAQ20_STM32F446RET6.elf
+Finished building: default.size.stdout
+ 
+Finished building: uDAQ20_STM32F446RET6.list
+ 

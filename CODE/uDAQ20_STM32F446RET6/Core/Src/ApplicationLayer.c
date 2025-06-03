@@ -17,7 +17,7 @@ static PCF8574_HandleType g_Pcf1;
 static uint8_t g_u8PinsState = 0U;
 static uint8_t Appl_GpioExpanderHandler(void);
 
-static uint16_t u16arrBuff[16];
+static int16_t u16arrBuff[16];
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
  .Returns        :  RETURN_ERROR
@@ -37,12 +37,7 @@ void ApplicationLayer_Init(void)
 	PCF8574_SetPinMode(&g_Pcf1, PIN7, TRUE);
 	PCF8574_Init(&g_Pcf1, 0x20);
 	DAC81416_Init();
-
-//	Appl_DAC816416WriteDacRegister(DAC_CHANNEL_8 , 65535/2);
-//	HAL_Delay(300);
-//	static uint16_t dacReg[16] = {0};
-//	memset(dacReg , 0xFFFF , sizeof(dacReg));
-//	Appl_DAC816416WriteDacRegister_StreamingMode(DAC_CHANNEL_0 , dacReg , 16);
+	Drv_AD7616_AdjustConversionPeriod(200U/*Micro seconds*/);
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
@@ -53,15 +48,15 @@ void ApplicationLayer_Init(void)
 void ApplicationLayer_Exe(void)
 {
 	Drv_AD7616_Handler();
-	if(en_AD7616_READING_CMPLTED == Drv_AD7616_GetState())
+	if(TRUE == Drv_AD7616_GetState())
 	{
 		/*If data capture completed - push data to USB*/
 
 		/*
 		 * TESTING WITH DAC
 		 */
-		uint16_t *pChA = NULL;
-		uint16_t *pChB = NULL;
+		int16_t *pChA = NULL;
+		int16_t *pChB = NULL;
 		memset(u16arrBuff , 0 , sizeof(u16arrBuff));
 		Drv_AD7616_GetInstanceAdcBuffer(&pChA ,&pChB);
 		memcpy(u16arrBuff , pChA , AD7616_CHMAX);
