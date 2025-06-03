@@ -37,7 +37,7 @@ void ApplicationLayer_Init(void)
 	PCF8574_SetPinMode(&g_Pcf1, PIN7, TRUE);
 	PCF8574_Init(&g_Pcf1, 0x20);
 	DAC81416_Init();
-	Drv_AD7616_AdjustConversionPeriod(200U/*Micro seconds*/);
+	Drv_AD7616_AdjustConversionPeriod(140U/*Micro seconds*/);
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
