@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="en_AD7616_WAITING_FOR_BUSY_SIG_FALLING"/>
+		<item key="selection" value="DAC81416_GetStatus"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="DAC81416_GetStatus"/>
 			<item value="en_AD7616_WAITING_FOR_BUSY_SIG_FALLING"/>
 			<item value="HAL_TIM_PeriodElapsedCallback"/>
 			<item value="readStatusFlag"/>
