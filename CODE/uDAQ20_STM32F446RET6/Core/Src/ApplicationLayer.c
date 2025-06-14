@@ -15,6 +15,7 @@
 #include "Appl_GPIOExpander.h"
 #include "Appl_ADC.h"
 #include "Appl_DAC.h"
+#include "Appl_Communication.h"
 
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
@@ -27,6 +28,7 @@ void ApplicationLayer_Init(void)
 	Appl_HandlerDac_Init();
 	Appl_HandlerAdc_Init();
 	Appl_GpioExpander_Init();
+	Appl_Communiation_Init();
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
@@ -39,6 +41,7 @@ void ApplicationLayer_Exe(void)
 	Appl_HandlerAdc();
 	Appl_HandlerDac_Exe();
 	Appl_GpioExpanderHandler();
+	Appl_Communication_Process();
 }
 
 void ConvertArrayToBigEndian(uint16_t * array, size_t length)

@@ -46,5 +46,8 @@ void Appl_HandlerAdc(void)
 		memcpy(u16arrBuff , pChA , AD7616_CHMAX);
 		memcpy(&u16arrBuff[8] , pChB , AD7616_CHMAX);
 	}
+
+
+
 }
 
