@@ -35,14 +35,14 @@ typedef enum
 typedef enum
 {
 	AD7616_CHAB0 = 0U,
-	AD7616_CHAB1,
-	AD7616_CHAB2,
-	AD7616_CHAB3,
-	AD7616_CHAB4,
-	AD7616_CHAB5,
-	AD7616_CHAB6,
-	AD7616_CHAB7,
-	AD7616_CHMAX
+	AD7616_CHAB1 = 1U,
+	AD7616_CHAB2 = 2U,
+	AD7616_CHAB3 = 3U,
+	AD7616_CHAB4 = 4U,
+	AD7616_CHAB5 = 5U,
+	AD7616_CHAB6 = 6U,
+	AD7616_CHAB7 = 7U,
+	AD7616_CHMAX = 8U
 }AD7616_CHANNEL;
 
 typedef enum
@@ -63,6 +63,8 @@ typedef enum
 }AD7616_STATE;
 
 void Drv_AD7616_Init(void);
+void Drv_AD7616_Turn_ON(uint8_t u8MaxChannel);
+void Drv_AD7616_Turn_OFF(void);
 void Drv_AD7616_AdjustConversionPeriod(uint32_t u32Period_us);
 void ISRCallback_Ad7616_TriggerAdcConverison(void);
 void ISRCallback_Ad7616_Busy(void);

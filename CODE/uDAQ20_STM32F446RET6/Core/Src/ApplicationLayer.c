@@ -43,7 +43,60 @@ void ApplicationLayer_Exe(void)
 	Appl_GpioExpanderHandler();
 	Appl_Communication_Process();
 }
+/*
+ * Set timer period during runtime
+ */
+void Appl_SetTimerPeriod(TIM_HandleTypeDef *htim , uint32_t u32Period_us)
+{
+	uint32_t u32Prescalar = 0U;
+	uint32_t u32ARR = 0U;
+    uint32_t u32Timer_clk = 0U;
 
+    // Get APB1 or APB2 timer clock
+    if (htim->Instance == TIM1 ||
+    		htim->Instance == TIM9 ||
+			htim->Instance == TIM10 ||
+			htim->Instance == TIM11)
+    {
+    	u32Timer_clk = HAL_RCC_GetPCLK2Freq();
+
+        // If APB2 prescaler > 1, timer clock is doubled
+        if ((RCC->CFGR & RCC_CFGR_PPRE2) != RCC_CFGR_PPRE2_DIV1)
+        {
+        	u32Timer_clk *= 2U;  // timer clock doubled if APB prescaler > 1
+        }
+
+    }
+    else if (htim->Instance == TIM2 ||
+    		htim->Instance == TIM3 ||
+			htim->Instance == TIM4 ||
+			htim->Instance == TIM5)
+    {
+    	u32Timer_clk = HAL_RCC_GetPCLK1Freq();
+
+        // If APB2 prescaler > 1, timer clock is doubled
+        if ((RCC->CFGR & RCC_CFGR_PPRE1) != RCC_CFGR_PPRE1_DIV1)
+        {
+        	u32Timer_clk *= 2U;
+        }
+
+    }
+
+    /*Target counter clock: 1 MHz (1 tick = 1 µs)*/
+    uint32_t u32Target_counter_clk = 1000000;
+    // Compute PSC and ARR
+    u32Prescalar = (u32Timer_clk / u32Target_counter_clk) - 1;
+    u32ARR		 = (u32Period_us * u32Target_counter_clk / 1000000) - 1;
+
+	__HAL_TIM_DISABLE(htim);
+	__HAL_TIM_SET_PRESCALER(htim, u32Prescalar);
+	__HAL_TIM_SET_AUTORELOAD(htim, u32ARR);
+	__HAL_TIM_SET_COUNTER(htim, 0U);
+	__HAL_TIM_ENABLE(htim);
+}
+/*
+ * Endian conversion
+ */
 void ConvertArrayToBigEndian(uint16_t * array, size_t length)
 {
     size_t i = 0U;

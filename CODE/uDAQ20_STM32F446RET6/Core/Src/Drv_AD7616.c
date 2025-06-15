@@ -110,7 +110,7 @@ void Drv_AD7616_Init(void)
 	 */
 	HAL_GPIO_WritePin(AD7616_RESET_GPIO_Port , AD7616_RESET_Pin , GPIO_PIN_SET);/*Make RESET pin HIGH*/
 	HAL_GPIO_WritePin(AD7616_CS__GPIO_Port , AD7616_CS__Pin , GPIO_PIN_SET);/*Make CS pin HIGH*/
-	Drv_AD7616_SelectChannel(m_MaxChannelScan = AD7616_CHAB7/*MAX Channel to scan*/);/*Sequencer will read from channel 0 - Configured channel*/
+
 	Drv_AD7616_SelectHWInputVoltageRange(RANGE_SEL_PM_5V);/*Select HARDWARE MODE and INP voltage range*/
 	HAL_GPIO_WritePin(AD7616_CONV_GPIO_Port , AD7616_CONV_Pin , GPIO_PIN_RESET);/*Make CONV pin RESET*/
 
@@ -121,7 +121,33 @@ void Drv_AD7616_Init(void)
 	HAL_GPIO_WritePin(AD7616_RESET_GPIO_Port , AD7616_RESET_Pin , GPIO_PIN_SET);/*Make RESET pin HIGH*/
 
 	HAL_Delay(TIME_RESET_WAIT);
+}
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for GPIO interrupt Rising and falling
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void Drv_AD7616_Turn_ON(uint8_t u8MaxChannel)
+{
+	Drv_AD7616_SelectChannel(m_MaxChannelScan = u8MaxChannel/*MAX Channel to scan*/);/*Sequencer will read from channel 0 - Configured channel*/
+	memset(g_u16SpiReadBuffer , 0U , sizeof(g_u16SpiReadBuffer));
+	memset(g_u16ADCDataVal_ChannelA , 0U , sizeof(g_u16ADCDataVal_ChannelA));
+	memset(g_u16ADCDataVal_ChannelB , 0U , sizeof(g_u16ADCDataVal_ChannelB));
 	HAL_TIM_Base_Start_IT(GetInstance_AD7616SOC_TIM5());
+}
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for GPIO interrupt Rising and falling
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void Drv_AD7616_Turn_OFF(void)
+{
+	HAL_TIM_Base_Stop_IT(GetInstance_AD7616SOC_TIM5());
+	memset(g_u16SpiReadBuffer , 0U , sizeof(g_u16SpiReadBuffer));
+	memset(g_u16ADCDataVal_ChannelA , 0U , sizeof(g_u16ADCDataVal_ChannelA));
+	memset(g_u16ADCDataVal_ChannelB , 0U , sizeof(g_u16ADCDataVal_ChannelB));
 }
 /*********************.Drv_AD7616_TriggerAdcConvst().*****************************
  .Purpose        : Function to get address of buffer to application layer and to get validity of adc data.
@@ -274,15 +300,7 @@ void Drv_AD7616_AdjustConversionPeriod(uint32_t u32Period_us)
         /*NOP*/
     }
 
-    __disable_irq();
-
-    if (phTim->Instance != NULL)
-    {
-        __HAL_TIM_SET_AUTORELOAD(phTim, u32Period_us - 1UL);
-        __HAL_TIM_SET_COUNTER(phTim, 0UL);
-    }
-
-    __enable_irq();
+    Appl_SetTimerPeriod(GetInstance_AD7616SOC_TIM5() , u32Period_us/*Us*/);
 }
 #if (AD7616_CRC_ENABLED_FLAG)
 /*********************.Drv_AD7616_TriggerAdcConvst().*****************************
