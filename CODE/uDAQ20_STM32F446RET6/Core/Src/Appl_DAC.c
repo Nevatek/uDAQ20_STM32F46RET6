@@ -44,6 +44,8 @@ inline void ISR_CallbackDAC81416_Sync(void)
 void Appl_HandlerDac_Init(void)
 {
 	DAC81416_Init();
+	Appl_SetTimerPeriod(GetInstance_DAC816416SYNC_TIM2() , 25U/*Micro seconds*/);
+	HAL_TIM_Base_Start_IT(GetInstance_DAC816416SYNC_TIM2());
 }
 /*********************.Appl_HandlerDac_Exe().*****************************
  .Purpose        : 	Handler for DAC output.
@@ -68,5 +70,9 @@ void Appl_HandlerDac_Exe(void)
 			}
 		}
 		Appl_DAC816416WriteDacRegister_StreamingMode(DAC_CHANNEL_0 , (uint16_t*)g_arru16TxBuff , DAC816416_MAX_NUM_OF_CHANNEL);/*Push to DAC816416*/
+	}
+	else
+	{
+		/*NOP*/
 	}
 }

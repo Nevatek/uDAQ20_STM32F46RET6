@@ -57,6 +57,7 @@ void Error_Handler(void);
 UART_HandleTypeDef *GetInstance_Communication_UART1(void);
 TIM_HandleTypeDef *GetInstance_DAC816416SYNC_TIM2(void);
 TIM_HandleTypeDef *GetInstance_AD7616SOC_TIM5(void);
+TIM_HandleTypeDef *GetInstance_PCF8574GPIO_SYNC_TIM7(void);
 SPI_HandleTypeDef *GetInstance_SPI1(void);
 SPI_HandleTypeDef *GetInstance_SPI2(void);
 I2C_HandleTypeDef* GetInstance_I2C1(void);

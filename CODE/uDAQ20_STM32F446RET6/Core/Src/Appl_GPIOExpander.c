@@ -42,6 +42,8 @@ void Appl_GpioExpander_Init(void)
 	PCF8574_SetPinMode(&g_Pcf1, PIN7, GPX_PIN_MODE_INPUT);
 	PCF8574_Init(&g_Pcf1, ADDRESS_I2C_PCF8574);
 	PCF8574_Read(&g_Pcf1, ALL_PINS, I2C_INTERUPT);
+	Appl_SetTimerPeriod(GetInstance_DAC816416SYNC_TIM2() , 50U/*Micro seconds*/);
+	HAL_TIM_Base_Start_IT(GetInstance_PCF8574GPIO_SYNC_TIM7());
 }
 uint8_t Appl_GetGpioExpander_PinState(void)
 {

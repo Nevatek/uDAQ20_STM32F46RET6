@@ -117,6 +117,13 @@ TIM_HandleTypeDef *GetInstance_AD7616SOC_TIM5(void)
 	return (&htim5);
 }
 /*
+ * Tiner 5 is used for conversion start trigger for ADC AD7616
+ */
+TIM_HandleTypeDef *GetInstance_PCF8574GPIO_SYNC_TIM7(void)
+{
+	return (&htim7);
+}
+/*
  * SPI 1 is used for ADC
  */
 SPI_HandleTypeDef *GetInstance_SPI1(void)
