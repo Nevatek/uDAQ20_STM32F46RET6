@@ -61,7 +61,7 @@ void Appl_Communication_Process(void)
 		g_CommControl.u1RxDataSize = 0U;
 
 		if(COMM_START_OF_FRAME == g_CommRxBuffer.m_BIT.u8SOF &&
-				COMM_END_OF_FRAME == g_CommRxBuffer.u8ArrBuff[u16SizeofFrame - 1U])/*Validate Start of frame as well as END of frame*/
+				COMM_END_OF_FRAME == g_CommRxBuffer.m_BIT.u8EOF)/*Validate Start of frame as well as END of frame*/
 		{
 			/*If Valid*/
 			/*Process frame*/
@@ -166,7 +166,7 @@ void Appl_Communication_AnalogInputHandler(STM32_COMM_BUFFER *pCommBuffer)/*ADC*
 		{
 			Drv_AD7616_AdjustConversionPeriod(m_Config.u32AdcSampleIntervel_us/*Us*/);
 		}
-
+		Appl_AdcConfig(m_Config.u32AdcDataTrnsmitCount);
 	}
 	else if(COMM_DATA == pCommBuffer->m_BIT.u2ControlBit)
 	{
@@ -343,8 +343,10 @@ void Appl_Communication_TransmitDigitalInputHandler(PCD8574_HANDLE *pHandle , ui
 	mFrame.u3TypeID = DATA_TID_PCF_DI;
 	for(uint8_t u8Port = GP_OUTPUT_PORTA ; u8Port < GP_OUTPUT_PORT_MAX ; ++u8Port)/*Cycle through all output Ports*/
 	{
-		memcpy(&mFrame.u8DataArr[0U + u8Port] , &pHandle[u8Port].u8PORTVAL , sizeof(uint8_t));
+		memcpy(&mFrame.u8DataArr[u8Port] , &pHandle[u8Port].u8PORTVAL , sizeof(uint8_t));
 	}
+	mFrame.u16DataLength = GP_OUTPUT_PORT_MAX;
+	mFrame.u8EOF = COMM_END_OF_FRAME;
 	/*Push frame to TX FIFO*/
 	Appl_Communication_PushToTxFifo(&mFrame);
 }
@@ -354,7 +356,7 @@ void Appl_Communication_TransmitDigitalInputHandler(PCD8574_HANDLE *pHandle , ui
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-void Appl_Communication_TransmitAnalogInputHandler(PCD8574_HANDLE *pHandle , uint8_t u8NumOfPorts)/*ADC -> IMX*/
+void Appl_Communication_TransmitAnalogInputHandler(ADC_STACK_BUFFER *pBuff , uint32_t u32NumOfData)/*ADC -> IMX*/
 {
 	/*Create Frame*/
 	STM32_COMM_FRAME mFrame;
@@ -364,9 +366,9 @@ void Appl_Communication_TransmitAnalogInputHandler(PCD8574_HANDLE *pHandle , uin
 	mFrame.u2ChannelType = COMM_SEQ_MULTI_CHANNEL;
 	mFrame.u2ControlBit = COMM_DATA;
 	mFrame.u3TypeID = DATA_TID_ADC_AI;
-	for(uint8_t u8Port = GP_OUTPUT_PORTA ; u8Port < GP_OUTPUT_PORT_MAX ; ++u8Port)/*Cycle through all output Ports*/
+	for(uint8_t u8Idx = 0U ; u8Idx < u32NumOfData ; ++u8Idx)/*Cycle through all ADC STACK Buffers*/
 	{
-		memcpy(&mFrame.u8DataArr[0U + u8Port] , &pHandle[u8Port].u8PORTVAL , sizeof(uint8_t));
+		memcpy(&mFrame.u8DataArr[(sizeof(ADC_STACK_BUFFER) * u8Idx)] , &pBuff[u8Idx].n16ADCData[0U] , sizeof(ADC_STACK_BUFFER));
 	}
 	/*Push frame to TX FIFO*/
 	Appl_Communication_PushToTxFifo(&mFrame);

@@ -91,7 +91,7 @@ typedef struct __attribute__((packed))
 	uint16_t u16DataLength;
 
 	uint8_t u8DataArr[MAX_COMM_DATA_LENGTH];
-	/*uint8_t u8EOF; Here actual position of EOF frame depends upon data length*/
+	uint8_t u8EOF;
 }STM32_COMM_FRAME;
 
 typedef union
@@ -115,7 +115,7 @@ typedef struct
 
 typedef struct
 {
-	uint32_t u32AdcDataTrnsmitIntervel_us;
+	uint32_t u32AdcDataTrnsmitCount;
 	uint32_t u32AdcSampleIntervel_us;
 }ADC_CONFIG;
 
@@ -157,4 +157,5 @@ void Appl_Communication_Process(void);
 void Appl_Communiation_Transmit(uint8_t* Buf, uint32_t Len);
 
 void Appl_Communication_TransmitDigitalInputHandler(PCD8574_HANDLE *pHandle , uint8_t u8NumOfPorts);
+void Appl_Communication_TransmitAnalogInputHandler(ADC_STACK_BUFFER *pBuff , uint32_t u32NumOfData);
 #endif /* SRC_APPL_COMMUNICATION_H_ */
