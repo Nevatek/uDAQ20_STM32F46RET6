@@ -16,9 +16,11 @@
 #include "Appl_Communication.h"
 
 STM32_COMM_BUFFER g_CommRxBuffer;
+STM32_COMM_TX_FIFO g_CommTX_FIFO[MAX_TX_FIFO_COUNT];
 static STM32_COMM_CONTROL g_CommControl;
 static void Appl_Communication_AnalogInputHandler(STM32_COMM_BUFFER *pCommBuffer);
 static void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer);
+static void Appl_Communication_PushToTxFifo(STM32_COMM_FRAME *pFrame);
 
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
@@ -43,7 +45,12 @@ void Appl_Communiation_Transmit(uint8_t* Buf, uint32_t Len)
 	g_CommControl.u1TxCompleteFlag = FALSE;
 	HAL_UART_Transmit_IT(GetInstance_Communication_UART1(), Buf, Len);
 }
-
+/**************************.PCF8574_Init().**********************************
+ .Purpose        : 	Initialization of PCF8574 handler
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
 void Appl_Communication_Process(void)
 {
 	uint16_t u16SizeofFrame = 0U;
@@ -103,7 +110,12 @@ void Appl_Communication_Process(void)
 		/*Ignore frame if size is not valid*/
 	}
 }
-
+/**************************.PCF8574_Init().**********************************
+ .Purpose        : 	Initialization of PCF8574 handler
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
 void Appl_Communication_AnalogInputHandler(STM32_COMM_BUFFER *pCommBuffer)/*ADC*/
 {
 	uint8_t u8ChannelEnd = 0U;
@@ -165,7 +177,12 @@ void Appl_Communication_AnalogInputHandler(STM32_COMM_BUFFER *pCommBuffer)/*ADC*
 		/*Ignore frame > NOP*/
 	}
 }
-
+/**************************.PCF8574_Init().**********************************
+ .Purpose        : 	Initialization of PCF8574 handler
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
 void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DAC*/
 {
 	uint8_t u8ChannelStart = 0U;
@@ -242,7 +259,13 @@ void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DAC
 		/*Ignore frame > NOP*/
 	}
 }
-void Appl_Communication_DigitalOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DAC*/
+/**************************.PCF8574_Init().**********************************
+ .Purpose        : 	Initialization of PCF8574 handler
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void Appl_Communication_DigitalOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*IMX -> GPIO*/
 {
 	GP_OUTPUT_OUTPUT_CONFIG m_Config;
 	GP_OUTPUT_DATA m_Data;
@@ -259,11 +282,21 @@ void Appl_Communication_DigitalOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DA
 			{
 				Appl_SetTimerPeriod(GetInstance_DAC816416SYNC_TIM2() , m_Config.u32SignalPeriodUs/*Micro seconds*/);
 			}
-
 		}
 		else if(COMM_DATA == pCommBuffer->m_BIT.u2ControlBit)
 		{
 			memcpy(&m_Data , &pCommBuffer->m_BIT.u8DataArr[0U] , sizeof(m_Data));
+			/*Config channels of all ports*/
+			for(uint8_t u8Port = GP_OUTPUT_PORTA ; u8Port < GP_OUTPUT_PORT_MAX ; ++u8Port)/*Cycle through all output Ports*/
+			{
+				for(uint8_t u8Channel = 0U ; u8Channel < PCF8574_MAX_CHANNEL ; ++u8Channel)/*Cycle through all channels*/
+				{
+					Appl_GPConfigureOutput(u8Port , u8Channel ,
+							m_Data.m_ChConfig_PORT[u8Port][u8Channel].u2OutputMode ,
+							m_Data.m_ChConfig_PORT[u8Port][u8Channel].u16FreqDiv ,
+							m_Data.m_ChConfig_PORT[u8Port][u8Channel].u1PinVal);
+				}
+			}
 		}
 		else
 		{
@@ -275,5 +308,66 @@ void Appl_Communication_DigitalOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DA
 		/*Ignore frame > NOP*/
 	}
 }
-
-
+/**************************.PCF8574_Init().**********************************
+ .Purpose        : 	Initialization of PCF8574 handler
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void Appl_Communication_PushToTxFifo(STM32_COMM_FRAME *pFrame)
+{
+	for(uint8_t u8Index = 0U ; u8Index < MAX_TX_FIFO_COUNT ; ++u8Index)
+	{
+		if(FALSE == g_CommTX_FIFO[u8Index].u8OccupiedFlag)/*If FIFO location is free*/
+		{
+			memcpy(&g_CommTX_FIFO[u8Index].m_Buff , pFrame , sizeof(STM32_COMM_FRAME));
+			g_CommTX_FIFO[u8Index].u8OccupiedFlag = TRUE;/*Mark FIFO location as occupied*/
+		}
+	}
+}
+/**************************.PCF8574_Init().**********************************
+ .Purpose        : 	Initialization of PCF8574 handler
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void Appl_Communication_TransmitDigitalInputHandler(PCD8574_HANDLE *pHandle , uint8_t u8NumOfPorts)/*GPIO -> IMX*/
+{
+	/*Create Frame*/
+	STM32_COMM_FRAME mFrame;
+	mFrame.u8SOF = COMM_START_OF_FRAME;
+	mFrame.u3SenderID = SENDERID_STM;
+	mFrame.u6ChannelID = COMM_CHANNEL_ALL;
+	mFrame.u2ChannelType = COMM_SEQ_MULTI_CHANNEL;
+	mFrame.u2ControlBit = COMM_DATA;
+	mFrame.u3TypeID = DATA_TID_PCF_DI;
+	for(uint8_t u8Port = GP_OUTPUT_PORTA ; u8Port < GP_OUTPUT_PORT_MAX ; ++u8Port)/*Cycle through all output Ports*/
+	{
+		memcpy(&mFrame.u8DataArr[0U + u8Port] , &pHandle[u8Port].u8PORTVAL , sizeof(uint8_t));
+	}
+	/*Push frame to TX FIFO*/
+	Appl_Communication_PushToTxFifo(&mFrame);
+}
+/**************************.PCF8574_Init().**********************************
+ .Purpose        : 	Initialization of PCF8574 handler
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void Appl_Communication_TransmitAnalogInputHandler(PCD8574_HANDLE *pHandle , uint8_t u8NumOfPorts)/*ADC -> IMX*/
+{
+	/*Create Frame*/
+	STM32_COMM_FRAME mFrame;
+	mFrame.u8SOF = COMM_START_OF_FRAME;
+	mFrame.u3SenderID = SENDERID_STM;
+	mFrame.u6ChannelID = COMM_CHANNEL_ALL;
+	mFrame.u2ChannelType = COMM_SEQ_MULTI_CHANNEL;
+	mFrame.u2ControlBit = COMM_DATA;
+	mFrame.u3TypeID = DATA_TID_ADC_AI;
+	for(uint8_t u8Port = GP_OUTPUT_PORTA ; u8Port < GP_OUTPUT_PORT_MAX ; ++u8Port)/*Cycle through all output Ports*/
+	{
+		memcpy(&mFrame.u8DataArr[0U + u8Port] , &pHandle[u8Port].u8PORTVAL , sizeof(uint8_t));
+	}
+	/*Push frame to TX FIFO*/
+	Appl_Communication_PushToTxFifo(&mFrame);
+}

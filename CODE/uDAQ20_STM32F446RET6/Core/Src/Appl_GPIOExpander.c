@@ -143,6 +143,7 @@ void Appl_GpioExpander_Exe(void)
 				{
 					u8InputPortIndex = GP_OUTPUT_PORTA;/*Reset to PORT A*/
 					m_PCFState = PCF8574_STATE_WRITE_PORT;/*Go back to write task*/
+					Appl_Communication_TransmitDigitalInputHandler(&g_PCF8574_Input[0U] , GP_INPUT_PORT_MAX);
 				}
 				else
 				{
@@ -159,7 +160,11 @@ void Appl_GpioExpander_Exe(void)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-uint8_t Appl_GPConfigureOutput(GP_OUTPUT_PORT m_Port , uint8_t u8Mode , uint16_t u16FreqDiv)
+void Appl_GPConfigureOutput(GP_OUTPUT_PORT m_Port ,
+		uint8_t u8Channel , uint8_t u8Mode , uint16_t u16FreqDiv , uint8_t u8PinVal)
 {
-
+	g_GpOutputChannel[m_Port][u8Channel].m_Mode = u8Mode;
+	g_GpOutputChannel[m_Port][u8Channel].u8FreqDivision = u16FreqDiv;
+	g_GpOutputChannel[m_Port][u8Channel].u8FreqDivCnt = 0U;
+	g_GpOutputChannel[m_Port][u8Channel].u8PinState = u8PinVal;
 }

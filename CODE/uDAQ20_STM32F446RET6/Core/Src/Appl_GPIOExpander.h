@@ -49,4 +49,6 @@ typedef struct
 void ISR_Callback_PCF8574SYNC(void);
 void Appl_GpioExpander_Exe(void);
 void Appl_GpioExpander_Init(void);
+void Appl_GPConfigureOutput(GP_OUTPUT_PORT m_Port ,
+		uint8_t u8Channel , uint8_t u8Mode , uint16_t u16FreqDiv , uint8_t u8PinVal);
 #endif /* SRC_APPL_GPIOEXPANDER_H_ */

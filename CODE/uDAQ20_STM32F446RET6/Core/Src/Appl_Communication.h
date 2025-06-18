@@ -15,6 +15,8 @@
 #define MAX_DAC_WAVE_ARRAY_POINTS 	(1024)/*1KB*/
 #define TIME_US_VAL_INVALID 		(0U)
 
+#define MAX_TX_FIFO_COUNT (3)
+
 typedef enum
 {
 	SENDERID_IMX 			= 0x01,
@@ -101,6 +103,12 @@ typedef union
 
 typedef struct
 {
+	STM32_COMM_BUFFER m_Buff;
+	uint8_t u8OccupiedFlag;
+}STM32_COMM_TX_FIFO;
+
+typedef struct
+{
 	uint32_t u1ChEnable : 1U;
 	uint32_t : 31U;
 }ADC_CONTROL;
@@ -128,25 +136,25 @@ typedef struct
 
 typedef struct
 {
-	uint16_t u2OutputMode : 2;/*Select output mode , that is fixed voltage or square wave*/
-	uint16_t u16FreqDiv : 8;
-	uint16_t : 6U;
+	uint32_t u2OutputMode : 2U;/*Select output mode , that is fixed voltage or square wave*/
+	uint32_t u16FreqDiv : 8U;
+	uint32_t u1PinVal : 1U;
+	uint32_t : 21U;
 }GP_OUTPUT_CHANNEL_CONFIG;
 
 typedef struct
 {
 	uint32_t u32SignalPeriodUs;
-	GP_OUTPUT_CHANNEL_CONFIG m_ChConfig_PORTA[PCF8574_MAX_CHANNEL];
-	GP_OUTPUT_CHANNEL_CONFIG m_ChConfig_PORTB[PCF8574_MAX_CHANNEL];
 }GP_OUTPUT_OUTPUT_CONFIG;
 
 typedef struct
 {
-	uint16_t u16ValueGPO_PORT_A;
-	uint16_t u16ValueGPO_PORT_B;
+	GP_OUTPUT_CHANNEL_CONFIG m_ChConfig_PORT[GP_OUTPUT_PORT_MAX][PCF8574_MAX_CHANNEL];
 }GP_OUTPUT_DATA;
 
 void Appl_Communiation_Init(void);
 void Appl_Communication_Process(void);
 void Appl_Communiation_Transmit(uint8_t* Buf, uint32_t Len);
+
+void Appl_Communication_TransmitDigitalInputHandler(PCD8574_HANDLE *pHandle , uint8_t u8NumOfPorts);
 #endif /* SRC_APPL_COMMUNICATION_H_ */
