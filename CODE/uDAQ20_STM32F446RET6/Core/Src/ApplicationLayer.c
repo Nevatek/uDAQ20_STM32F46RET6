@@ -4,13 +4,11 @@
  *  Created on: May 24, 2025
  *      Author: aldrin.Rebellow
  */
-
-
 #include "main.h"
 #include "string.h"
 #include "Drv_AD7616.h"
-#include "DRV_PCF8574.h"
 #include "DRV_DAC81416.h"
+#include "DRV_PCF8574.h"
 #include "ApplicationLayer.h"
 #include "Appl_GPIOExpander.h"
 #include "Appl_ADC.h"
@@ -40,7 +38,7 @@ void ApplicationLayer_Exe(void)
 {
 	Appl_HandlerAdc();
 	Appl_HandlerDac_Exe();
-	Appl_GpioExpanderHandler();
+	Appl_GpioExpander_Exe();
 	Appl_Communication_Process();
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************

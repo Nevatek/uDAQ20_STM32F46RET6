@@ -15,6 +15,7 @@ typedef enum
 	DAC_MODE_FIXED_VOLTAGE = 0U,
 	DAC_MODE_WAVEFORM
 }DAC_MODE;
+
 typedef struct
 {
 	uint16_t 	arru16ChBuff[MAX_DATA_POINTS_PER_CHANNEL];/*Buffer to store wave points (1KB MAX)*/
@@ -26,4 +27,6 @@ typedef struct
 void ISR_CallbackDAC81416_Sync(void);
 void Appl_HandlerDac_Init(void);
 void Appl_HandlerDac_Exe(void);
+void Appl_HandlerDac_SetChannelWaveform(uint8_t *pData , uint32_t u32Points , uint8_t u8Channel);
+void Appl_HandlerDac_SetChannelFixedVoltage(uint16_t u16Voltage , uint8_t u8Channel);
 #endif /* SRC_APPL_DAC_H_ */

@@ -21,8 +21,8 @@ static int16_t u16arrBuff[16];
 void Appl_HandlerAdc_Init(void)
 {
 	Drv_AD7616_Init();
-	Drv_AD7616_AdjustConversionPeriod(140U/*Micro seconds*/);
-	Drv_AD7616_Turn_ON(AD7616_CHAB7);
+	Drv_AD7616_AdjustConversionPeriod(150U/*Micro seconds*/);
+//	Drv_AD7616_Turn_ON(AD7616_CHAB7);
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : 	Callback for GPIO interrupt Rising and falling

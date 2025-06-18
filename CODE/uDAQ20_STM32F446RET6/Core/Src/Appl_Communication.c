@@ -6,12 +6,19 @@
  */
 #include "main.h"
 #include "string.h"
+#include "DRV_DAC81416.h"
 #include "Drv_AD7616.h"
+#include "DRV_PCF8574.h"
+#include "Appl_GPIOExpander.h"
+#include "Appl_ADC.h"
+#include "Appl_DAC.h"
+#include "ApplicationLayer.h"
 #include "Appl_Communication.h"
 
 STM32_COMM_BUFFER g_CommRxBuffer;
 static STM32_COMM_CONTROL g_CommControl;
 static void Appl_Communication_AnalogInputHandler(STM32_COMM_BUFFER *pCommBuffer);
+static void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer);
 
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
@@ -46,8 +53,6 @@ void Appl_Communication_Process(void)
 		g_CommControl.u1RxAvailableFlag = FALSE;
 		g_CommControl.u1RxDataSize = 0U;
 
-		Appl_Communiation_Transmit("Aldrin" , 6);
-
 		if(COMM_START_OF_FRAME == g_CommRxBuffer.m_BIT.u8SOF &&
 				COMM_END_OF_FRAME == g_CommRxBuffer.u8ArrBuff[u16SizeofFrame - 1U])/*Validate Start of frame as well as END of frame*/
 		{
@@ -67,7 +72,7 @@ void Appl_Communication_Process(void)
 					}break;
 					case (DATA_TID_DAC_A0):/*DAC Analog OUTPUT FROM IMX*/
 					{
-
+						Appl_Communication_AnalogOutputHandler(&g_CommRxBuffer);
 					}break;
 					case (DATA_TID_PCF_DI):/*Data input to IMX*/
 					{
@@ -99,9 +104,11 @@ void Appl_Communication_Process(void)
 	}
 }
 
-void Appl_Communication_AnalogInputHandler(STM32_COMM_BUFFER *pCommBuffer)
+void Appl_Communication_AnalogInputHandler(STM32_COMM_BUFFER *pCommBuffer)/*ADC*/
 {
 	uint8_t u8ChannelEnd = 0U;
+	ADC_CONFIG m_Config;
+	ADC_CONTROL m_Ctrl;
 	if(COMM_CHANNEL_ALL == pCommBuffer->m_BIT.u6ChannelID)/*All channels*/
 	{
 		u8ChannelEnd = AD7616_CHAB7;
@@ -125,8 +132,9 @@ void Appl_Communication_AnalogInputHandler(STM32_COMM_BUFFER *pCommBuffer)
 
 	if(COMM_CONTROL == pCommBuffer->m_BIT.u2ControlBit)
 	{
+		memcpy(&m_Ctrl , &pCommBuffer->m_BIT.u8DataArr[0U] , sizeof(m_Ctrl));
 		/*Turn ON / OFF ADC*/
-		if(TRUE == pCommBuffer->m_BIT.u8DataArr[0U])
+		if(TRUE == m_Ctrl.u1ChEnable)
 		{
 			/*Turn ON ADC*/
 			Drv_AD7616_Turn_ON(u8ChannelEnd);
@@ -139,13 +147,14 @@ void Appl_Communication_AnalogInputHandler(STM32_COMM_BUFFER *pCommBuffer)
 	}
 	else if(COMM_CONFIG == pCommBuffer->m_BIT.u2ControlBit)
 	{
-		/*First 4 bytes condains period value in us*/
-		uint32_t u32TimerPeriod_Us = pCommBuffer->m_BIT.u8DataArr[3U] << 24U |
-				pCommBuffer->m_BIT.u8DataArr[2U] << 16U  |
-				pCommBuffer->m_BIT.u8DataArr[1U] << 8U 	 |
-				pCommBuffer->m_BIT.u8DataArr[0U];
+		memcpy(&m_Config , &pCommBuffer->m_BIT.u8DataArr[0U] , sizeof(m_Config));
 
-		Drv_AD7616_AdjustConversionPeriod(u32TimerPeriod_Us/*Us*/);
+		/*First 4 bytes condains period value in us*/
+		if(TIME_US_VAL_INVALID != m_Config.u32AdcSampleIntervel_us)/*Mofidy and reconfigure timer only if timer value is valid*/
+		{
+			Drv_AD7616_AdjustConversionPeriod(m_Config.u32AdcSampleIntervel_us/*Us*/);
+		}
+
 	}
 	else if(COMM_DATA == pCommBuffer->m_BIT.u2ControlBit)
 	{
@@ -157,6 +166,114 @@ void Appl_Communication_AnalogInputHandler(STM32_COMM_BUFFER *pCommBuffer)
 	}
 }
 
+void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DAC*/
+{
+	uint8_t u8ChannelStart = 0U;
+	uint8_t u8ChannelEnd = 0U;
+	DAC_CONFIG m_Config;
+	DAC_CONTROL m_Ctrl;
+	if(COMM_CHANNEL_ALL == pCommBuffer->m_BIT.u6ChannelID)/*All channels*/
+	{
+		u8ChannelStart = 0U;
+		u8ChannelEnd = DAC_CHANNEL_15;
+	}
+	else/*Single channel*/
+	{
+		if(COMM_SINGLE_CHANNEL == pCommBuffer->m_BIT.u2ChannelType)
+		{
+			u8ChannelStart = u8ChannelEnd = (pCommBuffer->m_BIT.u6ChannelID - 1U);/*Only single channel*/
+		}
+		else if(COMM_SEQ_MULTI_CHANNEL == pCommBuffer->m_BIT.u2ChannelType)
+		{
+			u8ChannelStart = 0U;
+			u8ChannelEnd = (pCommBuffer->m_BIT.u6ChannelID - 1U);/*Sequential channel from 0 to N*/
+		}
+		else
+		{
+			/*Invalid channel > Ignore frame*/
+		}
+	}
 
+
+	if(COMM_CONTROL == pCommBuffer->m_BIT.u2ControlBit)
+	{
+		memcpy(&m_Ctrl , &pCommBuffer->m_BIT.u8DataArr[0U] , sizeof(m_Ctrl));
+		/*Turn ON / OFF DAC*/
+		if(TRUE == m_Ctrl.u1ChEnable)
+		{
+			/*Turn ON DAC channels*/
+			Appl_DAC816416_EnableChannels(u8ChannelStart , u8ChannelEnd);
+		}
+		else
+		{
+			/*Turn OFF DAC channels*/
+			Appl_DAC816416_DisableChannels(u8ChannelStart , u8ChannelEnd);
+		}
+	}
+	else if(COMM_CONFIG == pCommBuffer->m_BIT.u2ControlBit)
+	{
+		memcpy(&m_Config , &pCommBuffer->m_BIT.u8DataArr[0U] , sizeof(m_Config));
+
+		/*First 4 bytes condains period value in us*/
+		if(TIME_US_VAL_INVALID != m_Config.u32DAC_SyncTimerIntervel_us)/*Mofidy and reconfigure timer only if timer value is valid*/
+		{
+			Appl_SetTimerPeriod(GetInstance_DAC816416SYNC_TIM2() , m_Config.u32DAC_SyncTimerIntervel_us/*Micro seconds*/);
+		}
+
+		if(COMM_CHANNEL_ALL < u8ChannelEnd && COMM_CHANNEL_MAX > u8ChannelEnd)/*Only single channel can be configured at a time*/
+		{
+			if(DAC_MODE_FIXED_VOLTAGE == m_Config.u2DacMode)
+			{
+				Appl_HandlerDac_SetChannelFixedVoltage(m_Config.u8WaveArray[0U] , u8ChannelEnd);/*Set DAC voltage to channel*/
+			}
+			else if(DAC_MODE_WAVEFORM == m_Config.u2DacMode)
+			{
+				/*Copy waveform data to respective channel array*/
+				Appl_HandlerDac_SetChannelWaveform(&m_Config.u8WaveArray[0U] , m_Config.u32Wave_No_Of_Points , u8ChannelEnd);
+			}
+		}
+	}
+	else if(COMM_DATA == pCommBuffer->m_BIT.u2ControlBit)
+	{
+		/*Ignore frame > NOP*/
+	}
+	else
+	{
+		/*Ignore frame > NOP*/
+	}
+}
+void Appl_Communication_DigitalOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DAC*/
+{
+	GP_OUTPUT_OUTPUT_CONFIG m_Config;
+	GP_OUTPUT_DATA m_Data;
+	if(COMM_CHANNEL_ALL == pCommBuffer->m_BIT.u6ChannelID)/*All channels*/
+	{
+		if(COMM_CONTROL == pCommBuffer->m_BIT.u2ControlBit)
+		{
+			/*Ignore frame > NOP*/
+		}
+		else if(COMM_CONFIG == pCommBuffer->m_BIT.u2ControlBit)
+		{
+			memcpy(&m_Config , &pCommBuffer->m_BIT.u8DataArr[0U] , sizeof(m_Config));
+			if(TIME_US_VAL_INVALID != m_Config.u32SignalPeriodUs)/*Mofidy and reconfigure timer only if timer value is valid*/
+			{
+				Appl_SetTimerPeriod(GetInstance_DAC816416SYNC_TIM2() , m_Config.u32SignalPeriodUs/*Micro seconds*/);
+			}
+
+		}
+		else if(COMM_DATA == pCommBuffer->m_BIT.u2ControlBit)
+		{
+			memcpy(&m_Data , &pCommBuffer->m_BIT.u8DataArr[0U] , sizeof(m_Data));
+		}
+		else
+		{
+			/*Ignore frame > NOP*/
+		}
+	}
+	else/*Single channel*/
+	{
+		/*Ignore frame > NOP*/
+	}
+}
 
 

@@ -11,8 +11,9 @@
 #define COMM_START_OF_FRAME (0x7E)
 #define COMM_END_OF_FRAME 	(0x7F)
 
-#define MAX_COMM_DATA_LENGTH (1024)/*1KB*/
-
+#define MAX_COMM_DATA_LENGTH 		(4096)/*4KB*/
+#define MAX_DAC_WAVE_ARRAY_POINTS 	(1024)/*1KB*/
+#define TIME_US_VAL_INVALID 		(0U)
 
 typedef enum
 {
@@ -96,6 +97,54 @@ typedef union
 	STM32_COMM_FRAME m_BIT;
 	uint8_t u8ArrBuff[sizeof(STM32_COMM_FRAME)];
 }STM32_COMM_BUFFER;
+
+
+typedef struct
+{
+	uint32_t u1ChEnable : 1U;
+	uint32_t : 31U;
+}ADC_CONTROL;
+
+typedef struct
+{
+	uint32_t u32AdcDataTrnsmitIntervel_us;
+	uint32_t u32AdcSampleIntervel_us;
+}ADC_CONFIG;
+
+typedef struct
+{
+	uint32_t u1ChEnable : 1U;
+	uint32_t : 31U;
+}DAC_CONTROL;
+
+typedef struct
+{
+	uint32_t u32DAC_SyncTimerIntervel_us;
+	uint32_t u32Wave_No_Of_Points : 10U;
+	uint32_t u2DacMode : 2U;/*This will represent DAC output type , Waveform or fixed voltage*/
+	uint32_t : 20U;
+	uint8_t u8WaveArray[MAX_DAC_WAVE_ARRAY_POINTS];
+}DAC_CONFIG;
+
+typedef struct
+{
+	uint16_t u2OutputMode : 2;/*Select output mode , that is fixed voltage or square wave*/
+	uint16_t u16FreqDiv : 8;
+	uint16_t : 6U;
+}GP_OUTPUT_CHANNEL_CONFIG;
+
+typedef struct
+{
+	uint32_t u32SignalPeriodUs;
+	GP_OUTPUT_CHANNEL_CONFIG m_ChConfig_PORTA[PCF8574_MAX_CHANNEL];
+	GP_OUTPUT_CHANNEL_CONFIG m_ChConfig_PORTB[PCF8574_MAX_CHANNEL];
+}GP_OUTPUT_OUTPUT_CONFIG;
+
+typedef struct
+{
+	uint16_t u16ValueGPO_PORT_A;
+	uint16_t u16ValueGPO_PORT_B;
+}GP_OUTPUT_DATA;
 
 void Appl_Communiation_Init(void);
 void Appl_Communication_Process(void);

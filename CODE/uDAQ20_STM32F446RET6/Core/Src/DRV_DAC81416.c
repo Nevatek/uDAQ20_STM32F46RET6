@@ -38,7 +38,7 @@ DAC81416_SERIAL_ACCESS g_rxData;
 DAC81416_REG_DEVICEID g_mDevId;
 DAC81416_REG_SPICONFIG g_mSpiReg;
 DAC81416_REG_DIFFCONFIG g_mDiffConfigReg;
-DAC81416_REG_DACPWDWN g_mDacPWDWNReg;
+DAC81416_REG_DACPWDWN g_mDacPDWNReg;
 
 uint8_t g_u8WriteStFlag = FALSE;
 uint8_t g_u8ReadStFlag  = FALSE;
@@ -71,7 +71,7 @@ void DAC81416_Init(void)
 	DAC81416_WriteRegister_Blocking(DAC_REG_NOP, 0x0000);/*Wrinting dummy writing operation to NOP register*/
 
 
-	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPWDWNReg.u16SHORT);/*Reading device ID*/
+	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading device ID*/
 
 	DAC81416_ReadRegister_Blocking(DAC_REG_SPICONFIG, &g_mSpiReg.u16SHORT);/*Setting SPI config register*/
 	g_mSpiReg.BIT.DEV_PWDWN = 0U;
@@ -81,13 +81,11 @@ void DAC81416_Init(void)
 	g_mDiffConfigReg.BIT.REF_PWDWN = 0U;/*VREF Internal enabled*/
 	DAC81416_WriteRegister_Blocking(DAC_REG_GENCONFIG, g_mDiffConfigReg.u16SHORT);/*Setting SPI config register*/
 
-	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPWDWNReg.u16SHORT);/*Reading device ID*/
-
-
-	g_mDacPWDWNReg.u16SHORT = 0x0000;
-	DAC81416_WriteRegister_Blocking(DAC_REG_DACPWDWN, g_mDacPWDWNReg.u16SHORT);/*Setting SPI config register*/
-	g_mDacPWDWNReg.u16SHORT = 0xAA;
-	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPWDWNReg.u16SHORT);/*Reading device ID*/
+//	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading device ID*/
+//	g_mDacPWDWNReg.u16SHORT = 0x0000;
+//	DAC81416_WriteRegister_Blocking(DAC_REG_DACPWDWN, g_mDacPDWNReg.u16SHORT);/*Setting SPI config register*/
+//	g_mDacPWDWNReg.u16SHORT = 0xAA;
+//	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading device ID*/
 
 	DAC81416_ReadRegister_Blocking(DAC_REG_DEVICEID , &g_mDevId.u16SHORT);/*Reading device ID*/
 	Appl_DAC816416WriteDacRegister_EnableStreamingMode();
@@ -141,7 +139,7 @@ uint8_t DAC81416_WriteDacStreaming(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pU16TxD
 	uint8_t u8Ret = FALSE;
 	uint8_t  u8DatLen = (0U);
 	memset(g_u8DacStreamBuff , 0x00 , sizeof(g_u8DacStreamBuff));
-	g_u8DacStreamBuff[0U] = DAC_REG_DAC0;
+	g_u8DacStreamBuff[0U] = DAC_REG_DAC0 + m_Ch;
 	u8DatLen = (u16Len < (1U - sizeof(g_u8DacStreamBuff))?u16Len : (1U - sizeof(g_u8DacStreamBuff)));
 	memcpy((uint8_t*)&g_u8DacStreamBuff[1U] , (uint8_t*)pU16TxData , u8DatLen);
 	g_mSpiState = SPI_STATE_WRITE_DATA;
@@ -441,28 +439,81 @@ inline void Callback_DAC81416RxComplete(void)
 }
 
 /**************************Middleware - DAC816416**************************************************/
+/*********************.Appl_HandlerDac_Init().*****************************
+ .Purpose        : 	Initlization Handler for DAC output.
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
 void Appl_DAC816416WriteDacRegister(DAC81416_DAC_CHANNEL m_Ch , uint16_t u16Data)
 {
 	DAC81416_REG_MAP m_reg = DAC_REG_DAC0 + m_Ch;
 	DAC81416_WriteRegister(m_reg , u16Data);
 }
+/*********************.Appl_HandlerDac_Init().*****************************
+ .Purpose        : 	Initlization Handler for DAC output.
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
 void Appl_DAC816416WriteDacRegister_EnableStreamingMode(void)
 {
 	DAC81416_ReadRegister_Blocking(DAC_REG_SPICONFIG, &g_mSpiReg.u16SHORT);/*Setting SPI config register*/
 	g_mSpiReg.BIT.STR_EN = TRUE;
 	DAC81416_WriteRegister_Blocking(DAC_REG_SPICONFIG, g_mSpiReg.u16SHORT);/*Setting SPI config register*/
 }
+/*********************.Appl_HandlerDac_Init().*****************************
+ .Purpose        : 	Initlization Handler for DAC output.
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
 void Appl_DAC816416WriteDacRegister_DisableStreamingMode(void)
 {
 	DAC81416_ReadRegister_Blocking(DAC_REG_SPICONFIG, &g_mSpiReg.u16SHORT);/*Setting SPI config register*/
 	g_mSpiReg.BIT.STR_EN = FALSE;
 	DAC81416_WriteRegister_Blocking(DAC_REG_SPICONFIG, g_mSpiReg.u16SHORT);/*Setting SPI config register*/
 }
-
+/*********************.Appl_HandlerDac_Init().*****************************
+ .Purpose        : 	Initlization Handler for DAC output.
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
 void Appl_DAC816416WriteDacRegister_StreamingMode(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pu16Data , uint8_t u8ChannelCnt)
 {
 	uint8_t u8DataLen = 0U;
 	ConvertArrayToBigEndian(pu16Data , u8ChannelCnt);
 	u8DataLen = (u8ChannelCnt * 2U) + 1U;
 	DAC81416_WriteDacStreaming(m_Ch , pu16Data , u8DataLen);
+}
+/*********************.Appl_HandlerDac_Init().*****************************
+ .Purpose        : 	Initlization Handler for DAC output.
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void Appl_DAC816416_EnableChannels(uint8_t u8StartCh , uint8_t u8EndCh)
+{
+	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading Pwr dwn Reg*/
+	for(uint8_t u8nIdx = (u8StartCh) ; u8nIdx <= (u8EndCh) ; ++u8nIdx)
+	{
+		g_mDacPDWNReg.u16SHORT &= ~(DAC816416_PWR_ACTIVE << u8nIdx);
+	}
+	DAC81416_WriteRegister_Blocking(DAC_REG_DACPWDWN, g_mDacPDWNReg.u16SHORT);/*Setting SPI config register*/
+}
+/*********************.Appl_HandlerDac_Init().*****************************
+ .Purpose        : 	Initlization Handler for DAC output.
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void Appl_DAC816416_DisableChannels(uint8_t u8StartCh , uint8_t u8EndCh)
+{
+	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading Pwr dwn Reg*/
+	for(uint8_t u8nIdx = (u8StartCh) ; u8nIdx <= (u8EndCh) ; ++u8nIdx)
+	{
+		g_mDacPDWNReg.u16SHORT |= (DAC816416_PWR_DWN << u8nIdx);
+	}
+	DAC81416_WriteRegister_Blocking(DAC_REG_DACPWDWN, g_mDacPDWNReg.u16SHORT);/*Setting SPI config register*/
 }

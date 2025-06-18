@@ -23,7 +23,6 @@
 /* USER CODE BEGIN Includes */
 #include "Drv_AD7616.h"
 #include "Drv_SoftDelay.h"
-#include "DRV_PCF8574.h"
 #include "DRV_DAC81416.h"
 #include "Appl_ADC.h"
 #include "Appl_DAC.h"
@@ -163,12 +162,21 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		/*  ISR for IO End */
 	}
 
-	if(GPIO_Pin == GPIO_PIN_9)
+	if(GPIO_Pin == GPIO_PIN_9)/*IRQ pin of PCF8574 module A*/
 	{
 		/* ISR for IO Start */
-		Callback_IRQ_INT_Pin();
+		Callback_PCF8574_IRQ_PORTA();
 		/*  ISR for IO End */
 	}
+
+
+	if(GPIO_Pin == GPIO_PIN_7)/*IRQ pin of PCF8574 module B*/
+	{
+		/* ISR for IO Start */
+		Callback_PCF8574_IRQ_PORTB();
+		/*  ISR for IO End */
+	}
+
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
@@ -231,7 +239,7 @@ void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
 	if(hi2c == GetInstance_I2C1())
 	{
 		/*PCF8574 IRQ*/
-		Callback_PCF8574TxComplete();
+		Callback_I2C1_TxComplete();
 	}
 }
 /*********************.HAL_I2C_MasterTxCpltCallback().************************
@@ -245,7 +253,7 @@ void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
 	if(hi2c == GetInstance_I2C1())
 	{
 		/*PCF8574 IRQ*/
-		Callback_PCF8574RxComplete();
+		Callback_I2C1_RxComplete();
 	}
 }
 /* USER CODE END 0 */
@@ -683,11 +691,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PCF8574_IRQ_Pin */
-  GPIO_InitStruct.Pin = PCF8574_IRQ_Pin;
+  /*Configure GPIO pins : PCF8574_IRQ_PORTB_Pin PCF8574_IRQ_PORTA_Pin */
+  GPIO_InitStruct.Pin = PCF8574_IRQ_PORTB_Pin|PCF8574_IRQ_PORTA_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(PCF8574_IRQ_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : AD7616_BUSY_IQR_Pin */
   GPIO_InitStruct.Pin = AD7616_BUSY_IQR_Pin;

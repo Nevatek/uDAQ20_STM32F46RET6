@@ -11,524 +11,175 @@
 
  ******************************************************************************/
 
-/**************************** includes **************************************/
 #include "main.h"
+#include "string.h"
+#include "Appl_Timer.h"
 #include "DRV_PCF8574.h"
 
-/**************************** defines ***************************************/
-#define I2C_INTERRUPT_MODE
-
-#define PCF8574_I2C_DELAY		1000U
-#define PCF8574_I2C_DATA_SIZE	1U		/* 8bit*/
-
-#define ALL_PIN_INPUT	255U
-#define ALL_PIN_OUTPUT	0U
-
-#define TOGGLE_BIT(REG, BIT)   ((REG) ^= (BIT))
-PCF8574_HandleType *p_HpcfHandle = NULL;
-/************************* typedefs ****************************************/
-
-
-/************************* function prototypes *****************************/
-/* Controller specific functions */
-ReturnType i2c_init(uint8_t address);
-ReturnType i2c_read(uint8_t address, uint8_t* pData, I2C_TRANSFER_TYPE mode);
-ReturnType i2c_write(uint8_t address, uint8_t* pData, I2C_TRANSFER_TYPE mode);
-
-/* interrupt Callback functions of STM */
-void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c);
-void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c);
-
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
-/************************* function definitions ****************************/
-/**************************.PCF8574_Init().**********************************
- .Purpose        : Initialization of PCF8574 handler
+static uint8_t g_u8IrqFlagEnabled = FALSE;
+static uint8_t g_u8I2CTxCompleteFlag = FALSE;
+static uint8_t g_u8I2CRxCompleteFlag = FALSE;
+static uint8_t g_u8I2CModuleBusyFlag = FALSE;
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
  .Returns        :  RETURN_ERROR
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-ReturnType PCF8574_Init(PCF8574_HandleType *hpcf,
-		uint8_t device_address)
+inline void Callback_I2C1_TxComplete(void)
 {
-	ReturnType ret = RETURN_ERROR;
-	p_HpcfHandle = hpcf;
-	/* Initialize the i2c device */
-	if(RETURN_SUCCESS == i2c_init(device_address))
-	{
-		/* Set the device address */
-		hpcf->dev_address 	= device_address;
-
-		ret = RETURN_SUCCESS;
-	}
-	return ret;
+	g_u8I2CTxCompleteFlag = TRUE;
+	g_u8I2CModuleBusyFlag = FALSE;
 }
-
-/***********************.PCF8574_Read().*************************************
- .Purpose        : Update the status of IO pins
- .Returns        : RETURN_ERROR
-				   RETURN_SUCCESS
- .Note           : Check PCF8574_PinState_st for pin states
- 	 	 	 	   Check PCF8574_FlagStatus_st for operation status
- ****************************************************************************/
-ReturnType PCF8574_Read(PCF8574_HandleType *hpcf,
-		PCF8574_PinType pin,
-		I2C_TRANSFER_TYPE mode)
-{
-	ReturnType ret = RETURN_ERROR;
-
-	/* Check if handler initialized */
-	if(hpcf != NULL)
-	{
-		/* perform i2c read based on the type */
-		if(RETURN_SUCCESS == i2c_read(hpcf->dev_address,&(hpcf->pinState.all), mode))
-		{
-			/* Set current operation as read */
-			hpcf->currOperation = IO_READ;
-
-			ret = RETURN_SUCCESS;
-		}
-	}
-	/* Return status */
-	return ret;
-}
-
-/***********************.PCF8574_Write().*************************************
- .Purpose        : Change the state of the IO pin
- .Returns        :  RETURN_ERROR
-					RETURN_SUCCESS
- .Note           : Check PCF8574_FlagStatus_st for operation status
- ****************************************************************************/
-ReturnType PCF8574_Write(PCF8574_HandleType *hpcf,
-		PCF8574_PinType pin,
-		uint8_t* data,
-		I2C_TRANSFER_TYPE mode)
-{
-
-	ReturnType ret 			= RETURN_ERROR;
-	static uint8_t tempData = 0;
-
-	tempData = hpcf->pinState.all;
-
-	/* reset the operation status */
-	hpcf->flags.WriteStatus_Flag = FALSE;
-
-
-	if((hpcf != NULL) && (data != NULL))
-	{
-		/* whole 8 pin write */
-		if(pin == ALL_PINS)
-		{
-			tempData = *data;
-		}
-		/* individual pin write */
-		else
-		{
-			/* Set or clear only the specific bit */
-			if (*data)
-			{
-				SET_BIT(tempData, (1 << pin));
-			}
-			else
-			{
-				CLEAR_BIT(tempData, (1 << pin));
-			}
-		}
-
-		/* Mask the input pins to avoid changing them */
-		tempData = tempData | hpcf->pinMode.all;
-
-		/* write the data through i2c */
-		if(RETURN_SUCCESS == i2c_write(hpcf->dev_address, &tempData, mode))
-		{
-			/* Set current operation as write */
-			hpcf->currOperation = IO_WRITE;
-			/* update pin stte buffer */
-			hpcf->pinState.all = tempData;
-			ret = RETURN_SUCCESS;
-		}
-	}
-	return ret;
-}
-
-/**********************.PCF8574_Toggle().*************************************
- .Purpose        : Toggle pins of the IO expander
- .Returns        :  RETURN_ERROR
-					RETURN_SUCCESS
- .Note           : Check PCF8574_FlagStatus_st for operation status
- ****************************************************************************/
-ReturnType PCF8574_Toggle(PCF8574_HandleType *hpcf,
-		PCF8574_PinType pin,
-		I2C_TRANSFER_TYPE mode)
-{
-	ReturnType ret 			= RETURN_ERROR;
-	static uint8_t tempData = 0;
-	tempData = hpcf->pinState.all;
-
-	/* reset the operation status */
-	hpcf->flags.ToggleStatus_Flag = FALSE;
-
-	if(hpcf != NULL)
-	{
-		/* whole 8 pin toggle */
-		if(pin == ALL_PINS)
-		{
-			tempData = ~(hpcf->pinState.all);
-		}
-		/* individual pin toggle */
-		else
-		{
-			TOGGLE_BIT(tempData,(1 << pin));
-		}
-
-		/* Mask the input pins to avoid changing them */
-		tempData = tempData | hpcf->pinMode.all;
-
-		/* write the data through i2c */
-		if(RETURN_SUCCESS == i2c_write(hpcf->dev_address, &tempData, mode))
-		{
-			/* update pin state buffer */
-			hpcf->pinState.all = tempData;
-
-			/* Set current operation as toggle */
-			hpcf->currOperation = IO_TOGGLE;
-
-			ret = RETURN_SUCCESS;
-		}
-	}
-	return ret;
-}
-/*********************.PCF8574_GetPinState().********************************
- .Purpose        : Get the 8 bit IO state
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
  .Returns        :  RETURN_ERROR
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-PCF8574_Operation PCF8574_GetOpStatus(PCF8574_HandleType *hpcf)
+inline void Callback_I2C1_RxComplete(void)
 {
-	return (hpcf->currOperation);
+	g_u8I2CRxCompleteFlag = TRUE;
+	g_u8I2CModuleBusyFlag = FALSE;
 }
-/*********************.PCF8574_GetPinState().********************************
- .Purpose        : Get the 8 bit IO state
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
  .Returns        :  RETURN_ERROR
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-ReturnType PCF8574_GetPinState(PCF8574_HandleType *hpcf, uint8_t* state)
+inline void Callback_PCF8574_IRQ_PORTA(void)
 {
-	ReturnType ret = RETURN_ERROR;
-
-	if(hpcf != NULL)
-	{
-		*state = hpcf->pinState.all;
-
-		ret = RETURN_SUCCESS;
-	}
-	return ret;
+	g_u8IrqFlagEnabled = TRUE;/*If any input channel signal changed , IRQ triggered and all channel must be readed from all two ports*/
 }
-
-/*******************.PCF8574_GetFlagStatus().********************************
- .Purpose        : Get the status of a flag
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
  .Returns        :  RETURN_ERROR
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-ReturnType PCF8574_GetFlagStatus(PCF8574_HandleType *hpcf,
-								PCF8574_Operation op,
-								uint8_t* status)
+inline void Callback_PCF8574_IRQ_PORTB(void)
 {
-	ReturnType ret = RETURN_ERROR;
-
-	if(hpcf != NULL)
-	{
-		ret = RETURN_SUCCESS;
-		/* Get the flag status from the structure based on operation */
-		switch (op)
-		{
-		case IO_READ: 		*status = hpcf->flags.ReadStatus_Flag; 		break;
-		case IO_WRITE: 		*status = hpcf->flags.WriteStatus_Flag; 	break;
-		case IO_TOGGLE: 	*status = hpcf->flags.ToggleStatus_Flag; 	break;
-		case IO_INTERRUPT: 	*status = hpcf->flags.InterruptStatus_Flag; break;
-		default: 			ret = RETURN_ERROR; 				   		break;
-		}
-	}
-	return ret;
+	g_u8IrqFlagEnabled = TRUE;/*If any input channel signal changed , IRQ triggered and all channel must be readed from all two ports*/
 }
-
-/*********************.PCF8574_ClearFlagStatus().****************************
- .Purpose        : Clear the Status of a flag
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
  .Returns        :  RETURN_ERROR
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-ReturnType PCF8574_ClearFlagStatus(PCF8574_HandleType *hpcf,
-								PCF8574_Operation op)
+uint8_t Get_StatusPCF8574_I2C_TxCompleted(void)
 {
-	ReturnType ret = RETURN_ERROR;
-
-	if(hpcf != NULL)
-	{
-		ret = RETURN_SUCCESS;
-		/* Get the flag status from the structure based on operation */
-		switch (op)
-		{
-		case IO_READ: 	hpcf->flags.ReadStatus_Flag 		= FALSE; break;
-		case IO_WRITE: 	hpcf->flags.WriteStatus_Flag 		= FALSE; break;
-		case IO_TOGGLE: hpcf->flags.ToggleStatus_Flag		= FALSE; break;
-		case IO_INTERRUPT: 	hpcf->flags.InterruptStatus_Flag= FALSE; break;
-		default: 			ret = RETURN_ERROR; 				   	 break;
-		}
-	}
-	return ret;
+	uint8_t u8Status = g_u8I2CTxCompleteFlag;
+	g_u8IrqFlagEnabled = FALSE;
+	return (u8Status);
 }
-
-/******************************.i2c_read().**********************************
- .Purpose        : Controller Specific code for i2c receive
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
  .Returns        :  RETURN_ERROR
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-ReturnType i2c_init(uint8_t address)
+uint8_t Get_StatusPCF8574_I2C_RxCompleted(void)
 {
-	ReturnType ret = RETURN_ERROR;
-
-	/* Get the i2c handler */
-	I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
-
-	/* Check if device is connected with correct address */
-	if(HAL_OK == HAL_I2C_IsDeviceReady(pI2c,
-			address << 1,
-			10, 100))
-	{
-		ret = RETURN_SUCCESS;
-	}
-
-	return ret;
+	uint8_t u8Status = g_u8I2CRxCompleteFlag;
+	g_u8IrqFlagEnabled = FALSE;
+	return (u8Status);
 }
-/******************************.i2c_read().**********************************
- .Purpose        : Controller Specific code for i2c receive
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
  .Returns        :  RETURN_ERROR
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-ReturnType i2c_read(uint8_t address, uint8_t* pData, I2C_TRANSFER_TYPE mode)
+uint8_t Get_StatusPCF8574_I2CBusyFlag(void)
 {
-	ReturnType ret = RETURN_ERROR;
-
-	/* Get the i2c handler */
-	I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
-	switch(mode)
-	{
-	// Normal mode
-	case I2C_NORMAL:
-	{
-		if(HAL_OK == HAL_I2C_Master_Receive(pI2c,
-				(address << 1),
-				pData,
-				PCF8574_I2C_DATA_SIZE,
-				PCF8574_I2C_DELAY))
-		{
-			ret = RETURN_SUCCESS;
-		}
-		break;
-	}
-	// Interrupt mode
-	case I2C_INTERUPT:
-	{
-		/* Check i2c state before operation */
-		if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
-		{
-			if(HAL_OK == HAL_I2C_Master_Receive_IT(pI2c,
-					(address << 1),
-					pData,
-					PCF8574_I2C_DATA_SIZE))
-			{
-				ret = RETURN_SUCCESS;
-			}
-		}
-		break;
-	}
-	// DMA mode
-	case I2C_DMA:
-	{
-		/* Check i2c state before operation */
-		if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
-		{
-			/* abort any interrupt request */
-			if(HAL_OK == HAL_I2C_Master_Receive_DMA(pI2c,
-					(address << 1),
-					pData,
-					PCF8574_I2C_DATA_SIZE))
-			{
-				ret = RETURN_SUCCESS;
-			}
-		}
-		break;
-	}
-	default:
-		break;
-	}
-
-	return ret;
+	return g_u8I2CModuleBusyFlag;
 }
-
-/*****************************.i2c_write().**********************************
- .Purpose        : Controller Specific code for i2c transmit
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
  .Returns        :  RETURN_ERROR
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-ReturnType i2c_write(uint8_t address, uint8_t* pData, I2C_TRANSFER_TYPE mode)
+uint8_t Get_StatusPCF8574InpPinSignalChanged(void)
 {
-	ReturnType ret = RETURN_ERROR;
-	/* Controller specific Code */
-	I2C_HandleTypeDef *pI2c = GetInstance_I2C1();
-	switch(mode)
-	{
-	// Normal mode
-	case I2C_NORMAL:
-	{
-		if(HAL_OK == (HAL_I2C_Master_Transmit(pI2c,
-				(address << 1),
-				pData,
-				PCF8574_I2C_DATA_SIZE,
-				PCF8574_I2C_DELAY)))
-		{
-			ret = RETURN_SUCCESS;
-		}
-		break;
-	}
-	// Interrupt mode
-	case I2C_INTERUPT:
-	{
-		/* Check i2c state before operation */
-		if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
-		{
-			if(HAL_OK == HAL_I2C_Master_Transmit_IT(pI2c,
-					(address << 1),
-					pData,
-					PCF8574_I2C_DATA_SIZE))
-			{
-				ret = RETURN_SUCCESS;
-			}
-		}
-		break;
-	}
-	// DMA mode
-	case I2C_DMA:
-	{
-		/* Check i2c state before operation */
-		if(HAL_I2C_STATE_READY == HAL_I2C_GetState(pI2c))
-		{
-			if(HAL_OK == HAL_I2C_Master_Transmit_DMA(pI2c,
-					(address << 1),
-					pData,
-					PCF8574_I2C_DATA_SIZE))
-			{
-				ret = RETURN_SUCCESS;
-			}
-		}
-		break;
-	}
-	default:
-		break;
-	}
-
-	return ret;
+	uint8_t u8Status = g_u8IrqFlagEnabled;
+	g_u8IrqFlagEnabled = FALSE;
+	return (u8Status);
 }
-/*********************.PCF8574_SetPinMode().********************************
- .Purpose        : Set the pin mode 0: output 1: input
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
  .Returns        :  RETURN_ERROR
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-ReturnType PCF8574_SetPinMode(PCF8574_HandleType *hpcf,
-		PCF8574_PinType pin,
-		PCF8547_PIN_MODE mode)
+void Drv_PCF8574_Init(PCD8574_HANDLE *pHandle ,
+		I2C_HandleTypeDef *pI2cHandle , uint8_t u8DevAddrs , PCF8574_GPIO_MODE m_Mode)
 {
-	ReturnType ret 	 = RETURN_ERROR;
-	uint8_t tempData = 0;
-
-	tempData = hpcf->pinMode.all;
-
-	if(hpcf != NULL)
+	pHandle->pI2cHandle = pI2cHandle;
+	pHandle->u8DevAddress = u8DevAddrs;
+	pHandle->mMode = m_Mode;
+	if(PCF_GP_MODE_INPUT == pHandle->mMode)
 	{
-		/* whole 8 pin toggle */
-		if(pin == ALL_PINS)
-		{
-			/* Set or clear only the specific bit */
-			if (GPX_PIN_MODE_INPUT == mode)
-			{
-				tempData = ALL_PIN_INPUT;
-			}
-			else
-			{
-				tempData = ALL_PIN_OUTPUT;
-			}
-		}
-		/* individual pin toggle */
-		else
-		{
-			/* Set or clear only the specific bit */
-			if (GPX_PIN_MODE_INPUT == mode)
-			{
-				SET_BIT(tempData, (1 << pin));
-			}
-			else
-			{
-				CLEAR_BIT(tempData, (1 << pin));
-			}
-		}
-
-		hpcf->pinMode.all = tempData;
-	}
-
-
-	return ret;
-}
-/*********************.HAL_I2C_MasterTxCpltCallback().************************
- .Purpose        : Callback for transmission complete for IT & DMA
- .Returns        :  RETURN_ERROR
-					RETURN_SUCCESS
- .Note           :
- ****************************************************************************/
-inline void Callback_PCF8574TxComplete(void)
-{
-	p_HpcfHandle->currOperation = IO_IDLE;
-	if(p_HpcfHandle->currOperation == IO_TOGGLE)
-	{
-		p_HpcfHandle->flags.ToggleStatus_Flag = TRUE;
+		pHandle->u8PORTVAL = PCF_GP_MODE_INPUT;
 	}
 	else
 	{
-		p_HpcfHandle->flags.WriteStatus_Flag = TRUE;
-		/* ISR for Write Start */
-		/* ISR for Write End */
+		pHandle->u8PORTVAL = PCF_GP_MODE_OUTPUT;
+	}
+	Drv_PCF8574_Write_Blocking(pHandle);
+	g_u8IrqFlagEnabled = FALSE;
+	g_u8I2CTxCompleteFlag = FALSE;
+	g_u8I2CRxCompleteFlag = FALSE;
+}
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void Drv_PCF8574_Write(PCD8574_HANDLE *pHandle)
+{
+	if(FALSE == g_u8I2CModuleBusyFlag)
+	{
+		HAL_I2C_Master_Transmit_IT(pHandle->pI2cHandle ,
+				(pHandle->u8DevAddress << 1) , (uint8_t*)&pHandle->u8PORTVAL , sizeof(pHandle->u8PORTVAL));
+		g_u8I2CModuleBusyFlag = TRUE;
+	}
+}
+/*********************.HAL_GPIO_EXTI_Callback().*****************************
+ .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void Drv_PCF8574_Write_Blocking(PCD8574_HANDLE *pHandle)
+{
+	if(FALSE == g_u8I2CModuleBusyFlag)
+	{
+		HAL_I2C_Master_Transmit_IT(pHandle->pI2cHandle ,
+				(pHandle->u8DevAddress << 1) , (uint8_t*)&pHandle->u8PORTVAL , sizeof(pHandle->u8PORTVAL));
+		g_u8I2CModuleBusyFlag = TRUE;
+	}
+	while(TRUE != Get_StatusPCF8574_I2C_TxCompleted())
+	{
+		/*NOP - wait blocking*/
 	}
 }
 
-/*********************.HAL_I2C_MasterRxCpltCallback().************************
- .Purpose        : Callback for reception complete for IT & DMA
- .Returns        :  RETURN_ERROR
-					RETURN_SUCCESS
- .Note           :
- ****************************************************************************/
-inline void Callback_PCF8574RxComplete(void)
-{
-	p_HpcfHandle->flags.ReadStatus_Flag = TRUE;
-
-	/* ISR for Read Start */
-	p_HpcfHandle->currOperation = IO_IDLE;
-	/* ISR for Read End */
-}
-
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
- .Purpose        : Callback for GPIO interrupt Rising and falling
+ .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
  .Returns        :  RETURN_ERROR
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-inline void Callback_IRQ_INT_Pin(void)
+void Drv_PCF8574_Read(PCD8574_HANDLE *pHandle)
 {
-	/* change  GetInstance_PFC1 () based on your pfc handler */
-	p_HpcfHandle->flags.InterruptStatus_Flag = TRUE;
+	if(FALSE == g_u8I2CModuleBusyFlag)
+	{
+		HAL_I2C_Master_Receive_IT(pHandle->pI2cHandle ,
+				(pHandle->u8DevAddress << 1) , (uint8_t*)&pHandle->u8PORTVAL , sizeof(uint8_t));
+		g_u8I2CModuleBusyFlag = TRUE;
+	}
 }

@@ -15,6 +15,13 @@
 #define DAC816416_MAX_NUM_OF_CHANNEL	(16U)
 #define DAC816416_MAX_OF_BYTE_PERCHANNEL	(2U)
 #define DAC_STREAM_BUFF_LENGTH (33U)/*32bytes for channels and 1 byte for address*/
+
+typedef enum
+{
+	DAC816416_PWR_ACTIVE = 0,
+	DAC816416_PWR_DWN = 1,
+}DAC816416_PWR_DWN_CONTROL;
+
 typedef enum
 {
 	SPI_STATE_IDLE,
@@ -25,23 +32,23 @@ typedef enum
 
 typedef enum
 {
-	DAC_CHANNEL_0	= 0,		// Channel 0 ID
-	DAC_CHANNEL_1 ,				// Channel 1 ID
-	DAC_CHANNEL_2 ,				// Channel 2 ID
-	DAC_CHANNEL_3 ,				// Channel 3 ID
-	DAC_CHANNEL_4 ,				// Channel 4 ID
-	DAC_CHANNEL_5 ,				// Channel 5 ID
-	DAC_CHANNEL_6 ,				// Channel 6 ID
-	DAC_CHANNEL_7 ,				// Channel 7 ID
-	DAC_CHANNEL_8 ,				// Channel 8 ID
-	DAC_CHANNEL_9 ,				// Channel 9 ID
-	DAC_CHANNEL_10 ,			// Channel 10 ID
-	DAC_CHANNEL_11 ,			// Channel 11 ID
-	DAC_CHANNEL_12 ,			// Channel 12 ID
-	DAC_CHANNEL_13 ,			// Channel 13 ID
-	DAC_CHANNEL_14 ,			// Channel 14 ID
-	DAC_CHANNEL_15 ,			// Channel 15 ID
-	DAC_CHANNEL_MAX
+	DAC_CHANNEL_0	= 0,				// Channel 0 ID
+	DAC_CHANNEL_1  	= 1,				// Channel 1 ID
+	DAC_CHANNEL_2  	= 2,				// Channel 2 ID
+	DAC_CHANNEL_3 	= 3,				// Channel 3 ID
+	DAC_CHANNEL_4 	= 4,				// Channel 4 ID
+	DAC_CHANNEL_5 	= 5,				// Channel 5 ID
+	DAC_CHANNEL_6 	= 6,				// Channel 6 ID
+	DAC_CHANNEL_7 	= 7,				// Channel 7 ID
+	DAC_CHANNEL_8 	= 8,				// Channel 8 ID
+	DAC_CHANNEL_9 	= 9,				// Channel 9 ID
+	DAC_CHANNEL_10 	= 10,				// Channel 10 ID
+	DAC_CHANNEL_11 	= 11,				// Channel 11 ID
+	DAC_CHANNEL_12 	= 12,				// Channel 12 ID
+	DAC_CHANNEL_13 	= 13,				// Channel 13 ID
+	DAC_CHANNEL_14 	= 14,				// Channel 14 ID
+	DAC_CHANNEL_15 	= 15,				// Channel 15 ID
+	DAC_CHANNEL_MAX	= 16
 } DAC81416_DAC_CHANNEL;
 
 typedef enum
@@ -417,4 +424,6 @@ void Appl_DAC816416WriteDacRegister_EnableStreamingMode(void);
 void Appl_DAC816416WriteDacRegister_DisableStreamingMode(void);
 void Appl_DAC816416WriteDacRegister(DAC81416_DAC_CHANNEL m_Ch , uint16_t u16Data);
 void Appl_DAC816416WriteDacRegister_StreamingMode(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pu16Data , uint8_t u8ChannelCnt);
+void Appl_DAC816416_EnableChannels(uint8_t u8StartCh , uint8_t u8EndCh);
+void Appl_DAC816416_DisableChannels(uint8_t u8StartCh , uint8_t u8EndCh);
 #endif /* DRV_DAC81416_H_ */
