@@ -48,10 +48,10 @@ void Appl_HandlerAdc(void)
 		memcpy(&g_AdcStack[g_u32AdcStackCount].n16ADCData[8U] , pChB , AD7616_CHMAX);
 
 
-		++g_u32AdcStackCount;
+		++g_u32AdcStackCount;/*Incre,emt stack index*/
 		if(g_u32AdcStackCount_Max <= g_u32AdcStackCount)
 		{
-			g_u32AdcStackCount = 0U;
+			g_u32AdcStackCount = 0U;/*Clear stack index*/
 			/*Push frame to transmit fifo*/
 			Appl_Communication_TransmitAnalogInputHandler(&g_AdcStack[0U] , g_u32AdcStackCount_Max);
 		}
@@ -65,10 +65,15 @@ void Appl_HandlerAdc(void)
  ****************************************************************************/
 void Appl_AdcConfig(uint32_t u32AdcDataTrnsmitCount)
 {
+	/*Check for max stack buffer count*/
 	if(MAX_ADC_STACK_BUFF_COUNT >= u32AdcDataTrnsmitCount)
 	{
 		g_u32AdcStackCount = 0U;
 		g_u32AdcStackCount_Max = u32AdcDataTrnsmitCount;
+	}
+	else
+	{
+		/*If new transmit count is more than max trasmit count -> ignore frame*/
 	}
 }
 

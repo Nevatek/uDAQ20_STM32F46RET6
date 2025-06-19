@@ -39,7 +39,8 @@ void ApplicationLayer_Exe(void)
 	Appl_HandlerAdc();
 	Appl_HandlerDac_Exe();
 	Appl_GpioExpander_Exe();
-	Appl_Communication_Process();
+	Appl_Communication_RxProcess();
+	Appl_Communication_TxFifoHandler();
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling

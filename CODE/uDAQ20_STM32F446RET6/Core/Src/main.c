@@ -24,9 +24,11 @@
 #include "Drv_AD7616.h"
 #include "Drv_SoftDelay.h"
 #include "DRV_DAC81416.h"
+#include "DRV_PCF8574.h"
 #include "Appl_ADC.h"
 #include "Appl_DAC.h"
 #include "Appl_GPIOExpander.h"
+#include "Appl_Communication.h"
 #include "ApplicationLayer.h"
 /* USER CODE END Includes */
 
@@ -256,6 +258,19 @@ void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
 		Callback_I2C1_RxComplete();
 	}
 }
+/*********************.HAL_I2C_MasterTxCpltCallback().************************
+ .Purpose        : Callback for transmission complete for IT & DMA
+ .Returns        :  RETURN_ERROR
+					RETURN_SUCCESS
+ .Note           :
+ ****************************************************************************/
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if (huart->Instance == USART1)
+	{
+		Callback_Communication_Uart_TxCompleted();
+	}
+}
 /* USER CODE END 0 */
 
 /**
@@ -275,6 +290,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+
 
   /* USER CODE END Init */
 

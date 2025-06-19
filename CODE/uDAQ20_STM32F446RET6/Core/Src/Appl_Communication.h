@@ -153,9 +153,11 @@ typedef struct
 }GP_OUTPUT_DATA;
 
 void Appl_Communiation_Init(void);
-void Appl_Communication_Process(void);
+void Callback_Communication_Uart_TxCompleted(void);
+void Appl_Communication_RxProcess(void);
 void Appl_Communiation_Transmit(uint8_t* Buf, uint32_t Len);
 
+void Appl_Communication_TxFifoHandler(void);
 void Appl_Communication_TransmitDigitalInputHandler(PCD8574_HANDLE *pHandle , uint8_t u8NumOfPorts);
 void Appl_Communication_TransmitAnalogInputHandler(ADC_STACK_BUFFER *pBuff , uint32_t u32NumOfData);
 #endif /* SRC_APPL_COMMUNICATION_H_ */

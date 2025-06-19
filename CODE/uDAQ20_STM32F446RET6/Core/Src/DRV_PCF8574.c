@@ -16,6 +16,7 @@
 #include "Appl_Timer.h"
 #include "DRV_PCF8574.h"
 
+static stcTimer g_GPTimer;
 static uint8_t g_u8IrqFlagEnabled = FALSE;
 static uint8_t g_u8I2CTxCompleteFlag = FALSE;
 static uint8_t g_u8I2CRxCompleteFlag = FALSE;
@@ -162,10 +163,16 @@ void Drv_PCF8574_Write_Blocking(PCD8574_HANDLE *pHandle)
 				(pHandle->u8DevAddress << 1) , (uint8_t*)&pHandle->u8PORTVAL , sizeof(pHandle->u8PORTVAL));
 		g_u8I2CModuleBusyFlag = TRUE;
 	}
+	StartTimer(&g_GPTimer , 10U);
 	while(TRUE != Get_StatusPCF8574_I2C_TxCompleted())
 	{
 		/*NOP - wait blocking*/
+		if(TRUE == Timer_IsTimeout(&g_GPTimer))
+		{
+			break;
+		}
 	}
+	StopTimer(&g_GPTimer);
 }
 
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
