@@ -8,7 +8,7 @@
 #include "string.h"
 #include "Appl_Timer.h"
 #include "Drv_AD7616.h"
-#include "ApplicationLayer.h"
+#include "Drv_System.h"
 
 uint8_t g_u8AdcConvComplteFlag = FALSE;/*varibale to flag ADC conversion is completed*/
 uint8_t g_u8AD7616DataAvailFlag = FALSE;
@@ -122,8 +122,6 @@ void Drv_AD7616_Init(void)
 	HAL_GPIO_WritePin(AD7616_RESET_GPIO_Port , AD7616_RESET_Pin , GPIO_PIN_SET);/*Make RESET pin HIGH*/
 
 	HAL_Delay(TIME_RESET_WAIT);
-
-	Drv_AD7616_Turn_ON(AD7616_CHAB7);
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling

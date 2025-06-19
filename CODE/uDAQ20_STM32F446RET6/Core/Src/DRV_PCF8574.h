@@ -31,6 +31,7 @@ typedef struct
 	I2C_HandleTypeDef *pI2cHandle;
 	uint8_t u8DevAddress;
 	uint8_t u8PORTVAL;
+	uint8_t u8DevReadyFlag;
 	PCF8574_GPIO_MODE mMode;
 }PCD8574_HANDLE;
 
@@ -44,7 +45,7 @@ uint8_t Get_StatusPCF8574InpPinSignalChanged(void);
 uint8_t Get_StatusPCF8574_I2C_TxCompleted(void);
 uint8_t Get_StatusPCF8574_I2C_RxCompleted(void);
 uint8_t Get_StatusPCF8574_I2CBusyFlag(void);
-void Drv_PCF8574_Write(PCD8574_HANDLE *pHandle);
-void Drv_PCF8574_Read(PCD8574_HANDLE *pHandle);
+uint8_t Drv_PCF8574_Write(PCD8574_HANDLE *pHandle);
+uint8_t Drv_PCF8574_Read(PCD8574_HANDLE *pHandle);
 void Drv_PCF8574_Write_Blocking(PCD8574_HANDLE *pHandle);
 #endif /* DRV_PCF8574_H_ */

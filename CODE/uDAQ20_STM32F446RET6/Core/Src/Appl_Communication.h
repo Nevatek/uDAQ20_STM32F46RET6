@@ -8,14 +8,15 @@
 #ifndef SRC_APPL_COMMUNICATION_H_
 #define SRC_APPL_COMMUNICATION_H_
 
-#define COMM_START_OF_FRAME (0x7E)
-#define COMM_END_OF_FRAME 	(0x7F)
+#define COMM_START_OF_FRAME 		(0x7E)/*Start of frame*/
+#define COMM_END_OF_FRAME 			(0x7F)/*End of frame*/
+#define SIZE_OF_END_OF_FRAME 		(1U)/*1 Byte*/
 
 #define MAX_COMM_DATA_LENGTH 		(4096)/*4KB*/
 #define MAX_DAC_WAVE_ARRAY_POINTS 	(1024)/*1KB*/
-#define TIME_US_VAL_INVALID 		(0U)
+#define TIME_US_VAL_INVALID 		(0U)/*The invalid format for time , if this recieved from IMX internal timer will not get configured and this change will be get ignored*/
 
-#define MAX_TX_FIFO_COUNT (3)
+#define MAX_TX_FIFO_COUNT 			(5U)/*Max FIFO size for TX FIFO*/
 
 typedef enum
 {
@@ -77,6 +78,7 @@ typedef struct
 	uint32_t u1RxDataSize : 16U;
 }STM32_COMM_CONTROL;
 
+/*Communication frame format*/
 typedef struct __attribute__((packed))
 {
 	uint8_t u8SOF;
@@ -88,10 +90,9 @@ typedef struct __attribute__((packed))
 	uint8_t u2ControlBit 		: 2U;
 	uint8_t u6ChannelID 		: 6U;
 
-	uint16_t u16DataLength;
+	uint16_t u16DataLength;/*2 Bytes : To mention size of payload data to be transmitted or recieved*/
 
-	uint8_t u8DataArr[MAX_COMM_DATA_LENGTH];
-	uint8_t u8EOF;
+	uint8_t u8DataArr[MAX_COMM_DATA_LENGTH + SIZE_OF_END_OF_FRAME];/*Actual data payload feild + 1 byte end of packet at last position*/
 }STM32_COMM_FRAME;
 
 typedef union
@@ -104,6 +105,7 @@ typedef union
 typedef struct
 {
 	STM32_COMM_BUFFER m_Buff;
+	uint16_t u16FrameSize;
 	uint8_t u8OccupiedFlag;
 }STM32_COMM_TX_FIFO;
 

@@ -121,6 +121,7 @@ void Drv_PCF8574_Init(PCD8574_HANDLE *pHandle ,
 	pHandle->pI2cHandle = pI2cHandle;
 	pHandle->u8DevAddress = u8DevAddrs;
 	pHandle->mMode = m_Mode;
+	pHandle->u8DevReadyFlag = FALSE;
 	if(PCF_GP_MODE_INPUT == pHandle->mMode)
 	{
 		pHandle->u8PORTVAL = PCF_GP_MODE_INPUT;
@@ -129,7 +130,11 @@ void Drv_PCF8574_Init(PCD8574_HANDLE *pHandle ,
 	{
 		pHandle->u8PORTVAL = PCF_GP_MODE_OUTPUT;
 	}
-	Drv_PCF8574_Write_Blocking(pHandle);
+	if(HAL_OK == HAL_I2C_IsDeviceReady(pHandle->pI2cHandle, (pHandle->u8DevAddress << 1) , 2U, 5U))
+	{
+		pHandle->u8DevReadyFlag = TRUE;
+		Drv_PCF8574_Write_Blocking(pHandle);
+	}
 	g_u8IrqFlagEnabled = FALSE;
 	g_u8I2CTxCompleteFlag = FALSE;
 	g_u8I2CRxCompleteFlag = FALSE;
@@ -140,14 +145,17 @@ void Drv_PCF8574_Init(PCD8574_HANDLE *pHandle ,
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-void Drv_PCF8574_Write(PCD8574_HANDLE *pHandle)
+uint8_t Drv_PCF8574_Write(PCD8574_HANDLE *pHandle)
 {
-	if(FALSE == g_u8I2CModuleBusyFlag)
+	uint8_t u9Status = FALSE;
+	if(FALSE == g_u8I2CModuleBusyFlag && TRUE == pHandle->u8DevReadyFlag)
 	{
 		HAL_I2C_Master_Transmit_IT(pHandle->pI2cHandle ,
 				(pHandle->u8DevAddress << 1) , (uint8_t*)&pHandle->u8PORTVAL , sizeof(pHandle->u8PORTVAL));
 		g_u8I2CModuleBusyFlag = TRUE;
+		u9Status = TRUE;
 	}
+	return u9Status;
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for BUSY interrupt PIN - Rising and falling
@@ -157,7 +165,7 @@ void Drv_PCF8574_Write(PCD8574_HANDLE *pHandle)
  ****************************************************************************/
 void Drv_PCF8574_Write_Blocking(PCD8574_HANDLE *pHandle)
 {
-	if(FALSE == g_u8I2CModuleBusyFlag)
+	if(FALSE == g_u8I2CModuleBusyFlag && TRUE == pHandle->u8DevReadyFlag)
 	{
 		HAL_I2C_Master_Transmit_IT(pHandle->pI2cHandle ,
 				(pHandle->u8DevAddress << 1) , (uint8_t*)&pHandle->u8PORTVAL , sizeof(pHandle->u8PORTVAL));
@@ -181,12 +189,15 @@ void Drv_PCF8574_Write_Blocking(PCD8574_HANDLE *pHandle)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-void Drv_PCF8574_Read(PCD8574_HANDLE *pHandle)
+uint8_t Drv_PCF8574_Read(PCD8574_HANDLE *pHandle)
 {
-	if(FALSE == g_u8I2CModuleBusyFlag)
+	uint8_t u9Status = FALSE;
+	if(FALSE == g_u8I2CModuleBusyFlag && TRUE == pHandle->u8DevReadyFlag)
 	{
 		HAL_I2C_Master_Receive_IT(pHandle->pI2cHandle ,
 				(pHandle->u8DevAddress << 1) , (uint8_t*)&pHandle->u8PORTVAL , sizeof(uint8_t));
 		g_u8I2CModuleBusyFlag = TRUE;
+		u9Status = TRUE;
 	}
+	return u9Status;
 }

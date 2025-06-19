@@ -9,6 +9,7 @@
 #include "DRV_DAC81416.h"
 #include "Drv_AD7616.h"
 #include "DRV_PCF8574.h"
+#include "Drv_System.h"
 #include "Appl_GPIOExpander.h"
 #include "Appl_ADC.h"
 #include "Appl_DAC.h"
@@ -22,7 +23,7 @@ static STM32_COMM_CONTROL g_CommControl;
 static void Appl_Communication_AnalogInputHandler(STM32_COMM_BUFFER *pCommBuffer);
 static void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer);
 static void Appl_Communication_DigitalOutputHandler(STM32_COMM_BUFFER *pCommBuffer);
-static void Appl_Communication_PushToTxFifo(STM32_COMM_FRAME *pFrame);
+static void Appl_Communication_PushToTxFifo(STM32_COMM_FRAME *pFrame , uint16_t u16FrameSize);
 
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
@@ -65,7 +66,7 @@ void Appl_Communication_TxFifoHandler(void)
 		{
 			if(TRUE == g_CommTX_FIFO[u8Index].u8OccupiedFlag)/*If FIFO location is occupied*/
 			{
-				Appl_Communiation_Transmit(&g_CommTX_FIFO[u8Index].m_Buff.u8ArrBuff[0U] , sizeof(g_CommTX_FIFO[u8Index].m_Buff.m_BIT));
+				Appl_Communiation_Transmit(&g_CommTX_FIFO[u8Index].m_Buff.u8ArrBuff[0U] , g_CommTX_FIFO[u8Index].u16FrameSize);
 				g_CommTX_FIFO[u8Index].u8OccupiedFlag = FALSE;/*Mark FIFO location as not occupied*/
 				g_u8UartTxBusyFlag = TRUE;
 				return;
@@ -79,13 +80,14 @@ void Appl_Communication_TxFifoHandler(void)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-void Appl_Communication_PushToTxFifo(STM32_COMM_FRAME *pFrame)
+void Appl_Communication_PushToTxFifo(STM32_COMM_FRAME *pFrame , uint16_t u16FrameSize)
 {
 	for(uint8_t u8Index = 0U ; u8Index < MAX_TX_FIFO_COUNT ; ++u8Index)
 	{
 		if(FALSE == g_CommTX_FIFO[u8Index].u8OccupiedFlag)/*If FIFO location is free*/
 		{
-			memcpy(&g_CommTX_FIFO[u8Index].m_Buff , pFrame , sizeof(STM32_COMM_FRAME));
+			g_CommTX_FIFO[u8Index].u16FrameSize = u16FrameSize;
+			memcpy(&g_CommTX_FIFO[u8Index].m_Buff , pFrame , g_CommTX_FIFO[u8Index].u16FrameSize);
 			g_CommTX_FIFO[u8Index].u8OccupiedFlag = TRUE;/*Mark FIFO location as occupied*/
 		}
 	}
@@ -105,7 +107,7 @@ void Appl_Communication_RxProcess(void)
 		g_CommControl.u1RxDataSize = 0U;
 
 		if(COMM_START_OF_FRAME == g_CommRxBuffer.m_BIT.u8SOF &&
-				COMM_END_OF_FRAME == g_CommRxBuffer.m_BIT.u8EOF)/*Validate Start of frame as well as END of frame*/
+				COMM_END_OF_FRAME == g_CommRxBuffer.m_BIT.u8DataArr[g_CommRxBuffer.m_BIT.u16DataLength])/*Validate Start of frame as well as END of frame*/
 		{
 			/*If Valid data length*/
 			if(MAX_COMM_DATA_LENGTH > g_CommRxBuffer.m_BIT.u16DataLength)
@@ -365,6 +367,7 @@ void Appl_Communication_TransmitDigitalInputHandler(PCD8574_HANDLE *pHandle , ui
 {
 	/*Create Frame*/
 	STM32_COMM_FRAME mFrame;
+	uint16_t u16FrameSize = 0U;
 	mFrame.u8SOF = COMM_START_OF_FRAME;
 	mFrame.u3SenderID = SENDERID_STM;
 	mFrame.u6ChannelID = COMM_CHANNEL_ALL;
@@ -376,9 +379,11 @@ void Appl_Communication_TransmitDigitalInputHandler(PCD8574_HANDLE *pHandle , ui
 		memcpy(&mFrame.u8DataArr[u8Port] , &pHandle[u8Port].u8PORTVAL , sizeof(uint8_t));
 	}
 	mFrame.u16DataLength = GP_OUTPUT_PORT_MAX;
-	mFrame.u8EOF = COMM_END_OF_FRAME;
+	mFrame.u8DataArr[mFrame.u16DataLength] = COMM_END_OF_FRAME;/*Copy end of frame*/
 	/*Push frame to TX FIFO*/
-	Appl_Communication_PushToTxFifo(&mFrame);
+	u16FrameSize = sizeof(STM32_COMM_FRAME) - sizeof(mFrame.u8DataArr);
+	u16FrameSize += (mFrame.u16DataLength + SIZE_OF_END_OF_FRAME);
+	Appl_Communication_PushToTxFifo(&mFrame , u16FrameSize);
 }
 /**************************.PCF8574_Init().**********************************
  .Purpose        : 	Initialization of PCF8574 handler
@@ -390,6 +395,7 @@ void Appl_Communication_TransmitAnalogInputHandler(ADC_STACK_BUFFER *pBuff , uin
 {
 	/*Create Frame*/
 	STM32_COMM_FRAME mFrame;
+	uint16_t u16FrameSize = 0U;
 	mFrame.u8SOF = COMM_START_OF_FRAME;
 	mFrame.u3SenderID = SENDERID_STM;
 	mFrame.u6ChannelID = COMM_CHANNEL_ALL;
@@ -401,7 +407,9 @@ void Appl_Communication_TransmitAnalogInputHandler(ADC_STACK_BUFFER *pBuff , uin
 		memcpy(&mFrame.u8DataArr[(sizeof(ADC_STACK_BUFFER) * u8Idx)] , &pBuff[u8Idx].n16ADCData[0U] , sizeof(ADC_STACK_BUFFER));
 	}
 	mFrame.u16DataLength = (u32NumOfData * sizeof(ADC_STACK_BUFFER));
-	mFrame.u8EOF = COMM_END_OF_FRAME;
+	mFrame.u8DataArr[mFrame.u16DataLength] = COMM_END_OF_FRAME;/*Copy end of frame*/
 	/*Push frame to TX FIFO*/
-	Appl_Communication_PushToTxFifo(&mFrame);
+	u16FrameSize = sizeof(STM32_COMM_FRAME) - sizeof(mFrame.u8DataArr);
+	u16FrameSize += (mFrame.u16DataLength + SIZE_OF_END_OF_FRAME);
+	Appl_Communication_PushToTxFifo(&mFrame , u16FrameSize);
 }

@@ -7,15 +7,19 @@
 #include "main.h"
 #include "stdlib.h"
 #include "DRV_PCF8574.h"
+#include "Drv_AD7616.h"
+#include "Drv_System.h"
+#include "Appl_ADC.h"
 #include "Appl_GPIOExpander.h"
+#include "Appl_Communication.h"
 #include "ApplicationLayer.h"
 
 static PCF8574_STATE m_PCFState = PCF8574_STATE_WRITE_PORT;
 static PCD8574_HANDLE g_PCF8574_Input[GP_INPUT_PORT_MAX];
 static PCD8574_HANDLE g_PCF8574_Output[GP_OUTPUT_PORT_MAX];
 
-static uint8_t u8OutputPortIndex = 0U;
-static uint8_t u8InputPortIndex = 0U;
+static uint8_t u8OutputPortIndex = GP_OUTPUT_PORTA;
+static uint8_t u8InputPortIndex = GP_INPUT_PORTA;
 static GP_OUTPUT_CHANNEL_CONTROL g_GpOutputChannel[GP_OUTPUT_PORT_MAX][PCF8574_MAX_CHANNEL];
 
 
@@ -98,30 +102,39 @@ void Appl_GpioExpander_Exe(void)
 		case (PCF8574_STATE_WRITE_PORT):
 		{
 			/*Write task*/
-			Drv_PCF8574_Write(&g_PCF8574_Output[u8OutputPortIndex]);
-			m_PCFState = PCF8574_STATE_WRITE_PORT_BUSY;
+			if(TRUE == Drv_PCF8574_Write(&g_PCF8574_Output[u8OutputPortIndex]))
+			{
+				m_PCFState = PCF8574_STATE_WRITE_PORT_BUSY;
+			}
+			else
+			{
+				/*Continue on thius*/
+				m_PCFState = PCF8574_STATE_WRITE_PORT_SEL_NEXT_CHANNEL;
+			}
+		}break;
+		case (PCF8574_STATE_WRITE_PORT_SEL_NEXT_CHANNEL):
+		{
+			++u8OutputPortIndex;
+			if(GP_OUTPUT_PORT_MAX <= u8OutputPortIndex)
+			{
+				u8OutputPortIndex = GP_OUTPUT_PORTA;/*INDEX Reset to PORT A*/
+
+				if(TRUE == Get_StatusPCF8574InpPinSignalChanged())/*If a pin got changed*/
+				{
+					u8InputPortIndex = GP_INPUT_PORTA;/*Set index of read port to GPIO Port A*/
+					m_PCFState = PCF8574_STATE_READ_INPUT;/*Read PORT*/
+				}
+				else
+				{
+					m_PCFState = PCF8574_STATE_WRITE_PORT;/*Go back to write task*/
+				}
+			}
 		}break;
 		case (PCF8574_STATE_WRITE_PORT_BUSY):
 		{
 			if(TRUE == Get_StatusPCF8574_I2C_TxCompleted())
 			{
-				++u8OutputPortIndex;
-				if(GP_OUTPUT_PORT_MAX <= u8OutputPortIndex)
-				{
-					u8OutputPortIndex = GP_OUTPUT_PORTA;/*INDEX Reset to PORT A*/
-					if(TRUE == Get_StatusPCF8574InpPinSignalChanged())/*If a pin got changed*/
-					{
-						m_PCFState = PCF8574_STATE_READ_INPUT;/*Read PORT*/
-					}
-					else
-					{
-						m_PCFState = PCF8574_STATE_WRITE_PORT;/*Go back to write task*/
-					}
-				}
-				else
-				{
-					/*NOP*/
-				}
+				m_PCFState = PCF8574_STATE_WRITE_PORT_SEL_NEXT_CHANNEL;
 			}
 			else
 			{
@@ -130,26 +143,36 @@ void Appl_GpioExpander_Exe(void)
 		}break;
 		case (PCF8574_STATE_READ_INPUT):
 		{
-			Drv_PCF8574_Read(&g_PCF8574_Input[u8InputPortIndex]);
-			m_PCFState = PCF8574_STATE_READ_BUSY;/*Read PORT*/
 			/*Read Task*/
+			if(TRUE == Drv_PCF8574_Read(&g_PCF8574_Input[u8InputPortIndex]))
+			{
+				m_PCFState = PCF8574_STATE_READ_BUSY;/*Read PORT*/
+			}
+			else
+			{
+				m_PCFState = PCF8574_STATE_READ_PORT_SEL_NEXT_CHANNEL;/*Skip not ready port*/
+			}
+		}break;
+		case (PCF8574_STATE_READ_PORT_SEL_NEXT_CHANNEL):
+		{
+			++u8InputPortIndex;
+			if(GP_OUTPUT_PORT_MAX <= u8InputPortIndex)
+			{
+				u8InputPortIndex = GP_OUTPUT_PORTA;/*Reset to PORT A*/
+				m_PCFState = PCF8574_STATE_WRITE_PORT;/*Go back to write task*/
+				Appl_Communication_TransmitDigitalInputHandler(&g_PCF8574_Input[0U] , GP_INPUT_PORT_MAX);/*Push data to TX FIFO*/
+			}
+			else
+			{
+				/*Read next channel*/
+				m_PCFState = PCF8574_STATE_READ_INPUT;/*Read PORT*/
+			}
 		}break;
 		case (PCF8574_STATE_READ_BUSY):
 		{
 			if(TRUE == Get_StatusPCF8574_I2C_RxCompleted())
 			{
-				++u8InputPortIndex;
-				if(GP_OUTPUT_PORT_MAX <= u8InputPortIndex)
-				{
-					u8InputPortIndex = GP_OUTPUT_PORTA;/*Reset to PORT A*/
-					m_PCFState = PCF8574_STATE_WRITE_PORT;/*Go back to write task*/
-					Appl_Communication_TransmitDigitalInputHandler(&g_PCF8574_Input[0U] , GP_INPUT_PORT_MAX);
-				}
-				else
-				{
-					/*Read next channel*/
-					m_PCFState = PCF8574_STATE_READ_INPUT;/*Read PORT*/
-				}
+				m_PCFState = PCF8574_STATE_READ_PORT_SEL_NEXT_CHANNEL;/*Select next port*/
 			}
 		}break;
 	}

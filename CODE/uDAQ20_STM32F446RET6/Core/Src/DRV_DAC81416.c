@@ -15,6 +15,7 @@
 #include "main.h"
 #include <string.h>
 #include "Appl_Timer.h"
+#include "Drv_System.h"
 #include "DRV_DAC81416.h"
 
 /**************************** defines ***************************************/
