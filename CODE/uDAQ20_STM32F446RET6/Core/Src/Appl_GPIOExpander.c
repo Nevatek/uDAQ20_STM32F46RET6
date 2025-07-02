@@ -129,6 +129,10 @@ void Appl_GpioExpander_Exe(void)
 					m_PCFState = PCF8574_STATE_WRITE_PORT;/*Go back to write task*/
 				}
 			}
+			else
+			{
+				m_PCFState = PCF8574_STATE_WRITE_PORT;/*Go back to write task*/
+			}
 		}break;
 		case (PCF8574_STATE_WRITE_PORT_BUSY):
 		{

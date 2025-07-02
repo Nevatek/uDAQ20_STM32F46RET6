@@ -88,8 +88,9 @@ void Appl_HandlerDac_Exe(void)
  ****************************************************************************/
 void Appl_HandlerDac_SetChannelFixedVoltage(uint16_t u16Voltage , uint8_t u8Channel)
 {
+	m_Dac[u8Channel].u16MaxPoints = 1U;/*SET maximum points to be represented as 1*/
+	m_Dac[u8Channel].arru16ChBuff[0U] = u16Voltage;/*Copy voltage data to array of respective channel*/
 	m_Dac[u8Channel].m_DacMode = DAC_MODE_FIXED_VOLTAGE;
-	DAC81416_WriteRegister_Blocking(DAC_REG_DAC0 + u8Channel, (uint16_t)u16Voltage);/*Push voltage to DAC816416 register*/
 }
 /*********************.Appl_HandlerDac_Init().*****************************
  .Purpose        : 	Initlization Handler for DAC output.

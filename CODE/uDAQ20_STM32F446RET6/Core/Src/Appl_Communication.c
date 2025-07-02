@@ -290,6 +290,7 @@ void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DAC
 		{
 			if(DAC_MODE_FIXED_VOLTAGE == m_Config.u2DacMode)
 			{
+				/*Copy voltage data to respective channel buffer variable*/
 				Appl_HandlerDac_SetChannelFixedVoltage(m_Config.u8WaveArray[0U] , u8ChannelEnd);/*Set DAC voltage to channel*/
 			}
 			else if(DAC_MODE_WAVEFORM == m_Config.u2DacMode)
@@ -329,7 +330,7 @@ void Appl_Communication_DigitalOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*IM
 			memcpy(&m_Config , &pCommBuffer->m_BIT.u8DataArr[0U] , sizeof(m_Config));
 			if(TIME_US_VAL_INVALID != m_Config.u32SignalPeriodUs)/*Mofidy and reconfigure timer only if timer value is valid*/
 			{
-				Appl_SetTimerPeriod(GetInstance_DAC816416SYNC_TIM2() , m_Config.u32SignalPeriodUs/*Micro seconds*/);
+				Appl_SetTimerPeriod(GetInstance_PCF8574GPIO_SYNC_TIM7() , m_Config.u32SignalPeriodUs/*Micro seconds*/);
 			}
 		}
 		else if(COMM_DATA == pCommBuffer->m_BIT.u2ControlBit)
