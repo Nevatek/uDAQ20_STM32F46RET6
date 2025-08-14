@@ -70,6 +70,8 @@ I2C_HandleTypeDef* GetInstance_I2C1(void);
 #define DAC81416_CS_GPIO_Port GPIOC
 #define AD7616_CS__Pin GPIO_PIN_4
 #define AD7616_CS__GPIO_Port GPIOA
+#define DAC81416_CLR_Pin GPIO_PIN_0
+#define DAC81416_CLR_GPIO_Port GPIOB
 #define AD7616_CHSEL2_Pin GPIO_PIN_10
 #define AD7616_CHSEL2_GPIO_Port GPIOB
 #define AD7616_HW_RNGSEL0_Pin GPIO_PIN_6
@@ -86,6 +88,8 @@ I2C_HandleTypeDef* GetInstance_I2C1(void);
 #define AD7616_CHSEL1_GPIO_Port GPIOA
 #define AD7616_CHSEL0_Pin GPIO_PIN_9
 #define AD7616_CHSEL0_GPIO_Port GPIOA
+#define DAC81416_ALMOUT_Pin GPIO_PIN_11
+#define DAC81416_ALMOUT_GPIO_Port GPIOC
 #define AD7616_RESET_Pin GPIO_PIN_3
 #define AD7616_RESET_GPIO_Port GPIOB
 #define AD7616_CONV_Pin GPIO_PIN_4
@@ -93,6 +97,8 @@ I2C_HandleTypeDef* GetInstance_I2C1(void);
 #define AD7616_BUSY_IQR_Pin GPIO_PIN_5
 #define AD7616_BUSY_IQR_GPIO_Port GPIOB
 #define AD7616_BUSY_IQR_EXTI_IRQn EXTI9_5_IRQn
+#define DAC81416_LDAC_Pin GPIO_PIN_7
+#define DAC81416_LDAC_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

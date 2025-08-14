@@ -82,12 +82,13 @@ void DAC81416_Init(void)
 	g_mDiffConfigReg.BIT.REF_PWDWN = 0U;/*VREF Internal enabled*/
 	DAC81416_WriteRegister_Blocking(DAC_REG_GENCONFIG, g_mDiffConfigReg.u16SHORT);/*Setting SPI config register*/
 
-//	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading device ID*/
-//	g_mDacPWDWNReg.u16SHORT = 0x0000;
-//	DAC81416_WriteRegister_Blocking(DAC_REG_DACPWDWN, g_mDacPDWNReg.u16SHORT);/*Setting SPI config register*/
-//	g_mDacPWDWNReg.u16SHORT = 0xAA;
-//	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading device ID*/
-
+#if 1
+	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading device ID*/
+	g_mDacPDWNReg.u16SHORT = 0xAA;
+	DAC81416_WriteRegister_Blocking(DAC_REG_DACPWDWN, g_mDacPDWNReg.u16SHORT);/*Setting SPI config register*/
+	g_mDacPDWNReg.u16SHORT = 0U;
+	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading device ID*/
+#endif
 	DAC81416_ReadRegister_Blocking(DAC_REG_DEVICEID , &g_mDevId.u16SHORT);/*Reading device ID*/
 	Appl_DAC816416WriteDacRegister_EnableStreamingMode();
 }
