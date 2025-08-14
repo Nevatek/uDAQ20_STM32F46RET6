@@ -82,7 +82,7 @@ void DAC81416_Init(void)
 	g_mDiffConfigReg.BIT.REF_PWDWN = 0U;/*VREF Internal enabled*/
 	DAC81416_WriteRegister_Blocking(DAC_REG_GENCONFIG, g_mDiffConfigReg.u16SHORT);/*Setting SPI config register*/
 
-#if 1
+#if 0
 	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading device ID*/
 	g_mDacPDWNReg.u16SHORT = 0xAA;
 	DAC81416_WriteRegister_Blocking(DAC_REG_DACPWDWN, g_mDacPDWNReg.u16SHORT);/*Setting SPI config register*/
