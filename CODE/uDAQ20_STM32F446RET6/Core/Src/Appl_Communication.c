@@ -29,7 +29,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
 	g_CommControl.u1RxDataSize = Size;
 	g_CommControl.u1RxAvailableFlag = TRUE;
-	HAL_UARTEx_ReceiveToIdle_IT(GetInstance_Communication_UART1(), g_CommRxBuffer.u8ArrBuff, Size);
+	HAL_UARTEx_ReceiveToIdle_IT(GetInstance_Communication_UART1(), g_CommRxBuffer.u8ArrBuff, sizeof(g_CommRxBuffer.u8ArrBuff));
 }
 inline void Callback_Communication_Uart_TxCompleted(void)
 {
