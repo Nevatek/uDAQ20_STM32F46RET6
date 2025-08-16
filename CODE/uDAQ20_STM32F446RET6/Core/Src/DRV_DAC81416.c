@@ -86,10 +86,26 @@ void DAC81416_Init(void)
 	g_mDiffConfigReg.BIT.REF_PWDWN = 0U;/*VREF Internal enabled*/
 	DAC81416_WriteRegister_Blocking(DAC_REG_GENCONFIG, g_mDiffConfigReg.u16SHORT);/*Setting SPI config register*/
 
-	g_DacRangeReg_0.u16SHORT = DAC_RANGE_0_10V;
-	g_DacRangeReg_1.u16SHORT = DAC_RANGE_0_10V;
-	g_DacRangeReg_2.u16SHORT = DAC_RANGE_0_10V;
-	g_DacRangeReg_3.u16SHORT = DAC_RANGE_0_10V;
+	g_DacRangeReg_0.BIT.DACa_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_0.BIT.DACb_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_0.BIT.DACc_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_0.BIT.DACd_RANGE = DAC_RANGE_0_10V;
+
+	g_DacRangeReg_1.BIT.DACa_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_1.BIT.DACb_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_1.BIT.DACc_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_1.BIT.DACd_RANGE = DAC_RANGE_0_10V;
+
+	g_DacRangeReg_2.BIT.DACa_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_2.BIT.DACb_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_2.BIT.DACc_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_2.BIT.DACd_RANGE = DAC_RANGE_0_10V;
+
+	g_DacRangeReg_3.BIT.DACa_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_3.BIT.DACb_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_3.BIT.DACc_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_3.BIT.DACd_RANGE = DAC_RANGE_0_10V;
+
 	DAC81416_ReadRegister_Blocking(DAC_REG_DACRANGE0 , &g_DacRangeReg_0.u16SHORT);
 	DAC81416_ReadRegister_Blocking(DAC_REG_DACRANGE1 , &g_DacRangeReg_1.u16SHORT);
 	DAC81416_ReadRegister_Blocking(DAC_REG_DACRANGE2 , &g_DacRangeReg_2.u16SHORT);
