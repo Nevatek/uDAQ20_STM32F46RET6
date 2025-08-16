@@ -106,10 +106,10 @@ void DAC81416_Init(void)
 	g_DacRangeReg_3.BIT.DACc_RANGE = DAC_RANGE_0_10V;
 	g_DacRangeReg_3.BIT.DACd_RANGE = DAC_RANGE_0_10V;
 
-	DAC81416_ReadRegister_Blocking(DAC_REG_DACRANGE0 , &g_DacRangeReg_0.u16SHORT);
-	DAC81416_ReadRegister_Blocking(DAC_REG_DACRANGE1 , &g_DacRangeReg_1.u16SHORT);
-	DAC81416_ReadRegister_Blocking(DAC_REG_DACRANGE2 , &g_DacRangeReg_2.u16SHORT);
-	DAC81416_ReadRegister_Blocking(DAC_REG_DACRANGE3 , &g_DacRangeReg_3.u16SHORT);
+	DAC81416_WriteRegister_Blocking(DAC_REG_DACRANGE0 , g_DacRangeReg_0.u16SHORT);
+	DAC81416_WriteRegister_Blocking(DAC_REG_DACRANGE1 , g_DacRangeReg_1.u16SHORT);
+	DAC81416_WriteRegister_Blocking(DAC_REG_DACRANGE2 , g_DacRangeReg_2.u16SHORT);
+	DAC81416_WriteRegister_Blocking(DAC_REG_DACRANGE3 , g_DacRangeReg_3.u16SHORT);
 #if 0
 	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading device ID*/
 	g_mDacPDWNReg.u16SHORT = 0xAA;
