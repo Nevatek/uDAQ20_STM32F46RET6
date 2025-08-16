@@ -66,12 +66,10 @@ void Appl_HandlerDac_Exe(void)
 			{
 				g_arru16TxBuff[u8Channel] = m_Dac[u8Channel].arru16ChBuff[m_Dac[u8Channel].u16PointCnt];/*Copy wave point*/
 			}
-#if FALSE
 			else/*Fixed voltage mode*/
 			{
 				g_arru16TxBuff[u8Channel] = m_Dac[u8Channel].arru16ChBuff[0U];/*Copy wave point (FIXED voltage)*/
 			}
-#endif
 		}
 		Appl_DAC816416WriteDacRegister_StreamingMode(DAC_CHANNEL_0 , (uint16_t*)g_arru16TxBuff , DAC816416_MAX_NUM_OF_CHANNEL);/*Push to DAC816416*/
 	}
