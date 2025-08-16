@@ -13,7 +13,7 @@
 #include "ApplicationLayer.h"
 
 DAC_HANDLE m_Dac[DAC816416_MAX_NUM_OF_CHANNEL];/*Max data obtained from HOST MCU*/
-uint16_t g_arru16TxBuff[DAC816416_MAX_NUM_OF_CHANNEL * DAC816416_MAX_OF_BYTE_PERCHANNEL];/*TX DATA BUffer for DAC816416*/
+uint16_t g_arru16TxBuff[DAC816416_MAX_NUM_OF_CHANNEL];/*TX DATA BUffer for DAC816416*/
 uint8_t g_u8DacTriggerFlag = FALSE;/*Trigger for DAC data output*/
 
 /*********************.ISR_DAC81416_Sync().*****************************

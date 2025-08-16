@@ -500,7 +500,7 @@ void Appl_DAC816416_EnableChannels(uint8_t u8StartCh , uint8_t u8EndCh)
 	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading Pwr dwn Reg*/
 	for(uint8_t u8nIdx = (u8StartCh) ; u8nIdx <= (u8EndCh) ; ++u8nIdx)
 	{
-		g_mDacPDWNReg.u16SHORT &= ~(DAC816416_PWR_ACTIVE << u8nIdx);
+		g_mDacPDWNReg.u16SHORT &= (DAC816416_PWR_ACTIVE << u8nIdx);
 	}
 	DAC81416_WriteRegister_Blocking(DAC_REG_DACPWDWN, g_mDacPDWNReg.u16SHORT);/*Setting SPI config register*/
 }
