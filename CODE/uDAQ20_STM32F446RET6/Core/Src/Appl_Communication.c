@@ -288,15 +288,34 @@ void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DAC
 
 		if(COMM_CHANNEL_ALL < u8ChannelEnd && COMM_CHANNEL_MAX > u8ChannelEnd)/*Only single channel can be configured at a time*/
 		{
-			if(DAC_MODE_FIXED_VOLTAGE == m_Config.u2DacMode)
+			if(COMM_CHANNEL_ALL == pCommBuffer->m_BIT.u6ChannelID)
 			{
-				/*Copy voltage data to respective channel buffer variable*/
-				Appl_HandlerDac_SetChannelFixedVoltage(m_Config.u8WaveArray[0U] , u8ChannelEnd);/*Set DAC voltage to channel*/
+				for(uint8_t u8Ch = 0U ; u8Ch < COMM_CHANNEL_MAX ; ++u8Ch)
+				{
+					if(DAC_MODE_FIXED_VOLTAGE == m_Config.u2DacMode)
+					{
+						/*Copy voltage data to respective channel buffer variable*/
+						Appl_HandlerDac_SetChannelFixedVoltage(m_Config.u8WaveArray[0U] , u8Ch);/*Set DAC voltage to channel*/
+					}
+					else if(DAC_MODE_WAVEFORM == m_Config.u2DacMode)
+					{
+						/*Copy waveform data to respective channel array*/
+						Appl_HandlerDac_SetChannelWaveform(&m_Config.u8WaveArray[0U] , m_Config.u32Wave_No_Of_Points , u8Ch);
+					}
+				}
 			}
-			else if(DAC_MODE_WAVEFORM == m_Config.u2DacMode)
+			else
 			{
-				/*Copy waveform data to respective channel array*/
-				Appl_HandlerDac_SetChannelWaveform(&m_Config.u8WaveArray[0U] , m_Config.u32Wave_No_Of_Points , u8ChannelEnd);
+				if(DAC_MODE_FIXED_VOLTAGE == m_Config.u2DacMode)
+				{
+					/*Copy voltage data to respective channel buffer variable*/
+					Appl_HandlerDac_SetChannelFixedVoltage(m_Config.u8WaveArray[0U] , u8ChannelEnd);/*Set DAC voltage to channel*/
+				}
+				else if(DAC_MODE_WAVEFORM == m_Config.u2DacMode)
+				{
+					/*Copy waveform data to respective channel array*/
+					Appl_HandlerDac_SetChannelWaveform(&m_Config.u8WaveArray[0U] , m_Config.u32Wave_No_Of_Points , u8ChannelEnd);
+				}
 			}
 		}
 	}
