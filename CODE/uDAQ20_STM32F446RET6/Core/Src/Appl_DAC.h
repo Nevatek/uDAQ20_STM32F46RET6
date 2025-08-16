@@ -27,6 +27,6 @@ typedef struct
 void ISR_CallbackDAC81416_Sync(void);
 void Appl_HandlerDac_Init(void);
 void Appl_HandlerDac_Exe(void);
-void Appl_HandlerDac_SetChannelWaveform(uint8_t *pData , uint32_t u32Points , uint8_t u8Channel);
+void Appl_HandlerDac_SetChannelWaveform(uint16_t *pData , uint32_t u32Points , uint8_t u8Channel);
 void Appl_HandlerDac_SetChannelFixedVoltage(uint16_t u16Voltage , uint8_t u8Channel);
 #endif /* SRC_APPL_DAC_H_ */

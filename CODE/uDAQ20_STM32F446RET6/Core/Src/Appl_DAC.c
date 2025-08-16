@@ -98,7 +98,7 @@ void Appl_HandlerDac_SetChannelFixedVoltage(uint16_t u16Voltage , uint8_t u8Chan
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-void Appl_HandlerDac_SetChannelWaveform(uint8_t *pData , uint32_t u32Points , uint8_t u8Channel)
+void Appl_HandlerDac_SetChannelWaveform(uint16_t *pData , uint32_t u32Points , uint8_t u8Channel)
 {
 	m_Dac[u8Channel].u16MaxPoints = (u32Points < MAX_DATA_POINTS_PER_CHANNEL) ? u32Points : MAX_DATA_POINTS_PER_CHANNEL;/*Get maximum points to be represented*/
 	memcpy(&m_Dac[u8Channel].arru16ChBuff[0U] , pData , m_Dac[u8Channel].u16MaxPoints);/*Copy waveform data to array of respective channel*/

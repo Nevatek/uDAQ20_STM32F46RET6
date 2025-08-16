@@ -133,7 +133,7 @@ typedef struct
 	uint32_t u32Wave_No_Of_Points : 10U;
 	uint32_t u2DacMode : 2U;/*This will represent DAC output type , Waveform or fixed voltage*/
 	uint32_t : 20U;
-	uint8_t u8WaveArray[MAX_DAC_WAVE_ARRAY_POINTS];
+	uint16_t u8WaveArray[MAX_DAC_WAVE_ARRAY_POINTS];
 }DAC_CONFIG;
 
 typedef struct
