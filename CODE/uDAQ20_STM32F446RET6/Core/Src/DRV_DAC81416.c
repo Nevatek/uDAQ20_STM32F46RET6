@@ -40,6 +40,10 @@ DAC81416_REG_DEVICEID g_mDevId;
 DAC81416_REG_SPICONFIG g_mSpiReg;
 DAC81416_REG_DIFFCONFIG g_mDiffConfigReg;
 DAC81416_REG_DACPWDWN g_mDacPDWNReg;
+DAC81416_REG_DACRANGE g_DacRangeReg_0;
+DAC81416_REG_DACRANGE g_DacRangeReg_1;
+DAC81416_REG_DACRANGE g_DacRangeReg_2;
+DAC81416_REG_DACRANGE g_DacRangeReg_3;
 
 uint8_t g_u8WriteStFlag = FALSE;
 uint8_t g_u8ReadStFlag  = FALSE;
@@ -82,6 +86,14 @@ void DAC81416_Init(void)
 	g_mDiffConfigReg.BIT.REF_PWDWN = 0U;/*VREF Internal enabled*/
 	DAC81416_WriteRegister_Blocking(DAC_REG_GENCONFIG, g_mDiffConfigReg.u16SHORT);/*Setting SPI config register*/
 
+	g_DacRangeReg_0.u16SHORT = DAC_RANGE_0_10V;
+	g_DacRangeReg_1.u16SHORT = DAC_RANGE_0_10V;
+	g_DacRangeReg_2.u16SHORT = DAC_RANGE_0_10V;
+	g_DacRangeReg_3.u16SHORT = DAC_RANGE_0_10V;
+	DAC81416_ReadRegister_Blocking(DAC_REG_DACRANGE0 , &g_DacRangeReg_0.u16SHORT);
+	DAC81416_ReadRegister_Blocking(DAC_REG_DACRANGE1 , &g_DacRangeReg_1.u16SHORT);
+	DAC81416_ReadRegister_Blocking(DAC_REG_DACRANGE2 , &g_DacRangeReg_2.u16SHORT);
+	DAC81416_ReadRegister_Blocking(DAC_REG_DACRANGE3 , &g_DacRangeReg_3.u16SHORT);
 #if 0
 	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading device ID*/
 	g_mDacPDWNReg.u16SHORT = 0xAA;
@@ -485,7 +497,9 @@ void Appl_DAC816416WriteDacRegister_DisableStreamingMode(void)
 void Appl_DAC816416WriteDacRegister_StreamingMode(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pu16Data , uint8_t u8ChannelCnt)
 {
 	uint8_t u8DataLen = 0U;
-	ConvertArrayToBigEndian(pu16Data , u8ChannelCnt);
+#if (FALSE)
+//	ConvertArrayToBigEndian(pu16Data , u8ChannelCnt);
+#endif
 	u8DataLen = (u8ChannelCnt * 2U) + 1U;
 	DAC81416_WriteDacStreaming(m_Ch , pu16Data , u8DataLen);
 }

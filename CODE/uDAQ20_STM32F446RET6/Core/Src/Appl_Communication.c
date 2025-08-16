@@ -290,7 +290,7 @@ void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DAC
 		{
 			if(COMM_CHANNEL_ALL == pCommBuffer->m_BIT.u6ChannelID)
 			{
-				for(uint8_t u8Ch = 0U ; u8Ch < COMM_CHANNEL_MAX ; ++u8Ch)
+				for(uint8_t u8Ch = u8ChannelStart ; u8Ch <= u8ChannelEnd ; ++u8Ch)
 				{
 					if(DAC_MODE_FIXED_VOLTAGE == m_Config.u2DacMode)
 					{

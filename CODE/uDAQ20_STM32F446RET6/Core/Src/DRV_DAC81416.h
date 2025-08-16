@@ -108,7 +108,17 @@ typedef enum
     DAC_REG_OFFSET3           = 0x23   // DAC[2-3;0-1] Differential Offset Register
 } DAC81416_REG_MAP;
 
-
+typedef enum
+{
+	DAC_RANGE_0_5V = 0b0000,/*0 to 5V*/
+	DAC_RANGE_0_10V = 0b0001,/*0 to 10V*/
+	DAC_RANGE_0_20V = 0b0010,/*0 to 20V*/
+	DAC_RANGE_0_40V = 0b0100,/*0 to 40V*/
+	DAC_RANGE_n5_5V = 0b1001,/*-5 to 5V*/
+	DAC_RANGE_n10_10V = 0b1010,/*-10 to 10V*/
+	DAC_RANGE_n20_20V = 0b1100,/*-20 to 20V*/
+	DAC_RANGE_n2_5__2_5V = 0b1110,/*-2.5 to 2.5V*/
+}DAC816416_DAC_RANGE;
 typedef union
 {
 	struct
