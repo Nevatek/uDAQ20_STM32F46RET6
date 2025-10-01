@@ -119,6 +119,20 @@ typedef enum
 	DAC_RANGE_n20_20V = 0b1100,/*-20 to 20V*/
 	DAC_RANGE_n2_5__2_5V = 0b1110,/*-2.5 to 2.5V*/
 }DAC816416_DAC_RANGE;
+
+typedef enum
+{
+	DAC_RANGE_0_5V_ZERO = 0,
+	DAC_RANGE_0_10V_ZERO = 0,/*0 to 10V*/
+	DAC_RANGE_0_20V_ZERO = 0,/*0 to 20V*/
+	DAC_RANGE_0_40V_ZERO = 0,/*0 to 40V*/
+	DAC_RANGE_n5_5V_ZERO = 0x8000,/*-5 to 5V*/
+	DAC_RANGE_n10_10V_ZERO = 0x8000,/*-10 to 10V*/
+	DAC_RANGE_n20_20V_ZERO = 0x8000,/*-20 to 20V*/
+	DAC_RANGE_n2_5__2_5V_ZERO = 0x8000,/*-2.5 to 2.5V*/
+}DAC816416_DAC_ZERO_V;
+
+
 typedef union
 {
 	struct
@@ -436,4 +450,5 @@ void Appl_DAC816416WriteDacRegister(DAC81416_DAC_CHANNEL m_Ch , uint16_t u16Data
 void Appl_DAC816416WriteDacRegister_StreamingMode(DAC81416_DAC_CHANNEL m_Ch , uint16_t *pu16Data , uint8_t u8ChannelCnt);
 void Appl_DAC816416_EnableChannels(uint8_t u8StartCh , uint8_t u8EndCh);
 void Appl_DAC816416_DisableChannels(uint8_t u8StartCh , uint8_t u8EndCh);
+uint8_t Appl_DAC816416_IsEnabled(uint8_t u8Channel);
 #endif /* DRV_DAC81416_H_ */

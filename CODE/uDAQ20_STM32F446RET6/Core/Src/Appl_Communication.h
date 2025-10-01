@@ -155,6 +155,8 @@ typedef struct
 }GP_OUTPUT_DATA;
 
 void Appl_Communiation_Init(void);
+void Appl_Communiation_Reset(void);
+
 void Callback_Communication_Uart_TxCompleted(void);
 void Appl_Communication_RxProcess(void);
 void Appl_Communiation_Transmit(uint8_t* Buf, uint32_t Len);
