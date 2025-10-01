@@ -15,7 +15,6 @@
 #include "Appl_DAC.h"
 #include "ApplicationLayer.h"
 #include "Appl_Communication.h"
-#include "Drv_SoftDelay.h"
 
 static uint8_t g_u8UartTxBusyFlag = FALSE;
 static STM32_COMM_BUFFER g_CommRxBuffer;
@@ -30,6 +29,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
 	g_CommControl.u1RxDataSize = Size;
 	g_CommControl.u1RxAvailableFlag = TRUE;
+	HAL_UARTEx_ReceiveToIdle_IT(GetInstance_Communication_UART1(), g_CommRxBuffer.u8ArrBuff, sizeof(g_CommRxBuffer.u8ArrBuff));
 }
 inline void Callback_Communication_Uart_TxCompleted(void)
 {
@@ -41,35 +41,9 @@ inline void Callback_Communication_Uart_TxCompleted(void)
  */
 void Appl_Communiation_Init(void)
 {
-	Appl_Communiation_Reset();
-}
-
-
-/*
- * Function to reset data buffer from uart
- */
-void Appl_Communiation_Reset(void)
-{
 	memset(&g_CommControl , 0x00 , sizeof(g_CommControl));
-	memset(&g_CommRxBuffer.u8ArrBuff, 0x00, sizeof(g_CommRxBuffer.u8ArrBuff));
-
-	HAL_UARTEx_ReceiveToIdle_DMA(GetInstance_Communication_UART1(), g_CommRxBuffer.u8ArrBuff, sizeof(g_CommRxBuffer.u8ArrBuff));
-//	HAL_UARTEx_ReceiveToIdle_IT(GetInstance_Communication_UART1(), g_CommRxBuffer.u8ArrBuff, sizeof(g_CommRxBuffer.u8ArrBuff));
+	HAL_UARTEx_ReceiveToIdle_IT(GetInstance_Communication_UART1(), g_CommRxBuffer.u8ArrBuff, sizeof(g_CommRxBuffer.u8ArrBuff));
 }
-
-
-//void HAL_UARTEx_RxData()
-//{
-//	uint16_t rxLen = 0;
-//	HAL_UARTEx_ReceiveToIdle(GetInstance_Communication_UART1(), &g_CommRxBuffer.u8ArrBuff[g_CommControl.u1RxDataSize],
-//			sizeof(g_CommRxBuffer.u8ArrBuff) - g_CommControl.u1RxDataSize, &rxLen, 0);
-//
-//	if (rxLen > 0) {
-//		g_CommControl.u1RxDataSize += rxLen;
-//		g_CommControl.u1RxAvailableFlag = TRUE;
-//	}
-//}
-
 /*
  * Function to transmit a data buffer to usb cdc.
  */
@@ -115,7 +89,6 @@ void Appl_Communication_PushToTxFifo(STM32_COMM_FRAME *pFrame , uint16_t u16Fram
 			g_CommTX_FIFO[u8Index].u16FrameSize = u16FrameSize;
 			memcpy(&g_CommTX_FIFO[u8Index].m_Buff , pFrame , g_CommTX_FIFO[u8Index].u16FrameSize);
 			g_CommTX_FIFO[u8Index].u8OccupiedFlag = TRUE;/*Mark FIFO location as occupied*/
-			break;
 		}
 	}
 }
@@ -180,16 +153,9 @@ void Appl_Communication_RxProcess(void)
 		{
 			/*Ignore frame if SOF / EOF is not valid*/
 		}
-
-		Appl_Communiation_Reset();
 	}
 	else
 	{
-		UART_HandleTypeDef * huartRef = GetInstance_Communication_UART1();
-		if (huartRef != NULL && huartRef->ErrorCode != 0) {
-			Appl_Communiation_Reset();
-		}
-
 		/*Ignore frame if size is not valid*/
 	}
 }
@@ -272,7 +238,6 @@ void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DAC
 	uint8_t u8ChannelEnd = 0U;
 	DAC_CONFIG m_Config;
 	DAC_CONTROL m_Ctrl;
-
 	if(COMM_CHANNEL_ALL == pCommBuffer->m_BIT.u6ChannelID)/*All channels*/
 	{
 		u8ChannelStart = 0U;
@@ -302,11 +267,6 @@ void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DAC
 		/*Turn ON / OFF DAC*/
 		if(TRUE == m_Ctrl.u1ChEnable)
 		{
-			if(COMM_CHANNEL_ALL == pCommBuffer->m_BIT.u6ChannelID)/*All channels*/
-			{
-				DAC81416_Init();
-			}
-
 			/*Turn ON DAC channels*/
 			Appl_DAC816416_EnableChannels(u8ChannelStart , u8ChannelEnd);
 		}
@@ -326,7 +286,7 @@ void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DAC
 			Appl_SetTimerPeriod(GetInstance_DAC816416SYNC_TIM2() , m_Config.u32DAC_SyncTimerIntervel_us/*Micro seconds*/);
 		}
 
-		if(COMM_CHANNEL_ALL <= u8ChannelEnd && COMM_CHANNEL_MAX > u8ChannelEnd)/*Only single channel can be configured at a time*/
+		if(COMM_CHANNEL_ALL < u8ChannelEnd && COMM_CHANNEL_MAX > u8ChannelEnd)/*Only single channel can be configured at a time*/
 		{
 			if(COMM_CHANNEL_ALL == pCommBuffer->m_BIT.u6ChannelID)
 			{
@@ -377,7 +337,7 @@ void Appl_Communication_AnalogOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*DAC
 void Appl_Communication_DigitalOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*IMX -> GPIO*/
 {
 	GP_OUTPUT_OUTPUT_CONFIG m_Config;
-//	GP_OUTPUT_DATA m_Data;
+	GP_OUTPUT_DATA m_Data;
 	if(COMM_CHANNEL_ALL == pCommBuffer->m_BIT.u6ChannelID)/*All channels*/
 	{
 		if(COMM_CONTROL == pCommBuffer->m_BIT.u2ControlBit)
@@ -394,21 +354,18 @@ void Appl_Communication_DigitalOutputHandler(STM32_COMM_BUFFER *pCommBuffer)/*IM
 		}
 		else if(COMM_DATA == pCommBuffer->m_BIT.u2ControlBit)
 		{
-//			memcpy(&m_Data , &pCommBuffer->m_BIT.u8DataArr[0U] , sizeof(m_Data));
-//			/*Config channels of all ports*/
-//			for(uint8_t u8Port = GP_OUTPUT_PORTA ; u8Port < GP_OUTPUT_PORT_MAX ; ++u8Port)/*Cycle through all output Ports*/
-//			{
-//				for(uint8_t u8Channel = 0U ; u8Channel < PCF8574_MAX_CHANNEL ; ++u8Channel)/*Cycle through all channels*/
-//				{
-//					Appl_GPConfigureOutput(u8Port , u8Channel ,
-//							m_Data.m_ChConfig_PORT[u8Port][u8Channel].u2OutputMode ,
-//							m_Data.m_ChConfig_PORT[u8Port][u8Channel].u16FreqDiv ,
-//							m_Data.m_ChConfig_PORT[u8Port][u8Channel].u1PinVal);
-//				}
-//			}
-			Appl_GPConfigureOutputNew(GP_OUTPUT_PORTA, pCommBuffer->m_BIT.u8DataArr[0U]);
-//			Drv_DelayBlocking_ns(1000000);
-			Appl_GPConfigureOutputNew(GP_OUTPUT_PORTB, pCommBuffer->m_BIT.u8DataArr[1U]);
+			memcpy(&m_Data , &pCommBuffer->m_BIT.u8DataArr[0U] , sizeof(m_Data));
+			/*Config channels of all ports*/
+			for(uint8_t u8Port = GP_OUTPUT_PORTA ; u8Port < GP_OUTPUT_PORT_MAX ; ++u8Port)/*Cycle through all output Ports*/
+			{
+				for(uint8_t u8Channel = 0U ; u8Channel < PCF8574_MAX_CHANNEL ; ++u8Channel)/*Cycle through all channels*/
+				{
+					Appl_GPConfigureOutput(u8Port , u8Channel ,
+							m_Data.m_ChConfig_PORT[u8Port][u8Channel].u2OutputMode ,
+							m_Data.m_ChConfig_PORT[u8Port][u8Channel].u16FreqDiv ,
+							m_Data.m_ChConfig_PORT[u8Port][u8Channel].u1PinVal);
+				}
+			}
 		}
 		else
 		{

@@ -57,8 +57,6 @@ void Appl_HandlerDac_Init(void)
  ****************************************************************************/
 void Appl_HandlerDac_Exe(void)
 {
-	static uint16_t local_DacData[DAC816416_MAX_NUM_OF_CHANNEL];
-
 	if(SPI_STATE_IDLE == DAC816416_GetSpiState() && TRUE == g_u8DacTriggerFlag)
 	{
 		g_u8DacTriggerFlag = FALSE;
@@ -72,15 +70,8 @@ void Appl_HandlerDac_Exe(void)
 			{
 				g_arru16TxBuff[u8Channel] = m_Dac[u8Channel].arru16ChBuff[0U];/*Copy wave point (FIXED voltage)*/
 			}
-
-			// Update DAC if value changed or Disabled currently
-			if (local_DacData[u8Channel] != g_arru16TxBuff[u8Channel])
-			{
-				local_DacData[u8Channel] = g_arru16TxBuff[u8Channel];
-				Appl_DAC816416WriteDacRegister(u8Channel, g_arru16TxBuff[u8Channel]);
-			}
 		}
-//		Appl_DAC816416WriteDacRegister_StreamingMode(DAC_CHANNEL_0 , (uint16_t*)g_arru16TxBuff , DAC816416_MAX_NUM_OF_CHANNEL);/*Push to DAC816416*/
+		Appl_DAC816416WriteDacRegister_StreamingMode(DAC_CHANNEL_0 , (uint16_t*)g_arru16TxBuff , DAC816416_MAX_NUM_OF_CHANNEL);/*Push to DAC816416*/
 	}
 	else
 	{

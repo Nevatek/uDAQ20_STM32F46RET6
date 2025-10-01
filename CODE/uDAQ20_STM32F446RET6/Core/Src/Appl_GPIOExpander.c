@@ -16,7 +16,7 @@
 
 static PCF8574_STATE m_PCFState = PCF8574_STATE_WRITE_PORT;
 static PCD8574_HANDLE g_PCF8574_Input[GP_INPUT_PORT_MAX];
-PCD8574_HANDLE g_PCF8574_Output[GP_OUTPUT_PORT_MAX];
+static PCD8574_HANDLE g_PCF8574_Output[GP_OUTPUT_PORT_MAX];
 
 static uint8_t u8OutputPortIndex = GP_OUTPUT_PORTA;
 static uint8_t u8InputPortIndex = GP_INPUT_PORTA;
@@ -86,8 +86,8 @@ void Appl_GpioExpander_Init(void)
 	Drv_PCF8574_Init(&g_PCF8574_Output[GP_OUTPUT_PORTB] , GetInstance_I2C1() , 0x23 , PCF_GP_MODE_OUTPUT);
 	/*Initilize GPIO expander modules - end*/
 	m_PCFState = PCF8574_STATE_WRITE_PORT;
-//	Appl_SetTimerPeriod(GetInstance_DAC816416SYNC_TIM2() , 50U/*Micro seconds*/);
-//	HAL_TIM_Base_Start_IT(GetInstance_PCF8574GPIO_SYNC_TIM7());
+	Appl_SetTimerPeriod(GetInstance_DAC816416SYNC_TIM2() , 50U/*Micro seconds*/);
+	HAL_TIM_Base_Start_IT(GetInstance_PCF8574GPIO_SYNC_TIM7());
 }
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
@@ -97,39 +97,13 @@ void Appl_GpioExpander_Init(void)
  ****************************************************************************/
 void Appl_GpioExpander_Exe(void)
 {
-	static uint8_t local_PCF8574_OutputState[GP_OUTPUT_PORT_MAX];
-	static uint8_t local_PCF8574_InputState[GP_INPUT_PORT_MAX];
-	static uint32_t tickSnapPortRead;
-	static uint32_t tickSnapBusyCheck;
-	static uint8_t u8ForceSend = FALSE;
-
 	switch(m_PCFState)
 	{
-		case PCF8574_STATE_IDLE:
-			if (local_PCF8574_OutputState[0] != g_PCF8574_Output[0].u8PORTVAL || local_PCF8574_OutputState[1] != g_PCF8574_Output[1].u8PORTVAL)
-			{
-				u8OutputPortIndex = GP_OUTPUT_PORTA;/*INDEX Reset to PORT A*/
-				m_PCFState = PCF8574_STATE_WRITE_PORT;
-			}
-			else if(TRUE == Get_StatusPCF8574InpPinSignalChanged())/*If a pin got changed*/
-			{
-				u8InputPortIndex = GP_INPUT_PORTA;/*Set index of read port to GPIO Port A*/
-				m_PCFState = PCF8574_STATE_READ_INPUT;/*Read PORT*/
-			}
-			else if ((HAL_GetTick() - tickSnapPortRead) > 2000)
-			{
-				tickSnapPortRead = HAL_GetTick();
-				u8ForceSend = TRUE;
-				u8InputPortIndex = GP_INPUT_PORTA;/*Set index of read port to GPIO Port A*/
-				m_PCFState = PCF8574_STATE_READ_INPUT;/*Read PORT*/
-			}
-		break;
 		case (PCF8574_STATE_WRITE_PORT):
 		{
 			/*Write task*/
-			if(TRUE == Drv_PCF8574_Write_Blocking(&g_PCF8574_Output[u8OutputPortIndex]))
+			if(TRUE == Drv_PCF8574_Write(&g_PCF8574_Output[u8OutputPortIndex]))
 			{
-				tickSnapBusyCheck = HAL_GetTick();
 				m_PCFState = PCF8574_STATE_WRITE_PORT_BUSY;
 			}
 			else
@@ -143,10 +117,17 @@ void Appl_GpioExpander_Exe(void)
 			++u8OutputPortIndex;
 			if(GP_OUTPUT_PORT_MAX <= u8OutputPortIndex)
 			{
-				local_PCF8574_OutputState[1] = g_PCF8574_Output[0].u8PORTVAL;
-				local_PCF8574_OutputState[0] = g_PCF8574_Output[1].u8PORTVAL;
+				u8OutputPortIndex = GP_OUTPUT_PORTA;/*INDEX Reset to PORT A*/
 
-				m_PCFState = PCF8574_STATE_IDLE;/*Go back to write task*/
+				if(TRUE == Get_StatusPCF8574InpPinSignalChanged())/*If a pin got changed*/
+				{
+					u8InputPortIndex = GP_INPUT_PORTA;/*Set index of read port to GPIO Port A*/
+					m_PCFState = PCF8574_STATE_READ_INPUT;/*Read PORT*/
+				}
+				else
+				{
+					m_PCFState = PCF8574_STATE_WRITE_PORT;/*Go back to write task*/
+				}
 			}
 			else
 			{
@@ -155,17 +136,20 @@ void Appl_GpioExpander_Exe(void)
 		}break;
 		case (PCF8574_STATE_WRITE_PORT_BUSY):
 		{
-			if ((TRUE == Get_StatusPCF8574_I2C_TxCompleted()) || ((HAL_GetTick() - tickSnapBusyCheck) > 2000))
+			if(TRUE == Get_StatusPCF8574_I2C_TxCompleted())
 			{
 				m_PCFState = PCF8574_STATE_WRITE_PORT_SEL_NEXT_CHANNEL;
+			}
+			else
+			{
+				/*NOP*/
 			}
 		}break;
 		case (PCF8574_STATE_READ_INPUT):
 		{
 			/*Read Task*/
-			if(TRUE == Drv_PCF8574_Read_Blocking(&g_PCF8574_Input[u8InputPortIndex]))
+			if(TRUE == Drv_PCF8574_Read(&g_PCF8574_Input[u8InputPortIndex]))
 			{
- 				tickSnapBusyCheck = HAL_GetTick();
 				m_PCFState = PCF8574_STATE_READ_BUSY;/*Read PORT*/
 			}
 			else
@@ -178,17 +162,9 @@ void Appl_GpioExpander_Exe(void)
 			++u8InputPortIndex;
 			if(GP_OUTPUT_PORT_MAX <= u8InputPortIndex)
 			{
-				m_PCFState = PCF8574_STATE_IDLE;/*Go back to write task*/
-				if (local_PCF8574_InputState[0] != g_PCF8574_Input[0].u8PORTVAL || local_PCF8574_InputState[1] != g_PCF8574_Input[1].u8PORTVAL
-						|| (u8ForceSend == TRUE))
-				{
-					local_PCF8574_InputState[1] = g_PCF8574_Input[0].u8PORTVAL;
-					local_PCF8574_InputState[0] = g_PCF8574_Input[1].u8PORTVAL;
-					tickSnapPortRead = HAL_GetTick();
-					u8ForceSend = FALSE;
-
-					Appl_Communication_TransmitDigitalInputHandler(&g_PCF8574_Input[0U] , GP_INPUT_PORT_MAX);/*Push data to TX FIFO*/
-				}
+				u8InputPortIndex = GP_OUTPUT_PORTA;/*Reset to PORT A*/
+				m_PCFState = PCF8574_STATE_WRITE_PORT;/*Go back to write task*/
+				Appl_Communication_TransmitDigitalInputHandler(&g_PCF8574_Input[0U] , GP_INPUT_PORT_MAX);/*Push data to TX FIFO*/
 			}
 			else
 			{
@@ -198,14 +174,13 @@ void Appl_GpioExpander_Exe(void)
 		}break;
 		case (PCF8574_STATE_READ_BUSY):
 		{
-			if ((TRUE == Get_StatusPCF8574_I2C_RxCompleted()) || ((HAL_GetTick() - tickSnapBusyCheck) > 2000))
+			if(TRUE == Get_StatusPCF8574_I2C_RxCompleted())
 			{
 				m_PCFState = PCF8574_STATE_READ_PORT_SEL_NEXT_CHANNEL;/*Select next port*/
 			}
 		}break;
 	}
 }
-
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
  .Purpose        : Callback for GPIO interrupt Rising and falling
  .Returns        :  RETURN_ERROR
@@ -219,12 +194,4 @@ void Appl_GPConfigureOutput(GP_OUTPUT_PORT m_Port ,
 	g_GpOutputChannel[m_Port][u8Channel].u8FreqDivision = u16FreqDiv;
 	g_GpOutputChannel[m_Port][u8Channel].u8FreqDivCnt = 0U;
 	g_GpOutputChannel[m_Port][u8Channel].u8PinState = u8PinVal;
-}
-
-void Appl_GPConfigureOutputNew(GP_OUTPUT_PORT portIndex, uint8_t portData)
-{
-	if (portIndex < GP_OUTPUT_PORT_MAX)
-	{
-		g_PCF8574_Output[portIndex].u8PORTVAL = portData;
-	}
 }

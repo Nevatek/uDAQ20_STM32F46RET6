@@ -31,8 +31,7 @@ typedef enum
 
 typedef enum
 {
-	PCF8574_STATE_IDLE = 0,
-	PCF8574_STATE_WRITE_PORT,
+	PCF8574_STATE_WRITE_PORT = 0U,
 	PCF8574_STATE_WRITE_PORT_BUSY,
 	PCF8574_STATE_WRITE_PORT_SEL_NEXT_CHANNEL,
 	PCF8574_STATE_READ_INPUT,
@@ -54,6 +53,4 @@ void Appl_GpioExpander_Exe(void);
 void Appl_GpioExpander_Init(void);
 void Appl_GPConfigureOutput(GP_OUTPUT_PORT m_Port ,
 		uint8_t u8Channel , uint8_t u8Mode , uint16_t u16FreqDiv , uint8_t u8PinVal);
-void Appl_GPConfigureOutputNew(GP_OUTPUT_PORT portIndex, uint8_t portData);
-
 #endif /* SRC_APPL_GPIOEXPANDER_H_ */

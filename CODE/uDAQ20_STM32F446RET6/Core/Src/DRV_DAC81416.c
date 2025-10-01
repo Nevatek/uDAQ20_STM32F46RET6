@@ -86,25 +86,25 @@ void DAC81416_Init(void)
 	g_mDiffConfigReg.BIT.REF_PWDWN = 0U;/*VREF Internal enabled*/
 	DAC81416_WriteRegister_Blocking(DAC_REG_GENCONFIG, g_mDiffConfigReg.u16SHORT);/*Setting SPI config register*/
 
-	g_DacRangeReg_0.BIT.DACa_RANGE = DAC_RANGE_n10_10V;
-	g_DacRangeReg_0.BIT.DACb_RANGE = DAC_RANGE_n10_10V;
-	g_DacRangeReg_0.BIT.DACc_RANGE = DAC_RANGE_n10_10V;
-	g_DacRangeReg_0.BIT.DACd_RANGE = DAC_RANGE_n10_10V;
+	g_DacRangeReg_0.BIT.DACa_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_0.BIT.DACb_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_0.BIT.DACc_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_0.BIT.DACd_RANGE = DAC_RANGE_0_10V;
 
-	g_DacRangeReg_1.BIT.DACa_RANGE = DAC_RANGE_n10_10V;
-	g_DacRangeReg_1.BIT.DACb_RANGE = DAC_RANGE_n10_10V;
-	g_DacRangeReg_1.BIT.DACc_RANGE = DAC_RANGE_n10_10V;
-	g_DacRangeReg_1.BIT.DACd_RANGE = DAC_RANGE_n10_10V;
+	g_DacRangeReg_1.BIT.DACa_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_1.BIT.DACb_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_1.BIT.DACc_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_1.BIT.DACd_RANGE = DAC_RANGE_0_10V;
 
-	g_DacRangeReg_2.BIT.DACa_RANGE = DAC_RANGE_n10_10V;
-	g_DacRangeReg_2.BIT.DACb_RANGE = DAC_RANGE_n10_10V;
-	g_DacRangeReg_2.BIT.DACc_RANGE = DAC_RANGE_n10_10V;
-	g_DacRangeReg_2.BIT.DACd_RANGE = DAC_RANGE_n10_10V;
+	g_DacRangeReg_2.BIT.DACa_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_2.BIT.DACb_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_2.BIT.DACc_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_2.BIT.DACd_RANGE = DAC_RANGE_0_10V;
 
-	g_DacRangeReg_3.BIT.DACa_RANGE = DAC_RANGE_n10_10V;
-	g_DacRangeReg_3.BIT.DACb_RANGE = DAC_RANGE_n10_10V;
-	g_DacRangeReg_3.BIT.DACc_RANGE = DAC_RANGE_n10_10V;
-	g_DacRangeReg_3.BIT.DACd_RANGE = DAC_RANGE_n10_10V;
+	g_DacRangeReg_3.BIT.DACa_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_3.BIT.DACb_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_3.BIT.DACc_RANGE = DAC_RANGE_0_10V;
+	g_DacRangeReg_3.BIT.DACd_RANGE = DAC_RANGE_0_10V;
 
 	DAC81416_WriteRegister_Blocking(DAC_REG_DACRANGE0 , g_DacRangeReg_0.u16SHORT);
 	DAC81416_WriteRegister_Blocking(DAC_REG_DACRANGE1 , g_DacRangeReg_1.u16SHORT);
@@ -118,12 +118,7 @@ void DAC81416_Init(void)
 	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading device ID*/
 #endif
 	DAC81416_ReadRegister_Blocking(DAC_REG_DEVICEID , &g_mDevId.u16SHORT);/*Reading device ID*/
-
-	for(uint8_t u8Channel = 0U ; u8Channel < DAC816416_MAX_NUM_OF_CHANNEL ; ++u8Channel)/*Cycle through all channels*/
-	{
-		Appl_DAC816416WriteDacRegister(u8Channel, DAC_RANGE_n10_10V_ZERO);
-	}
-//	Appl_DAC816416WriteDacRegister_EnableStreamingMode();
+	Appl_DAC816416WriteDacRegister_EnableStreamingMode();
 }
 /*********************.Drv_AD7616_TriggerAdcConvst().*****************************
  .Purpose        : Function to trigger start of converion of ADC
@@ -483,7 +478,7 @@ inline void Callback_DAC81416RxComplete(void)
 void Appl_DAC816416WriteDacRegister(DAC81416_DAC_CHANNEL m_Ch , uint16_t u16Data)
 {
 	DAC81416_REG_MAP m_reg = DAC_REG_DAC0 + m_Ch;
-	DAC81416_WriteRegister_Blocking(m_reg , u16Data);
+	DAC81416_WriteRegister(m_reg , u16Data);
 }
 /*********************.Appl_HandlerDac_Init().*****************************
  .Purpose        : 	Initlization Handler for DAC output.
@@ -535,7 +530,7 @@ void Appl_DAC816416_EnableChannels(uint8_t u8StartCh , uint8_t u8EndCh)
 	DAC81416_ReadRegister_Blocking(DAC_REG_DACPWDWN , &g_mDacPDWNReg.u16SHORT);/*Reading Pwr dwn Reg*/
 	for(uint8_t u8nIdx = (u8StartCh) ; u8nIdx <= (u8EndCh) ; ++u8nIdx)
 	{
-		g_mDacPDWNReg.u16SHORT &= (~(1 << u8nIdx));
+		g_mDacPDWNReg.u16SHORT &= (DAC816416_PWR_ACTIVE << u8nIdx);
 	}
 	DAC81416_WriteRegister_Blocking(DAC_REG_DACPWDWN, g_mDacPDWNReg.u16SHORT);/*Setting SPI config register*/
 }
@@ -553,9 +548,4 @@ void Appl_DAC816416_DisableChannels(uint8_t u8StartCh , uint8_t u8EndCh)
 		g_mDacPDWNReg.u16SHORT |= (DAC816416_PWR_DWN << u8nIdx);
 	}
 	DAC81416_WriteRegister_Blocking(DAC_REG_DACPWDWN, g_mDacPDWNReg.u16SHORT);/*Setting SPI config register*/
-}
-
-uint8_t Appl_DAC816416_IsEnabled(uint8_t u8Channel)
-{
-	return ((g_mDacPDWNReg.u16SHORT & (1 << u8Channel)) == 1) ? FALSE : TRUE;
 }

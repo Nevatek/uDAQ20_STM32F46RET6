@@ -163,15 +163,13 @@ uint8_t Drv_PCF8574_Write(PCD8574_HANDLE *pHandle)
 					RETURN_SUCCESS
  .Note           :
  ****************************************************************************/
-uint8_t Drv_PCF8574_Write_Blocking(PCD8574_HANDLE *pHandle)
+void Drv_PCF8574_Write_Blocking(PCD8574_HANDLE *pHandle)
 {
-	uint8_t u9Status = FALSE;
 	if(FALSE == g_u8I2CModuleBusyFlag && TRUE == pHandle->u8DevReadyFlag)
 	{
 		HAL_I2C_Master_Transmit_IT(pHandle->pI2cHandle ,
 				(pHandle->u8DevAddress << 1) , (uint8_t*)&pHandle->u8PORTVAL , sizeof(pHandle->u8PORTVAL));
 		g_u8I2CModuleBusyFlag = TRUE;
-		u9Status = TRUE;
 	}
 	StartTimer(&g_GPTimer , 10U);
 	while(TRUE != Get_StatusPCF8574_I2C_TxCompleted())
@@ -183,8 +181,6 @@ uint8_t Drv_PCF8574_Write_Blocking(PCD8574_HANDLE *pHandle)
 		}
 	}
 	StopTimer(&g_GPTimer);
-	g_u8I2CModuleBusyFlag = FALSE;
-	return u9Status;
 }
 
 /*********************.HAL_GPIO_EXTI_Callback().*****************************
@@ -196,36 +192,12 @@ uint8_t Drv_PCF8574_Write_Blocking(PCD8574_HANDLE *pHandle)
 uint8_t Drv_PCF8574_Read(PCD8574_HANDLE *pHandle)
 {
 	uint8_t u9Status = FALSE;
-  	if(FALSE == g_u8I2CModuleBusyFlag && TRUE == pHandle->u8DevReadyFlag)
+	if(FALSE == g_u8I2CModuleBusyFlag && TRUE == pHandle->u8DevReadyFlag)
 	{
 		HAL_I2C_Master_Receive_IT(pHandle->pI2cHandle ,
 				(pHandle->u8DevAddress << 1) , (uint8_t*)&pHandle->u8PORTVAL , sizeof(uint8_t));
 		g_u8I2CModuleBusyFlag = TRUE;
 		u9Status = TRUE;
 	}
-	return u9Status;
-}
-
-uint8_t Drv_PCF8574_Read_Blocking(PCD8574_HANDLE *pHandle)
-{
-	uint8_t u9Status = FALSE;
-  	if(FALSE == g_u8I2CModuleBusyFlag && TRUE == pHandle->u8DevReadyFlag)
-	{
-		HAL_I2C_Master_Receive_IT(pHandle->pI2cHandle ,
-				(pHandle->u8DevAddress << 1) , (uint8_t*)&pHandle->u8PORTVAL , sizeof(uint8_t));
-		g_u8I2CModuleBusyFlag = TRUE;
-		u9Status = TRUE;
-	}
-	StartTimer(&g_GPTimer , 10U);
-	while(TRUE != Get_StatusPCF8574_I2C_TxCompleted())
-	{
-		/*NOP - wait blocking*/
-		if(TRUE == Timer_IsTimeout(&g_GPTimer))
-		{
-			break;
-		}
-	}
-	StopTimer(&g_GPTimer);
-	g_u8I2CModuleBusyFlag = FALSE;
 	return u9Status;
 }

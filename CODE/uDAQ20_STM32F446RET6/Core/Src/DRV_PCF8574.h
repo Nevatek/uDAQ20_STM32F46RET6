@@ -47,6 +47,5 @@ uint8_t Get_StatusPCF8574_I2C_RxCompleted(void);
 uint8_t Get_StatusPCF8574_I2CBusyFlag(void);
 uint8_t Drv_PCF8574_Write(PCD8574_HANDLE *pHandle);
 uint8_t Drv_PCF8574_Read(PCD8574_HANDLE *pHandle);
-uint8_t Drv_PCF8574_Write_Blocking(PCD8574_HANDLE *pHandle);
-uint8_t Drv_PCF8574_Read_Blocking(PCD8574_HANDLE *pHandle);
+void Drv_PCF8574_Write_Blocking(PCD8574_HANDLE *pHandle);
 #endif /* DRV_PCF8574_H_ */
